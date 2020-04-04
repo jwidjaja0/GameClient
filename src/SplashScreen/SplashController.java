@@ -46,7 +46,7 @@ public class SplashController implements Observer {
     }
 
     private void getRegistrationInfo() throws IOException {
-        FXMLLoader getUserInfo = new FXMLLoader(getClass().getResource("/GetUserInfo/GetUserInfo.fxml"));
+        FXMLLoader getUserInfo = new FXMLLoader(getClass().getResource("GetUserInfo/GetUserInfo.fxml"));
         Parent getUserInfoWindow = getUserInfo.load();
         Stage stage = new Stage();
         stage.setTitle("Enter Your Information");
