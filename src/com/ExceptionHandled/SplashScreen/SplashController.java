@@ -68,7 +68,8 @@ public class SplashController {
             getUserInfoController.setToLogin();
 
 
-        stage.show();
+        stage.showAndWait();
         registrationInfo = getUserInfoController.getInfo();
+        System.out.println(registrationInfo[0] + registrationInfo[1] + registrationInfo[2] + registrationInfo[3]);
     }
 }
