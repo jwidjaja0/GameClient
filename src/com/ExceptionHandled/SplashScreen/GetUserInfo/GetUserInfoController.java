@@ -41,7 +41,6 @@ public class GetUserInfoController{
                 info[1] = password.getText();
                 info[2] = firstName.getText();
                 info[3] = lastName.getText();
-
             }
         });
     }
