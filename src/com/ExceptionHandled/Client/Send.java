@@ -1,6 +1,6 @@
 package com.ExceptionHandled.Client;
 
-import com.ExceptionHandled.GameMessages.Wrappers.Packet;
+import com.ExceptionHandled.GameMessages.Wrappers.*;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
