@@ -11,15 +11,15 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Observable;
+import java.util.Observer;
 
-public class SplashController {
+public class SplashController extends Observable implements Observer {
     @FXML
     Button login;
 
     @FXML
     Button register;
-
-    private String[] registrationInfo;
 
     public void initialize(){
         login.setOnAction(new EventHandler<ActionEvent>() {
@@ -55,6 +55,7 @@ public class SplashController {
 
     private void showInfoScreen(String type) throws IOException {
         GetUserInfoController getUserInfoController = new GetUserInfoController();
+        getUserInfoController.addObserver(this);
         FXMLLoader getUserInfo = new FXMLLoader(getClass().getResource("GetUserInfo/GetUserInfo.fxml"));
         getUserInfo.setController(getUserInfoController);
         Parent getUserInfoWindow = getUserInfo.load();
@@ -69,7 +70,12 @@ public class SplashController {
 
 
         stage.showAndWait();
-        registrationInfo = getUserInfoController.getInfo();
-        System.out.println(registrationInfo[0] + registrationInfo[1] + registrationInfo[2] + registrationInfo[3]);
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        //Pass everything onto main
+        setChanged();
+        notifyObservers(arg);
     }
 }
