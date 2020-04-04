@@ -1,5 +1,6 @@
-package SplashScreen;
+package com.ExceptionHandled.SplashScreen;
 
+import com.ExceptionHandled.SplashScreen.GetUserInfo.GetUserInfoController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -7,16 +8,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Observable;
-import java.util.Observer;
 
-public class SplashController implements Observer {
+public class SplashController {
     @FXML
     Button login;
 
@@ -46,17 +42,14 @@ public class SplashController implements Observer {
     }
 
     private void getRegistrationInfo() throws IOException {
+        GetUserInfoController getUserInfoController = new GetUserInfoController();
         FXMLLoader getUserInfo = new FXMLLoader(getClass().getResource("GetUserInfo/GetUserInfo.fxml"));
+        getUserInfo.setController(getUserInfoController);
         Parent getUserInfoWindow = getUserInfo.load();
         Stage stage = new Stage();
         stage.setTitle("Enter Your Information");
         stage.setScene(new Scene(getUserInfoWindow));
         stage.show();
-    }
-
-
-    @Override
-    public void update(Observable o, Object arg) {
-
+        registrationInfo = getUserInfoController.getInfo();
     }
 }

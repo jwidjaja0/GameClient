@@ -13,7 +13,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         //Open Splash Screen
-        FXMLLoader splashScreen = new FXMLLoader(getClass().getResource("/SplashScreen/SplashScreen.fxml"));
+        FXMLLoader splashScreen = new FXMLLoader(getClass().getResource("/com/ExceptionHandled/SplashScreen/SplashScreen.fxml"));
         Parent splashWindow = splashScreen.load();
         Stage stage = new Stage();
         stage.setTitle("Welcome!");

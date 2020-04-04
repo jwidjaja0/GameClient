@@ -1,5 +1,4 @@
-package SplashScreen.GetUserInfo;
-
+package com.ExceptionHandled.SplashScreen.GetUserInfo;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -7,10 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 
-import java.util.Observable;
-
 //TODO: Add error checking
-public class GetUserInfoController extends Observable {
+public class GetUserInfoController{
     @FXML
     Button register;
 
