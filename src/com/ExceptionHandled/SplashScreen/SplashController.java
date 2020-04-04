@@ -25,7 +25,11 @@ public class SplashController {
         login.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+                try {
+                    login();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -33,7 +37,7 @@ public class SplashController {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    getRegistrationInfo();
+                    register();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -41,7 +45,15 @@ public class SplashController {
         });
     }
 
-    private void getRegistrationInfo() throws IOException {
+    private void login() throws IOException {
+        showInfoScreen("Login");
+    }
+
+    private void register() throws IOException {
+        showInfoScreen("Register");
+    }
+
+    private void showInfoScreen(String type) throws IOException {
         GetUserInfoController getUserInfoController = new GetUserInfoController();
         FXMLLoader getUserInfo = new FXMLLoader(getClass().getResource("GetUserInfo/GetUserInfo.fxml"));
         getUserInfo.setController(getUserInfoController);
@@ -49,6 +61,13 @@ public class SplashController {
         Stage stage = new Stage();
         stage.setTitle("Enter Your Information");
         stage.setScene(new Scene(getUserInfoWindow));
+
+        if (type.equals("Register"))
+            getUserInfoController.setToRegister();
+        else
+            getUserInfoController.setToLogin();
+
+
         stage.show();
         registrationInfo = getUserInfoController.getInfo();
     }

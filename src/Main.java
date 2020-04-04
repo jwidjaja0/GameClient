@@ -16,11 +16,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        try{
-            client = new Client();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try{
+//            //client = new Client();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
         //Open Splash Screen
         FXMLLoader splashScreen = new FXMLLoader(getClass().getResource("/com/ExceptionHandled/SplashScreen/SplashScreen.fxml"));
