@@ -7,7 +7,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 
-public class GetUserInforController {
+import java.util.Observable;
+
+//TODO: Add error checking
+public class GetUserInfoController extends Observable {
     @FXML
     Button register;
 
@@ -28,15 +31,6 @@ public class GetUserInforController {
                 info[1] = password.getText();
             }
         });
-
-    }
-
-    private void closeStage(){
-
-    }
-
-    public void openStage(){
-
     }
 
     public String[] getInfo(){
