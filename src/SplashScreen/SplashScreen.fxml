@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="SplashScreen.SplashController"
-            prefHeight="400.0" prefWidth="400.0">
-
+<AnchorPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SplashScreen.SplashController">
+   <children>
+      <Button fx:id="login" layoutX="42.0" layoutY="88.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" text="Login" />
+      <Button fx:id="register" layoutX="42.0" layoutY="131.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" text="Register" />
+   </children>
 </AnchorPane>
