@@ -7,10 +7,11 @@ import com.ExceptionHandled.InternalWrapper.InternalPacket;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Observable;
+import java.util.Observer;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
-public class Client extends Observable implements Runnable{
+public class Client extends Observable implements Runnable, Observer {
     private Socket serverConnection;
     private String username;
     private Send send;
@@ -42,10 +43,16 @@ public class Client extends Observable implements Runnable{
 
 
 
+
     @Override
     public void run() {
         while(true){
 
         }
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        InternalPacket
     }
 }

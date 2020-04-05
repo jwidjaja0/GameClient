@@ -41,10 +41,12 @@ public class Main extends Application implements Observer {
     public void update(Observable o, Object arg) {
         InternalPacket packet = (InternalPacket)arg;
         if (packet.getDirection().equals("Outgoing")){
-
+            client.sendOut(packet);
         }
         if (packet.getDirection().equals("ToUI")){
-
+            if (packet.getMessageType().equals("Login")){
+                ((SplashController)splashScreen.getController()).
+            }
         }
     }
 }

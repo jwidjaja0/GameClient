@@ -1,5 +1,6 @@
 package com.ExceptionHandled.SplashScreen;
 
+import com.ExceptionHandled.InternalWrapper.InternalPacket;
 import com.ExceptionHandled.SplashScreen.GetUserInfo.GetUserInfoController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -72,10 +73,21 @@ public class SplashController extends Observable implements Observer {
         stage.showAndWait();
     }
 
+    public void alert(InternalPacket packet){
+
+    }
+
     @Override
     public void update(Observable o, Object arg) {
         //Pass everything onto main
         setChanged();
         notifyObservers(arg);
     }
+
+    static class alertFactory{
+
+
+    }
 }
+
+
