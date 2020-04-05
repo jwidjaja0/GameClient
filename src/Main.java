@@ -1,4 +1,5 @@
 import com.ExceptionHandled.Client.Client;
+import com.ExceptionHandled.Interfaces.Controller;
 import com.ExceptionHandled.InternalWrapper.InternalPacket;
 import com.ExceptionHandled.SplashScreen.SplashController;
 import javafx.application.Application;
@@ -13,6 +14,7 @@ import java.util.Observer;
 
 public class Main extends Application implements Observer {
     private Client client;
+    private Controller controller;
 
     public static void main(String[] args) {
         launch(args);
@@ -29,7 +31,8 @@ public class Main extends Application implements Observer {
 
         //Open Splash Screen
         FXMLLoader splashScreen = new FXMLLoader(getClass().getResource("/com/ExceptionHandled/SplashScreen/SplashScreen.fxml"));
-        ((SplashController)splashScreen.getController()).addObserver(this);
+        controller = splashScreen.getController();
+        ((SplashController)controller).addObserver(this);
         Parent splashWindow = splashScreen.load();
         Stage stage = new Stage();
         stage.setTitle("Welcome!");
@@ -45,7 +48,7 @@ public class Main extends Application implements Observer {
         }
         if (packet.getDirection().equals("ToUI")){
             if (packet.getMessageType().equals("Login")){
-                ((SplashController)splashScreen.getController()).
+                ((SplashController)controller).alert(packet);
             }
         }
     }

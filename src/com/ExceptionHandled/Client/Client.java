@@ -53,6 +53,10 @@ public class Client extends Observable implements Runnable, Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        InternalPacket
+        InternalPacket packet = (InternalPacket)arg;
+        if (packet.getDirection().equals("ToUI")){
+            setChanged();
+            notifyObservers(packet);
+        }
     }
 }
