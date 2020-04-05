@@ -74,7 +74,7 @@ public class SplashController extends Observable implements Observer {
     }
 
     public void alert(InternalPacket packet){
-
+        if (packet.get)
     }
 
     @Override
@@ -84,10 +84,6 @@ public class SplashController extends Observable implements Observer {
         notifyObservers(arg);
     }
 
-    static class alertFactory{
-
-
-    }
 }
 
 

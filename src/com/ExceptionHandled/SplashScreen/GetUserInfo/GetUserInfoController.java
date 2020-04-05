@@ -1,6 +1,7 @@
 package com.ExceptionHandled.SplashScreen.GetUserInfo;
 import com.ExceptionHandled.GameMessages.Login.SignUpRequest;
 import com.ExceptionHandled.GameMessages.Wrappers.Login;
+import com.ExceptionHandled.Interfaces.Alert;
 import com.ExceptionHandled.InternalWrapper.InternalPacket;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -46,6 +47,7 @@ public class GetUserInfoController extends Observable {
                 info[1] = password.getText();
                 info[2] = firstName.getText();
                 info[3] = lastName.getText();
+                checkValues();
             }
         });
     }
@@ -84,7 +86,6 @@ public class GetUserInfoController extends Observable {
     public String[] getInfo(){
         return info;
     }
-
 
 
 }
