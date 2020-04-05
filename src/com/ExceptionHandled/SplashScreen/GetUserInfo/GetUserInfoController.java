@@ -1,5 +1,5 @@
 package com.ExceptionHandled.SplashScreen.GetUserInfo;
-import com.ExceptionHandled.GameMessages.Login.SignUpRequest;
+import com.ExceptionHandled.GameMessages.Login.*;
 import com.ExceptionHandled.GameMessages.Wrappers.Login;
 import com.ExceptionHandled.Interfaces.Alert;
 import com.ExceptionHandled.InternalWrapper.InternalPacket;
@@ -66,15 +66,19 @@ public class GetUserInfoController extends Observable {
         lastName.setVisible(false);
     }
 
-    public void signUpFail(){
+    public void signUpFail(SignUpFail fail){
 
     }
 
-    public void loginFail(){
+    public void loginFail(LoginFail fail){
 
     }
 
-    public void success(){
+    public void loginSuccess(LoginSuccess success){
+
+    }
+
+    public void signUpSuccess(SignUpSuccess success){
 
     }
 

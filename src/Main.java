@@ -1,4 +1,5 @@
 import com.ExceptionHandled.Client.Client;
+import com.ExceptionHandled.GameMessages.Wrappers.Login;
 import com.ExceptionHandled.Interfaces.Controller;
 import com.ExceptionHandled.InternalWrapper.InternalPacket;
 import com.ExceptionHandled.SplashScreen.SplashController;
@@ -48,7 +49,7 @@ public class Main extends Application implements Observer {
         }
         if (packet.getDirection().equals("ToUI")){
             if (packet.getMessageType().equals("Login")){
-                ((SplashController)controller).alert(packet);
+                ((SplashController)controller).alert((Login)(packet.getMessage()));
             }
         }
     }

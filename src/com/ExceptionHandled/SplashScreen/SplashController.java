@@ -1,6 +1,7 @@
 package com.ExceptionHandled.SplashScreen;
 
-import com.ExceptionHandled.InternalWrapper.InternalPacket;
+import com.ExceptionHandled.GameMessages.Login.*;
+import com.ExceptionHandled.GameMessages.Wrappers.Login;
 import com.ExceptionHandled.SplashScreen.GetUserInfo.GetUserInfoController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,6 +22,8 @@ public class SplashController extends Observable implements Observer {
 
     @FXML
     Button register;
+
+    private GetUserInfoController getUserInfoController;
 
     public void initialize(){
         login.setOnAction(new EventHandler<ActionEvent>() {
@@ -55,7 +58,7 @@ public class SplashController extends Observable implements Observer {
     }
 
     private void showInfoScreen(String type) throws IOException {
-        GetUserInfoController getUserInfoController = new GetUserInfoController();
+        getUserInfoController = new GetUserInfoController();
         getUserInfoController.addObserver(this);
         FXMLLoader getUserInfo = new FXMLLoader(getClass().getResource("GetUserInfo/GetUserInfo.fxml"));
         getUserInfo.setController(getUserInfoController);
@@ -73,8 +76,20 @@ public class SplashController extends Observable implements Observer {
         stage.showAndWait();
     }
 
-    public void alert(InternalPacket packet){
-        if (packet.get)
+    public void alert(Login loginMessage){
+        if (loginMessage.getMessageType().equals("SignUpFail")){
+            getUserInfoController.signUpFail((SignUpFail) (loginMessage.getMessage()));
+        }
+        else if (loginMessage.getMessageType().equals("LoginFail")){
+            getUserInfoController.loginFail((LoginFail) (loginMessage.getMessage()));
+        }
+        else if (loginMessage.getMessageType().equals("SignUpSuccess")){
+            getUserInfoController.signUpSuccess((SignUpSuccess) (loginMessage.getMessage()));
+        }
+        else if (loginMessage.getMessageType().equals("LoginSuccess")){
+            getUserInfoController.loginSuccess((LoginSuccess) (loginMessage.getMessage()));
+        }
+
     }
 
     @Override
