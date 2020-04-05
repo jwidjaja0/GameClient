@@ -78,7 +78,7 @@ public class GetUserInfoController extends Observable {
 
     private void checkValues(){
         setChanged();
-        notifyObservers(new InternalPacket("Login", new Login("SignUpRequest", new SignUpRequest(info[0], info[1], info[2], info[3]))));
+        notifyObservers(new InternalPacket("Login", "Outgoing", new Login("SignUpRequest", new SignUpRequest(info[0], info[1], info[2], info[3]))));
     }
 
     public String[] getInfo(){
