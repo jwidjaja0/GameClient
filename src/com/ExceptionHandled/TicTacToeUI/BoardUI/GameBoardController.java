@@ -102,7 +102,6 @@ public class GameBoardController {
 
     //TODO: Done
     private void setOImage(Button tc){
-        //Image image = new Image(getClass().getResourceAsStream("../CirclePurple.png"));
         Image image = new Image(getClass().getResourceAsStream("../Graphics/WhiteCircle.png"));
         ImageView imageView = new ImageView(image);
 
