@@ -1,7 +1,6 @@
-package com.ExceptionHandled.SplashScreen.GetUserInfo;
+package com.ExceptionHandled.TicTacToeUI.SplashScreen.GetUserInfo;
 import com.ExceptionHandled.GameMessages.Login.*;
 import com.ExceptionHandled.GameMessages.Wrappers.Login;
-import com.ExceptionHandled.Interfaces.Alert;
 import com.ExceptionHandled.InternalWrapper.InternalPacket;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

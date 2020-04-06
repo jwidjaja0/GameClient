@@ -2,6 +2,7 @@ package com.ExceptionHandled.TicTacToeUI.BoardUI;
 
 
 import com.ExceptionHandled.GameMessages.Game.*;
+import com.ExceptionHandled.GameMessages.Wrappers.Game;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -12,6 +13,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -125,9 +127,33 @@ public class GameBoardController extends Observable {
 //
 //        char gameStatus = game.whoWon();
 //        if (gameStatus != '-') {
-//            disableAllPanels();
-//            addPlayerScore(gameStatus);
+
 //        }
+    }
+
+    public void messageProcessor(Game gameMessage){
+        if (gameMessage.getMessageType().equals("GameOverLoss")){
+
+        }
+        else if (gameMessage.getMessageType().equals("GameOverTie")){
+
+        }
+        else if (gameMessage.getMessageType().equals("GameOverWin")){
+
+        }
+    }
+
+    private void gameOver(String status, Serializable message){
+        disableAllPanels();
+        if (status.equals("Lost")){
+            addPlayerScore(((GameOverLoss)message).getPlayer());
+        }
+        else if (status.equals("Win")){
+            addPlayerScore(((GameOverLoss)message).getPlayer());
+        }
+        else if (status.equals("Tie")){
+
+        }
     }
 
     //TODO: Done
@@ -136,11 +162,11 @@ public class GameBoardController extends Observable {
     }
 
     //TODO: Done
-    private void addPlayerScore(char turnToken){
-        if (turnToken == 'X'){
+    private void addPlayerScore(String player){
+        if (player.equals("X")){
             increasePlayer1Score();
         }
-        else if (turnToken == 'O'){
+        else if (player.equals("O")){
             increasePlayer2Score();
         }
     }

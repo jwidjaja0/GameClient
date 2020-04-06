@@ -1,8 +1,7 @@
 import com.ExceptionHandled.Client.Client;
 import com.ExceptionHandled.GameMessages.Wrappers.Login;
-import com.ExceptionHandled.Interfaces.Controller;
 import com.ExceptionHandled.InternalWrapper.InternalPacket;
-import com.ExceptionHandled.SplashScreen.SplashController;
+import com.ExceptionHandled.TicTacToeUI.SplashScreen.SplashController;
 import com.ExceptionHandled.TicTacToeUI.BoardUI.GameBoardController;
 import com.ExceptionHandled.TicTacToeUI.MenuLayout.MenuLayoutController;
 import javafx.application.Application;
@@ -12,7 +11,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
