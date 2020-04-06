@@ -12,7 +12,7 @@
                   <MenuItem fx:id="loginRegisterButton" mnemonicParsing="false" text="Login\Register" />
                   <Menu mnemonicParsing="false" text="Change Versus">
                     <items>
-                      <MenuItem fx:id="menuSwitchToHuman" mnemonicParsing="false" onAction="#SwitchToHuman" text="Vs Human (Local)" />
+                      <MenuItem fx:id="menuSwitchToHuman" mnemonicParsing="false" text="Vs Human (Local)" />
                         <MenuItem mnemonicParsing="false" text="Vs Ai" />
                     </items>
                   </Menu>
@@ -23,7 +23,7 @@
           <Menu mnemonicParsing="false" text="Profile">
                <items>
                   <MenuItem fx:id="personalRecordOption" mnemonicParsing="false" text="Personal Record" />
-                  <MenuItem fx:id="changeProfileOption" mnemonicParsing="false" onAction="#ChangeProfileInfo" text="Change Profile Information" />
+                  <MenuItem fx:id="changeProfileOption" mnemonicParsing="false" text="Change Profile Information" />
                </items>
           </Menu>
         </menus>

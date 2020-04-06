@@ -3,6 +3,7 @@ package com.ExceptionHandled.TicTacToeUI.MenuLayout;
 
 
 import com.ExceptionHandled.SplashScreen.SplashController;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,12 +22,22 @@ public class MenuLayoutController extends Observable implements Observer {
 
     @FXML
     MenuItem loginRegisterButton;
+
     @FXML
     MenuBar menuBar1;
 
     private Observable controller;
 
-    public void loginRegister(ActionEvent event){
+    public void initialize(){
+        loginRegisterButton.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
+            @Override
+            public void handle(javafx.event.ActionEvent event) {
+                loginRegister();
+            }
+        });
+    }
+
+    public void loginRegister(){
         try{
             FXMLLoader splashScreen = new FXMLLoader(getClass().getResource("../../SplashScreen/SplashScreen.fxml"));
             controller = new SplashController();
@@ -44,6 +55,8 @@ public class MenuLayoutController extends Observable implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-
+        //Pass everything onto main
+        setChanged();
+        notifyObservers(arg);
     }
 }
