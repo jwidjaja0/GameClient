@@ -1,0 +1,97 @@
+GridPane{
+    -fx-border-width: 1px;
+    -fx-border-color: rgba(10,10,30,0.1);
+
+}
+
+#playArea{
+    /*-fx-background-color: rgb(207, 232, 250);*/
+    -fx-background-color: #d7f7fc
+}
+
+#TicTacToeBoard{
+    -fx-effect: DropShadow(three-pass-box, rgb(72,58,84), 10,0,0,0);
+
+}
+
+#gameTitle{
+    /*-fx-font-size: 50;*/
+    /*-fx-font-family: "Courier New";*/
+    -fx-effect: DropShadow(three-pass-box, rgb(72,58,84), 4,0,0,0);
+}
+
+#topMid{
+    -fx-border-style: solid;
+    -fx-border-width: 3px;
+    -fx-border-color: transparent black transparent black;
+}
+
+#midLeft{
+    -fx-border-style: solid;
+    -fx-border-width: 3px;
+    -fx-border-color: black transparent black transparent;
+}
+
+#midMid{
+    -fx-border-style: solid;
+    -fx-border-width: 3px;
+    -fx-border-color: black;
+}
+
+#midRight{
+    -fx-border-style: solid;
+    -fx-border-width: 3px;
+    -fx-border-color: black transparent black transparent;
+}
+
+#botMid{
+    -fx-border-style: solid;
+    -fx-border-width: 3px;
+    -fx-border-color: transparent black transparent black;
+}
+
+#btnExit:hover{
+    -fx-background-color: #f21818;
+    -fx-border-color: white;
+    -fx-border-width: 2px;
+    -fx-border-style: solid;
+    -fx-text-fill: white;
+}
+
+#btnExit{
+    /*-fx-background-color: radial-gradient(center 50% 50% , radius 160% , #ffffff, #f21818);*/
+    -fx-background-color: white;
+    -fx-border-color: #f21818;
+    -fx-border-width: 2px;
+    -fx-border-style: solid;
+
+    -fx-font-family: "Berlin Sans FB";
+
+}
+
+#btnRestart:hover{
+    -fx-background-color: #5263ff;
+    -fx-border-color: white;
+    -fx-border-width: 2px;
+    -fx-border-style: solid;
+
+    -fx-text-fill: white;
+}
+
+#btnRestart{
+    /*-fx-background-color: radial-gradient(center 50% 50% , radius 160% , #ffffff, #5263ff);*/
+    -fx-background-color: white;
+    -fx-border-color: #5263ff;
+    -fx-border-width: 2px;
+    -fx-border-style: solid;
+
+    -fx-font-family: "Berlin Sans FB";
+}
+
+Button{
+    -fx-background-color: white;
+    -fx-background-color: grey;
+}
+
+
+

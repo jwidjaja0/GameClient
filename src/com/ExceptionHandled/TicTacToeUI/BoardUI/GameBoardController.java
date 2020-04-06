@@ -174,6 +174,7 @@ public class GameBoardController {
     public void exitPrgm(ActionEvent actionEvent) {
         Stage stage = (Stage) btnExit.getScene().getWindow();
         stage.close();
+        //TODO: Send disconnect message to server
     }
 
     //TODO: Keep but modify

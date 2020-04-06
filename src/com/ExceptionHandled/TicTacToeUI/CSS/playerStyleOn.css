@@ -1,0 +1,5 @@
+#playerLabel{
+    -fx-background-color: white;
+    -fx-effect: DropShadow(three-pass-box, rgb(72,58,84), 10,0,0,0);
+
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <MenuBar fx:id="menuBar1">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem mnemonicParsing="false" text="Login" />
+                  <Menu mnemonicParsing="false" text="Change Versus">
+                    <items>
+                      <MenuItem fx:id="menuSwitchToHuman" mnemonicParsing="false" onAction="#SwitchToHuman" text="Vs Human (Local)" />
+                        <MenuItem mnemonicParsing="false" text="Vs Ai" />
+                    </items>
+                  </Menu>
+                  <MenuItem fx:id="gameSetupOption" mnemonicParsing="false" text="Game Setup" />
+              <MenuItem fx:id="closeOption" mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Profile">
+               <items>
+                  <MenuItem fx:id="personalRecordOption" mnemonicParsing="false" text="Personal Record" />
+                  <MenuItem fx:id="changeProfileOption" mnemonicParsing="false" onAction="#ChangeProfileInfo" text="Change Profile Information" />
+               </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</VBox>
