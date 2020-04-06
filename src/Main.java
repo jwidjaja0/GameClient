@@ -23,12 +23,12 @@ public class Main extends Application implements Observer {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-//        try{
-//            //client = new Client();
-              //client.addObserver(this);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try{
+            client = new Client();
+              client.addObserver(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         //Open Splash Screen
         FXMLLoader splashScreen = new FXMLLoader(getClass().getResource("/com/ExceptionHandled/SplashScreen/SplashScreen.fxml"));
