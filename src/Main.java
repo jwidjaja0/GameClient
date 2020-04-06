@@ -31,6 +31,7 @@ public class Main extends Application implements Observer {
         }
 
         //Open Splash Screen
+        //TODO: This will be replaced in later implementations, will be incorporated into menus. For now here to statisfy sprint req.
         FXMLLoader splashScreen = new FXMLLoader(getClass().getResource("/com/ExceptionHandled/SplashScreen/SplashScreen.fxml"));
         controller = new SplashController();
         splashScreen.setController(controller);
