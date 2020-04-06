@@ -89,7 +89,6 @@ public class SplashController extends Observable implements Observer {
         else if (loginMessage.getMessageType().equals("LoginSuccess")){
             getUserInfoController.loginSuccess((LoginSuccess) (loginMessage.getMessage()));
         }
-
     }
 
     @Override

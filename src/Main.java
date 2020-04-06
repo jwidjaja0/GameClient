@@ -15,7 +15,7 @@ import java.util.Observer;
 
 public class Main extends Application implements Observer {
     private Client client;
-    private Controller controller;
+    private Observable controller;
 
     public static void main(String[] args) {
         launch(args);
@@ -32,8 +32,9 @@ public class Main extends Application implements Observer {
 
         //Open Splash Screen
         FXMLLoader splashScreen = new FXMLLoader(getClass().getResource("/com/ExceptionHandled/SplashScreen/SplashScreen.fxml"));
-        controller = splashScreen.getController();
-        ((SplashController)controller).addObserver(this);
+        controller = new SplashController();
+        splashScreen.setController(controller);
+        controller.addObserver(this);
         Parent splashWindow = splashScreen.load();
         Stage stage = new Stage();
         stage.setTitle("Welcome!");

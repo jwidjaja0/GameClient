@@ -2,17 +2,22 @@ package com.ExceptionHandled.Alerts;
 
 import com.ExceptionHandled.Interfaces.Alert;
 
+import javax.swing.*;
+
 public class AlertFactory {
+    private String alert;
     public AlertFactory(String reason){
         if (reason.equals("NonUniqueUsername")){
-
+            alert = (new SignUpFailUsername()).alertMessage();
         }
         else if (reason.equals("IncorrectUsername")){
-
+            alert = (new LoginFailUsername()).alertMessage();
         }
         else if (reason.equals("IncorrectPassword")){
-
+            alert = (new LoginFailPassword()).alertMessage();
         }
+
+        JOptionPane.showMessageDialog(null, alert);
     }
 }
 
