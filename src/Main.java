@@ -33,22 +33,11 @@ public class Main extends Application implements Observer {
 //            e.printStackTrace();
 //        }
 
-//        //Open Splash Screen
-//        //TODO: This will be replaced in later implementations, will be incorporated into menus. For now here to statisfy sprint req.
-//        FXMLLoader splashScreen = new FXMLLoader(getClass().getResource("/com/ExceptionHandled/SplashScreen/SplashScreen.fxml"));
-//        controller = new SplashController();
-//        splashScreen.setController(controller);
-//        controller.addObserver(this);
-//        Parent splashWindow = splashScreen.load();
-//        Stage stage = new Stage();
-//        stage.setTitle("Welcome!");
-//        stage.setScene(new Scene(splashWindow));
-//        stage.show();
-
         // Instantiate the FXML Controller for the central game board
         GameBoardController gbc = new GameBoardController();
         // Instantiate the FXML Loader to load the game board UI
         FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("com/ExceptionHandled/TicTacToeUI/BoardUI/gameBoardScene.fxml"));
+        gbc.addObserver(this);
         // Set the controller of the game board
         gameLoader.setController(gbc);
         Parent gameBoard = gameLoader.load();
@@ -56,6 +45,7 @@ public class Main extends Application implements Observer {
         // Instantiate the FXML Loader to load the top menu
         FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("com/ExceptionHandled/TicTacToeUI/MenuLayout/MenuLayout.fxml"));
         MenuLayoutController MLC = new MenuLayoutController();
+        MLC.addObserver(this);
         menuLoader.setController(MLC);
         Parent menu = menuLoader.load();
 
@@ -65,7 +55,7 @@ public class Main extends Application implements Observer {
         // Create the main application window
         primaryStage.setTitle("TicTacToe Board");
         Scene scene1 = new Scene(mainScreen, 600,600);
-        scene1.getStylesheets().add("com.ExceptionHandled/TicTacToeUI/CSS/structStyle.css");
+        scene1.getStylesheets().add("com/ExceptionHandled/TicTacToeUI/CSS/structStyle.css");
         primaryStage.setScene(scene1);
 
         primaryStage.show();

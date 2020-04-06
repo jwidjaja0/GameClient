@@ -13,8 +13,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Observable;
 
-public class GameBoardController {
+public class GameBoardController extends Observable {
 
     double iconSize = 70.0;
 
