@@ -2,7 +2,8 @@ package com.ExceptionHandled.TicTacToeUI.MenuLayout;
 
 
 
-import com.ExceptionHandled.TicTacToeUI.SplashScreen.SplashController;
+import com.ExceptionHandled.GameMessages.Wrappers.Login;
+import com.ExceptionHandled.TicTacToeUI.SplashScreen.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
 
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -49,6 +51,12 @@ public class MenuLayoutController extends Observable implements Observer {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void alert(Serializable message){
+        if (message instanceof Login){
+            ((SplashController) controller).alert((Login) message);
         }
     }
 

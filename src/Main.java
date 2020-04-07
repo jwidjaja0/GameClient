@@ -1,7 +1,6 @@
 import com.ExceptionHandled.Client.Client;
 import com.ExceptionHandled.GameMessages.Wrappers.Login;
 import com.ExceptionHandled.InternalWrapper.InternalPacket;
-import com.ExceptionHandled.TicTacToeUI.SplashScreen.SplashController;
 import com.ExceptionHandled.TicTacToeUI.BoardUI.GameBoardController;
 import com.ExceptionHandled.TicTacToeUI.MenuLayout.MenuLayoutController;
 import javafx.application.Application;
@@ -68,7 +67,7 @@ public class Main extends Application implements Observer {
         }
         if (packet.getDirection().equals("ToUI")){
             if (packet.getMessageType().equals("Login")){
-                ((SplashController)controller).alert((Login)(packet.getMessage()));
+                ((MenuLayoutController)controller).alert(packet.getMessage());
             }
         }
     }

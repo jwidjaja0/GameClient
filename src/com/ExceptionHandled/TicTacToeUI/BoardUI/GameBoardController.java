@@ -61,6 +61,8 @@ public class GameBoardController extends Observable {
 
     }
 
+
+
     /**
      * disableAllPanels()
      * Prevents any clicking of the game board
@@ -120,15 +122,6 @@ public class GameBoardController extends Observable {
         Button button = (Button) event.getSource();
         int row = GridPane.getRowIndex(button);
         int column = GridPane.getColumnIndex(button);
-
-        //TODO: Remove remainder of this function
-        //TODO: Replace with implementation that sends Move object to main in Main
-//        game.makeTurn(new Move(row, column));
-//
-//        char gameStatus = game.whoWon();
-//        if (gameStatus != '-') {
-
-//        }
     }
 
     public void messageProcessor(Game gameMessage){
