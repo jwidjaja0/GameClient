@@ -64,6 +64,26 @@ public class GameBoardController extends Observable {
 
     }
 
+    public void incomingMessage(Game gameMessage){
+        String messageType = gameMessage.getMessageType();
+        if (messageType.equals("GameOverLoss") || messageType.equals("GameOverWin") || messageType.equals("GameOverTie")){
+            messageProcessor(gameMessage);
+        }
+        else if (messageType.equals("MoveValid")){
+            //TODO: Display move
+        }
+        else if (messageType.equals("MoveInvalid")){
+            //TODO: Display Invalid Move Alert
+        }
+        else if (messageType.equals("RematchRespond")){
+            //TODO: Restart game
+        }
+        else if(messageType.equals("WhoseTurn")){
+            //TODO: if it is this player's turn, enable the board to be clickable
+        }
+    }
+
+
     public UUID getGameID(){
         return gameID;
     }
@@ -156,19 +176,7 @@ public class GameBoardController extends Observable {
         }
     }
 
-    public void alert(Game gameMessage){
-        String messageType = gameMessage.getMessageType();
-        if (messageType.equals("GameOverLoss") || messageType.equals("GameOverWin") || messageType.equals("GameOverWin")){
-            messageProcessor(gameMessage);
-        }
-        else if (messageType.equals("MoveValid")){
-            //TODO: Display move
-        }
-        else if (messageType.equals("MoveInvalid")){
-            //TODO: Display Invalid Move Alert
-        }
-        else if (messageType.equals("RematchRespond"))
-    }
+
 
     //TODO: Done
     private Button getButton(int row, int col){

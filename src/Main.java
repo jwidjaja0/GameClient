@@ -68,7 +68,7 @@ public class Main extends Application implements Observer {
         }
         else if (packet.getDirection().equals("ToUI")){
             if(packet.getMessageType().equals("Game")){
-                gbc.alert((Game)packet.getMessage());
+                gbc.incomingMessage((Game)packet.getMessage());
             }
             else{
                 mlc.alert(packet.getMessage());
