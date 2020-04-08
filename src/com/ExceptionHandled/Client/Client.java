@@ -3,6 +3,7 @@ package com.ExceptionHandled.Client;
 import com.ExceptionHandled.GameMessages.Connection.*;
 import com.ExceptionHandled.GameMessages.Wrappers.*;
 import com.ExceptionHandled.InternalWrapper.InternalPacket;
+import com.ExceptionHandled.Miscellaneous.MessageSender;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -33,6 +34,9 @@ public class Client extends Observable implements Runnable, Observer {
         receive = new Receive(serverConnection, incoming);
         publish = new Publish(incoming);
         outgoing.add(new Packet("Connection", new Connection("ConnectionRequest",new ConnectionRequest())));
+
+        MessageSender.getInstance().setQueue(outgoing);
+
         Thread self = new Thread(this);
         self.start();
     }
