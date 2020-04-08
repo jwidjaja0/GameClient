@@ -1,5 +1,5 @@
 import com.ExceptionHandled.Client.Client;
-import com.ExceptionHandled.GameMessages.Wrappers.Login;
+import com.ExceptionHandled.GameMessages.Wrappers.*;
 import com.ExceptionHandled.InternalWrapper.InternalPacket;
 import com.ExceptionHandled.TicTacToeUI.BoardUI.GameBoardController;
 import com.ExceptionHandled.TicTacToeUI.MenuLayout.MenuLayoutController;
@@ -15,7 +15,8 @@ import java.util.Observer;
 
 public class Main extends Application implements Observer {
     private Client client;
-    private Observable controller;
+    private GameBoardController gbc;
+    private MenuLayoutController mlc;
 
     public static void main(String[] args) {
         launch(args);
@@ -31,7 +32,7 @@ public class Main extends Application implements Observer {
 //        }
 
         // Instantiate the FXML Controller for the central game board
-        GameBoardController gbc = new GameBoardController();
+        gbc = new GameBoardController();
         // Instantiate the FXML Loader to load the game board UI
         FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("com/ExceptionHandled/TicTacToeUI/BoardUI/gameBoardScene.fxml"));
         gbc.addObserver(this);
@@ -41,9 +42,9 @@ public class Main extends Application implements Observer {
 
         // Instantiate the FXML Loader to load the top menu
         FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("com/ExceptionHandled/TicTacToeUI/MenuLayout/MenuLayout.fxml"));
-        MenuLayoutController MLC = new MenuLayoutController();
-        MLC.addObserver(this);
-        menuLoader.setController(MLC);
+        mlc = new MenuLayoutController();
+        mlc.addObserver(this);
+        menuLoader.setController(mlc);
         Parent menu = menuLoader.load();
 
         // Create the main vBox that holds both the menu and the game board
@@ -65,10 +66,14 @@ public class Main extends Application implements Observer {
         if (packet.getDirection().equals("Outgoing")){
             client.sendOut(packet);
         }
-        if (packet.getDirection().equals("ToUI")){
-            if (packet.getMessageType().equals("Login")){
-                ((MenuLayoutController)controller).alert(packet.getMessage());
+        else if (packet.getDirection().equals("ToUI")){
+            if(packet.getMessageType().equals("Game")){
+                gbc.alert((Game)packet.getMessage());
+            }
+            else{
+                mlc.alert(packet.getMessage());
             }
         }
+
     }
 }

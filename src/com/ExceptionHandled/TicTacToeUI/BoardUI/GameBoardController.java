@@ -16,8 +16,11 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.UUID;
 
 public class GameBoardController extends Observable {
+
+    private UUID gameID;
 
     double iconSize = 70.0;
 
@@ -61,7 +64,9 @@ public class GameBoardController extends Observable {
 
     }
 
-
+    public UUID getGameID(){
+        return gameID;
+    }
 
     /**
      * disableAllPanels()
@@ -126,27 +131,43 @@ public class GameBoardController extends Observable {
 
     public void messageProcessor(Game gameMessage){
         if (gameMessage.getMessageType().equals("GameOverLoss")){
-
+            gameOver("Loss", gameMessage.getMessage());
         }
         else if (gameMessage.getMessageType().equals("GameOverTie")){
-
+            gameOver("Tie", gameMessage.getMessage());
         }
         else if (gameMessage.getMessageType().equals("GameOverWin")){
-
+            gameOver("Win", gameMessage.getMessage());
         }
     }
 
     private void gameOver(String status, Serializable message){
         disableAllPanels();
-        if (status.equals("Lost")){
+        if (status.equals("Loss")){
             addPlayerScore(((GameOverLoss)message).getPlayer());
+            //TODO: Display Loss Banner
         }
         else if (status.equals("Win")){
             addPlayerScore(((GameOverLoss)message).getPlayer());
+            //TODO: Display Win Banner
         }
         else if (status.equals("Tie")){
-
+            //TODO: Display Tie game banner
         }
+    }
+
+    public void alert(Game gameMessage){
+        String messageType = gameMessage.getMessageType();
+        if (messageType.equals("GameOverLoss") || messageType.equals("GameOverWin") || messageType.equals("GameOverWin")){
+            messageProcessor(gameMessage);
+        }
+        else if (messageType.equals("MoveValid")){
+            //TODO: Display move
+        }
+        else if (messageType.equals("MoveInvalid")){
+            //TODO: Display Invalid Move Alert
+        }
+        else if (messageType.equals("RematchRespond"))
     }
 
     //TODO: Done
