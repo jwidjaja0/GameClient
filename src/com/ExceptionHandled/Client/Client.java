@@ -12,7 +12,7 @@ import java.util.Observer;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
-public class Client extends Observable implements Runnable, Observer {
+public class Client extends Observable implements Observer {
     private Socket serverConnection;
     private String username;
     private Send send;
@@ -33,27 +33,12 @@ public class Client extends Observable implements Runnable, Observer {
         send = new Send(serverConnection, outgoing);
         receive = new Receive(serverConnection, incoming);
         publish = new Publish(incoming);
+        publish.addObserver(this);
         outgoing.add(new Packet("Connection", new Connection("ConnectionRequest",new ConnectionRequest())));
 
         MessageSender.getInstance().setQueue(outgoing);
-
-        Thread self = new Thread(this);
-        self.start();
     }
 
-    public void sendOut(InternalPacket internalPacket){
-        outgoing.add(new Packet(internalPacket.getMessageType(), internalPacket.getMessage()));
-    }
-
-
-
-
-    @Override
-    public void run() {
-        while(true){
-
-        }
-    }
 
     @Override
     public void update(Observable o, Object arg) {

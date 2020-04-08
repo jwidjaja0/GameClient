@@ -3,9 +3,10 @@ package com.ExceptionHandled.Client;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
 
 import java.util.ArrayList;
+import java.util.Observable;
 import java.util.concurrent.BlockingQueue;
 
-public class Publish implements Runnable {
+public class Publish extends Observable implements Runnable{
     //private ArrayList<ClientChatroom> chatrooms;
     private BlockingQueue<Packet> incoming;
 
