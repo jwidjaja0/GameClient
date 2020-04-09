@@ -2,6 +2,7 @@ package com.ExceptionHandled.TicTacToeUI.SplashScreen;
 
 import com.ExceptionHandled.GameMessages.Login.*;
 import com.ExceptionHandled.GameMessages.Wrappers.Login;
+import com.ExceptionHandled.Interfaces.Controller;
 import com.ExceptionHandled.TicTacToeUI.SplashScreen.GetUserInfo.GetUserInfoController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,7 +17,7 @@ import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
-public class SplashController {
+public class SplashController implements Controller {
     @FXML
     Button login;
 

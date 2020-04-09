@@ -43,7 +43,6 @@ public class Main extends Application implements Observer {
         // Instantiate the FXML Loader to load the top menu
         FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("com/ExceptionHandled/TicTacToeUI/MenuLayout/MenuLayout.fxml"));
         mlc = new MenuLayoutController();
-        mlc.addObserver(this);
         menuLoader.setController(mlc);
         Parent menu = menuLoader.load();
 
