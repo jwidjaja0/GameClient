@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
-public class SplashController extends Observable implements Observer {
+public class SplashController {
     @FXML
     Button login;
 
@@ -59,7 +59,6 @@ public class SplashController extends Observable implements Observer {
 
     private void showInfoScreen(String type) throws IOException {
         getUserInfoController = new GetUserInfoController();
-        getUserInfoController.addObserver(this);
         FXMLLoader getUserInfo = new FXMLLoader(getClass().getResource("GetUserInfo/GetUserInfo.fxml"));
         getUserInfo.setController(getUserInfoController);
         Parent getUserInfoWindow = getUserInfo.load();
@@ -89,13 +88,6 @@ public class SplashController extends Observable implements Observer {
         else if (loginMessage.getMessageType().equals("LoginSuccess")){
             getUserInfoController.loginSuccess((LoginSuccess) (loginMessage.getMessage()));
         }
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-        //Pass everything onto main
-        setChanged();
-        notifyObservers(arg);
     }
 
 }

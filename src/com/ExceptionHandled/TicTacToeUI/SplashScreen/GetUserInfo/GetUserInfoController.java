@@ -1,7 +1,9 @@
 package com.ExceptionHandled.TicTacToeUI.SplashScreen.GetUserInfo;
 import com.ExceptionHandled.GameMessages.Login.*;
 import com.ExceptionHandled.GameMessages.Wrappers.Login;
+import com.ExceptionHandled.GameMessages.Wrappers.Packet;
 import com.ExceptionHandled.InternalWrapper.InternalPacket;
+import com.ExceptionHandled.Miscellaneous.MessageSender;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -36,6 +38,7 @@ public class GetUserInfoController extends Observable {
     Label lastNameLabel;
 
     private String[] info;
+    boolean isLogin;
 
     public void initialize(){
         info = new String[4];
@@ -55,6 +58,7 @@ public class GetUserInfoController extends Observable {
 
     public void setToRegister(){
         action.setText("Register");
+        isLogin = false;
     }
 
     public void setToLogin(){
@@ -63,6 +67,7 @@ public class GetUserInfoController extends Observable {
         lastNameLabel.setVisible(false);
         firstName.setVisible(false);
         lastName.setVisible(false);
+        isLogin = true;
     }
 
     public void signUpFail(SignUpFail fail){
@@ -82,8 +87,14 @@ public class GetUserInfoController extends Observable {
     }
 
     private void checkValues(){
-        setChanged();
-        notifyObservers(new InternalPacket("Login", "Outgoing", new Login("SignUpRequest", new SignUpRequest(info[0], info[1], info[2], info[3]))));
+        if (info[2].equals(null) && info[3].equals(null)){
+            MessageSender.getInstance().sendMessage(new Packet("Login", new Login("LoginRequest", new LoginRequest(info[0], info[1]))));
+        }
+        else{
+            MessageSender.getInstance().sendMessage(new Packet("Login", new Login("SignUpRequest", new SignUpRequest(info[0], info[1], info[2], info[3]))));
+        }
+
+
     }
 
     public String[] getInfo(){

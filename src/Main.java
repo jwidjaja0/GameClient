@@ -63,10 +63,7 @@ public class Main extends Application implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         InternalPacket packet = (InternalPacket)arg;
-        if (packet.getDirection().equals("Outgoing")){
-            client.sendOut(packet);
-        }
-        else if (packet.getDirection().equals("ToUI")){
+        if (packet.getDirection().equals("ToUI")){
             if(packet.getMessageType().equals("Game")){
                 gbc.incomingMessage((Game)packet.getMessage());
             }
