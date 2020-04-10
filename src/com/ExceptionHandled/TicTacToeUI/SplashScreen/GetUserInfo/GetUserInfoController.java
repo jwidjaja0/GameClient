@@ -1,4 +1,5 @@
 package com.ExceptionHandled.TicTacToeUI.SplashScreen.GetUserInfo;
+import com.ExceptionHandled.Alerts.AlertFactory;
 import com.ExceptionHandled.GameMessages.Login.*;
 import com.ExceptionHandled.GameMessages.Wrappers.Login;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
@@ -71,19 +72,27 @@ public class GetUserInfoController extends Observable {
     }
 
     public void signUpFail(SignUpFail fail){
-
+        (new AlertFactory(fail.toString())).displayAlert();
+        info = new String[4];
     }
 
     public void loginFail(LoginFail fail){
-
+        (new AlertFactory(fail.toString())).displayAlert();
+        info = new String[4];
     }
 
     public void loginSuccess(LoginSuccess success){
-
+        (new AlertFactory(success.toString())).displayAlert();
+        setChanged();
+        notifyObservers();
+        //TODO: Close the stage
     }
 
     public void signUpSuccess(SignUpSuccess success){
-
+        (new AlertFactory(success.toString())).displayAlert();
+        setChanged();
+        notifyObservers();
+        //TODO: Close the stage
     }
 
     private void checkValues(){
