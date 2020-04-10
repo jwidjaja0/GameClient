@@ -1,6 +1,7 @@
 package com.ExceptionHandled.TicTacToeUI.BoardUI;
 
 
+import com.ExceptionHandled.Alerts.AlertFactory;
 import com.ExceptionHandled.GameMessages.Game.*;
 import com.ExceptionHandled.GameMessages.Wrappers.Game;
 import javafx.event.ActionEvent;
@@ -20,7 +21,7 @@ import java.util.UUID;
 
 public class GameBoardController extends Observable {
 
-    private UUID gameID;
+    private String gameID;
 
     double iconSize = 70.0;
 
@@ -70,10 +71,10 @@ public class GameBoardController extends Observable {
             messageProcessor(gameMessage);
         }
         else if (messageType.equals("MoveValid")){
-            //TODO: Display move
+            displayMove((MoveValid)gameMessage.getMessage());
         }
         else if (messageType.equals("MoveInvalid")){
-            //TODO: Display Invalid Move Alert
+            (new AlertFactory(((MoveInvalid)gameMessage.getMessage()).toString())).displayAlert();
         }
         else if (messageType.equals("RematchRespond")){
             //TODO: Restart game
@@ -84,7 +85,7 @@ public class GameBoardController extends Observable {
     }
 
 
-    public UUID getGameID(){
+    public String getGameID(){
         return gameID;
     }
 
@@ -109,7 +110,7 @@ public class GameBoardController extends Observable {
     }
 
     //TODO: Done
-    private void setPanelImage(MoveValid move){
+    private void displayMove(MoveValid move){
         if(move.getPlayer().equals("X")){
             setXImage(getButton(move.getxCoord(), move.getyCoord()));
         }
