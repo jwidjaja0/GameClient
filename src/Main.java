@@ -61,15 +61,13 @@ public class Main extends Application implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        InternalPacket packet = (InternalPacket)arg;
-        if (packet.getDirection().equals("ToUI")){
-            if(packet.getMessageType().equals("Game")){
-                gbc.incomingMessage((Game)packet.getMessage());
-            }
-            else{
-                mlc.alert(packet.getMessage());
-            }
+        Packet packet = (Packet) arg;
+        String messageType = packet.getMessageType();
+        if(messageType.equals("Login")){
+            mlc.alert(packet.getMessage());
         }
-
+        else if(messageType.equals("Game")){
+            gbc.messageProcessor((Game)packet.getMessage());
+        }
     }
 }

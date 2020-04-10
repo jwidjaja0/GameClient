@@ -25,7 +25,7 @@ public class Publish extends Observable implements Runnable{
         try {
             while (true) {
                 Packet packet = incoming.take();// Get the packet from the incoming queue
-                //TODO: Filterpackets here
+                packetFilter(packet);
             }
         }
         catch (InterruptedException e) {
@@ -35,4 +35,13 @@ public class Publish extends Observable implements Runnable{
             System.out.println("ClientPublish closing.");
         }
     }
+
+    private void packetFilter(Packet packet){
+        String messageType = packet.getMessageType();
+        if (messageType.equals("Login") || messageType.equals("Game") || messageType.equals("Connection")){
+            setChanged();
+            notifyObservers(packet);
+        }
+    }
+
 }

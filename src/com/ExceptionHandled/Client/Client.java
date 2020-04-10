@@ -1,6 +1,7 @@
 package com.ExceptionHandled.Client;
 
 import com.ExceptionHandled.GameMessages.Connection.*;
+import com.ExceptionHandled.GameMessages.Login.LoginSuccess;
 import com.ExceptionHandled.GameMessages.Wrappers.*;
 import com.ExceptionHandled.InternalWrapper.InternalPacket;
 import com.ExceptionHandled.Miscellaneous.MessageSender;
@@ -9,6 +10,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.UUID;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
@@ -18,6 +20,7 @@ public class Client extends Observable implements Observer {
     private Send send;
     private Receive receive;
     private Publish publish;
+    private String playerID;
 
     //TODO: Change to packet
     private BlockingQueue<Packet> outgoing;
@@ -42,10 +45,15 @@ public class Client extends Observable implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        InternalPacket packet = (InternalPacket)arg;
-        if (packet.getDirection().equals("ToUI")){
-            setChanged();
-            notifyObservers(packet);
+        Packet packet = (Packet)arg;
+        
+        if (packet.getMessageType().equals("Login")){
+            Login innerPacket = (Login)packet.getMessage();
+            if (innerPacket.getMessageType().equals("LoginSuccess")){
+                playerID = ((LoginSuccess)innerPacket.getMessage()).getPlayerID();
+            }
         }
+        setChanged();
+        notifyObservers(arg);
     }
 }
