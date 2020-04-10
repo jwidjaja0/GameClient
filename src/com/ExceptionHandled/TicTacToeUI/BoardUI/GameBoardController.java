@@ -4,6 +4,8 @@ package com.ExceptionHandled.TicTacToeUI.BoardUI;
 import com.ExceptionHandled.Alerts.AlertFactory;
 import com.ExceptionHandled.GameMessages.Game.*;
 import com.ExceptionHandled.GameMessages.Wrappers.Game;
+import com.ExceptionHandled.GameMessages.Wrappers.Packet;
+import com.ExceptionHandled.Miscellaneous.MessageSender;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -22,6 +24,7 @@ import java.util.UUID;
 public class GameBoardController extends Observable {
 
     private String gameID;
+    private String player;
 
     double iconSize = 70.0;
 
@@ -148,6 +151,7 @@ public class GameBoardController extends Observable {
         Button button = (Button) event.getSource();
         int row = GridPane.getRowIndex(button);
         int column = GridPane.getColumnIndex(button);
+        MessageSender.getInstance().sendMessage(new Packet("MoveMade", new MoveMade(gameID, player, row, column)));
     }
 
     public void messageProcessor(Game gameMessage){

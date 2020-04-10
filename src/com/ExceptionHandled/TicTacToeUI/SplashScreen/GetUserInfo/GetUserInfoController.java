@@ -41,6 +41,7 @@ public class GetUserInfoController extends Observable {
     private String[] info;
     boolean isLogin;
 
+
     public void initialize(){
         info = new String[4];
         action.setOnAction(new EventHandler<ActionEvent>() {
@@ -83,20 +84,16 @@ public class GetUserInfoController extends Observable {
 
     public void loginSuccess(LoginSuccess success){
         (new AlertFactory(success.toString())).displayAlert();
-        setChanged();
-        notifyObservers();
         //TODO: Close the stage
     }
 
     public void signUpSuccess(SignUpSuccess success){
         (new AlertFactory(success.toString())).displayAlert();
-        setChanged();
-        notifyObservers();
         //TODO: Close the stage
     }
 
     private void checkValues(){
-        if (info[2].equals(null) && info[3].equals(null)){
+        if (info[2].equals("") && info[3].equals("")){
             MessageSender.getInstance().sendMessage(new Packet("Login", new Login("LoginRequest", new LoginRequest(info[0], info[1]))));
         }
         else{
