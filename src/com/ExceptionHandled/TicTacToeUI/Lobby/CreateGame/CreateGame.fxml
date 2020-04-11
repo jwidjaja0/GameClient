@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.ExceptionHandled.TicTacToeUI.Lobby.CreateGame.CreateGameController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="213.0" prefWidth="267.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ExceptionHandled.TicTacToeUI.Lobby.CreateGame.CreateGameController">
+   <children>
+      <Label layoutX="14.0" layoutY="25.0" text="Game Name:" />
+      <Label layoutX="14.0" layoutY="60.0" text="Password:" />
+      <TextField fx:id="gameName" layoutX="92.0" layoutY="21.0" />
+      <TextField fx:id="password" layoutX="92.0" layoutY="56.0" />
+      <Label layoutX="12.0" layoutY="98.0" text="Opponent:" />
+      <ComboBox fx:id="opponent" layoutX="92.0" layoutY="94.0" prefWidth="150.0" />
+      <Label layoutX="12.0" layoutY="135.0" text="Private Game:" />
+      <ComboBox fx:id="privateGame" layoutX="92.0" layoutY="131.0" prefWidth="150.0" />
+      <Button fx:id="create" layoutX="189.0" layoutY="168.0" mnemonicParsing="false" text="Create" />
+   </children>
 </AnchorPane>

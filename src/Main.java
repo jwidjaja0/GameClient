@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -24,12 +25,12 @@ public class Main extends Application implements Observer {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-//        try{
-//            client = new Client();
-//              client.addObserver(this);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try{
+            client = new Client();
+              client.addObserver(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         // Instantiate the FXML Controller for the central game board
         gbc = new GameBoardController();
