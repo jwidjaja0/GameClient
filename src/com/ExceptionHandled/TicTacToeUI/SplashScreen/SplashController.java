@@ -79,15 +79,17 @@ public class SplashController implements Controller {
     public void alert(Login loginMessage){
         if (loginMessage.getMessageType().equals("SignUpFail")){
             getUserInfoController.signUpFail((SignUpFail) (loginMessage.getMessage()));
-        }
+    }
         else if (loginMessage.getMessageType().equals("LoginFail")){
             getUserInfoController.loginFail((LoginFail) (loginMessage.getMessage()));
         }
         else if (loginMessage.getMessageType().equals("SignUpSuccess")){
             getUserInfoController.signUpSuccess((SignUpSuccess) (loginMessage.getMessage()));
+            //TODO: Close the stage
         }
         else if (loginMessage.getMessageType().equals("LoginSuccess")){
             getUserInfoController.loginSuccess((LoginSuccess) (loginMessage.getMessage()));
+            //TODO: Close the stage
         }
     }
 

@@ -100,7 +100,6 @@ public class GetUserInfoController extends Observable {
             MessageSender.getInstance().sendMessage(new Packet("Login", new Login("SignUpRequest", new SignUpRequest(info[0], info[1], info[2], info[3]))));
         }
 
-
     }
 
     public String[] getInfo(){
