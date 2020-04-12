@@ -3,7 +3,7 @@ package com.ExceptionHandled.TicTacToeUI.BoardUI;
 
 import com.ExceptionHandled.Alerts.AlertFactory;
 import com.ExceptionHandled.GameMessages.Game.*;
-import com.ExceptionHandled.GameMessages.Wrappers.Game;
+import com.ExceptionHandled.GameMessages.Interfaces.Game;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
 import com.ExceptionHandled.Miscellaneous.MessageSender;
 import javafx.event.ActionEvent;
@@ -69,20 +69,19 @@ public class GameBoardController extends Observable {
     }
 
     public void incomingMessage(Game gameMessage){
-        String messageType = gameMessage.getMessageType();
-        if (messageType.equals("GameOverLoss") || messageType.equals("GameOverWin") || messageType.equals("GameOverTie")){
+        if (gameMessage instanceof GameOverLoss || gameMessage instanceof GameOverWin || gameMessage instanceof GameOverTie){
             messageProcessor(gameMessage);
         }
-        else if (messageType.equals("MoveValid")){
-            displayMove((MoveValid)gameMessage.getMessage());
+        else if (gameMessage instanceof MoveValid){
+            displayMove((MoveValid)gameMessage);
         }
-        else if (messageType.equals("MoveInvalid")){
-            (new AlertFactory(((MoveInvalid)gameMessage.getMessage()).toString())).displayAlert();
+        else if (gameMessage instanceof MoveInvalid){
+            (new AlertFactory(gameMessage.toString())).displayAlert();
         }
-        else if (messageType.equals("RematchRespond")){
+        else if (gameMessage instanceof RematchRespond){
             //TODO: Restart game
         }
-        else if(messageType.equals("WhoseTurn")){
+        else if(gameMessage instanceof WhoseTurn){
             //TODO: if it is this player's turn, enable the board to be clickable
         }
     }
@@ -112,7 +111,7 @@ public class GameBoardController extends Observable {
         }
     }
 
-    //TODO: Done
+
     private void displayMove(MoveValid move){
         if(move.getPlayer().equals("X")){
             setXImage(getButton(move.getxCoord(), move.getyCoord()));
@@ -123,7 +122,6 @@ public class GameBoardController extends Observable {
     }
 
 
-    //TODO: Done
     private void setXImage(Button tc){
         Image image = new Image(getClass().getResourceAsStream("../Graphics/XShape.png"));
         ImageView imageView = new ImageView(image);
@@ -134,7 +132,7 @@ public class GameBoardController extends Observable {
         tc.setMouseTransparent(true);
     }
 
-    //TODO: Done
+
     private void setOImage(Button tc){
         Image image = new Image(getClass().getResourceAsStream("../Graphics/WhiteCircle.png"));
         ImageView imageView = new ImageView(image);
@@ -151,18 +149,18 @@ public class GameBoardController extends Observable {
         Button button = (Button) event.getSource();
         int row = GridPane.getRowIndex(button);
         int column = GridPane.getColumnIndex(button);
-        MessageSender.getInstance().sendMessage(new Packet("MoveMade", new MoveMade(gameID, player, row, column)));
+        MessageSender.getInstance().sendMessage("MoveMade", new MoveMade(gameID, player, row, column));
     }
 
     public void messageProcessor(Game gameMessage){
-        if (gameMessage.getMessageType().equals("GameOverLoss")){
-            gameOver("Loss", gameMessage.getMessage());
+        if (gameMessage instanceof GameOverLoss){
+            gameOver("Loss", (GameOverLoss)gameMessage);
         }
-        else if (gameMessage.getMessageType().equals("GameOverTie")){
-            gameOver("Tie", gameMessage.getMessage());
+        else if (gameMessage instanceof GameOverTie){
+            gameOver("Tie", (GameOverTie)gameMessage);
         }
-        else if (gameMessage.getMessageType().equals("GameOverWin")){
-            gameOver("Win", gameMessage.getMessage());
+        else if (gameMessage instanceof GameOverWin){
+            gameOver("Win", (GameOverWin)gameMessage);
         }
     }
 

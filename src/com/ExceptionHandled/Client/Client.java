@@ -51,6 +51,7 @@ public class Client extends Observable implements Observer {
             Login innerPacket = (Login)packet.getMessage();
             if (innerPacket.getMessageType().equals("LoginSuccess")){
                 playerID = ((LoginSuccess)innerPacket.getMessage()).getPlayerID();
+                MessageSender.getInstance().setPlayerID(playerID);
             }
         }
         setChanged();
