@@ -1,7 +1,7 @@
 package com.ExceptionHandled.TicTacToeUI.SplashScreen;
 
+import com.ExceptionHandled.GameMessages.Interfaces.Login;
 import com.ExceptionHandled.GameMessages.Login.*;
-import com.ExceptionHandled.GameMessages.Wrappers.Login;
 import com.ExceptionHandled.Interfaces.Controller;
 import com.ExceptionHandled.TicTacToeUI.SplashScreen.GetUserInfo.GetUserInfoController;
 import javafx.event.ActionEvent;
@@ -25,6 +25,7 @@ public class SplashController implements Controller {
     Button register;
 
     private GetUserInfoController getUserInfoController;
+    private Stage openStage;
 
     public void initialize(){
         login.setOnAction(new EventHandler<ActionEvent>() {
@@ -63,9 +64,9 @@ public class SplashController implements Controller {
         FXMLLoader getUserInfo = new FXMLLoader(getClass().getResource("GetUserInfo/GetUserInfo.fxml"));
         getUserInfo.setController(getUserInfoController);
         Parent getUserInfoWindow = getUserInfo.load();
-        Stage stage = new Stage();
-        stage.setTitle("Enter Your Information");
-        stage.setScene(new Scene(getUserInfoWindow));
+        openStage = new Stage();
+        openStage.setTitle("Enter Your Information");
+        openStage.setScene(new Scene(getUserInfoWindow));
 
         if (type.equals("Register"))
             getUserInfoController.setToRegister();
@@ -73,23 +74,23 @@ public class SplashController implements Controller {
             getUserInfoController.setToLogin();
 
 
-        stage.showAndWait();
+        openStage.showAndWait();
     }
 
     public void alert(Login loginMessage){
-        if (loginMessage.getMessageType().equals("SignUpFail")){
-            getUserInfoController.signUpFail((SignUpFail) (loginMessage.getMessage()));
+        if (loginMessage instanceof SignUpFail){
+            getUserInfoController.signUpFail((SignUpFail) loginMessage);
     }
-        else if (loginMessage.getMessageType().equals("LoginFail")){
-            getUserInfoController.loginFail((LoginFail) (loginMessage.getMessage()));
+        else if (loginMessage instanceof LoginFail){
+            getUserInfoController.loginFail((LoginFail) loginMessage);
         }
-        else if (loginMessage.getMessageType().equals("SignUpSuccess")){
-            getUserInfoController.signUpSuccess((SignUpSuccess) (loginMessage.getMessage()));
-            //TODO: Close the stage
+        else if (loginMessage instanceof SignUpSuccess){
+            getUserInfoController.signUpSuccess((SignUpSuccess) loginMessage);
+            openStage.close();
         }
-        else if (loginMessage.getMessageType().equals("LoginSuccess")){
-            getUserInfoController.loginSuccess((LoginSuccess) (loginMessage.getMessage()));
-            //TODO: Close the stage
+        else if (loginMessage instanceof LoginSuccess){
+            getUserInfoController.loginSuccess((LoginSuccess) loginMessage);
+            openStage.close();
         }
     }
 
