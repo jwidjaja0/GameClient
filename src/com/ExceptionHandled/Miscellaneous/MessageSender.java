@@ -7,6 +7,7 @@ import java.util.concurrent.BlockingQueue;
 public class MessageSender {
 
     private static MessageSender instance = new MessageSender();
+    private String playerID;
     private BlockingQueue<Packet> queue;
 
     private MessageSender(){
@@ -23,5 +24,9 @@ public class MessageSender {
 
     public void sendMessage(Packet packet){
         queue.add(packet);
+    }
+
+    public void setPlayerID(String playerID){
+        this.playerID = playerID;
     }
 }
