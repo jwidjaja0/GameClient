@@ -1,9 +1,6 @@
 package com.ExceptionHandled.TicTacToeUI.SplashScreen.GetUserInfo;
 import com.ExceptionHandled.Alerts.AlertFactory;
 import com.ExceptionHandled.GameMessages.Login.*;
-import com.ExceptionHandled.GameMessages.Wrappers.Login;
-import com.ExceptionHandled.GameMessages.Wrappers.Packet;
-import com.ExceptionHandled.InternalWrapper.InternalPacket;
 import com.ExceptionHandled.Miscellaneous.MessageSender;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -94,10 +91,10 @@ public class GetUserInfoController extends Observable {
 
     private void checkValues(){
         if (info[2].equals("") && info[3].equals("")){
-            MessageSender.getInstance().sendMessage(new Packet("Login", new Login("LoginRequest", new LoginRequest(info[0], info[1]))));
+            MessageSender.getInstance().sendMessage("Login", new LoginRequest(info[0], info[1]));
         }
         else{
-            MessageSender.getInstance().sendMessage(new Packet("Login", new Login("SignUpRequest", new SignUpRequest(info[0], info[1], info[2], info[3]))));
+            MessageSender.getInstance().sendMessage("Login", new SignUpRequest(info[0], info[1], info[2], info[3]));
         }
 
     }
