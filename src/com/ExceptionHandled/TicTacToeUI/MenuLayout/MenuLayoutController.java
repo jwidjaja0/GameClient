@@ -52,7 +52,7 @@ public class MenuLayoutController {
         }
     }
 
-    public void alert(Serializable message){
+    public void messageProcessor(Serializable message){
         if (message instanceof Login){
             ((SplashController) controller).alert((Login) message);
         }

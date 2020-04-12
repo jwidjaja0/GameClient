@@ -1,6 +1,6 @@
 import com.ExceptionHandled.Client.Client;
+import com.ExceptionHandled.GameMessages.Interfaces.Game;
 import com.ExceptionHandled.GameMessages.Wrappers.*;
-import com.ExceptionHandled.InternalWrapper.InternalPacket;
 import com.ExceptionHandled.TicTacToeUI.BoardUI.GameBoardController;
 import com.ExceptionHandled.TicTacToeUI.MenuLayout.MenuLayoutController;
 import javafx.application.Application;
@@ -65,7 +65,7 @@ public class Main extends Application implements Observer {
         Packet packet = (Packet) arg;
         String messageType = packet.getMessageType();
         if(messageType.equals("Login")){
-            mlc.alert(packet.getMessage());
+            mlc.messageProcessor(packet.getMessage());
         }
         else if(messageType.equals("Game")){
             gbc.messageProcessor((Game)packet.getMessage());
