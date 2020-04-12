@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.UUID;
 
-public class GameBoardController extends Observable {
+public class GameBoardController {
 
     private String gameID;
     private String player;
