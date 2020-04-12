@@ -25,12 +25,12 @@ public class Main extends Application implements Observer {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        try{
-            client = new Client();
-              client.addObserver(this);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try{
+//            client = new Client();
+//              client.addObserver(this);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
         // Instantiate the FXML Loader to load the game board UI
         FXMLLoader lobbyUI = new FXMLLoader(getClass().getResource("com/ExceptionHandled/TicTacToeUI/Lobby/Lobby.fxml"));

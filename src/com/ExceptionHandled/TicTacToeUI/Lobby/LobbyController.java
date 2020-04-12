@@ -41,12 +41,16 @@ public class LobbyController {
     public void initialize(){
         openGames = new ArrayList<>();
 
-        requestGamesListRefresh();
+        //requestGamesListRefresh();
 
         createGameButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+                try {
+                    createGame();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -82,7 +86,7 @@ public class LobbyController {
     }
 
     private void createGame() throws IOException {
-        FXMLLoader createGameUI = new FXMLLoader(getClass().getResource("com/ExceptionHandled/TicTacToeUI/Lobby/CreateGame/CreateGame.fxml"));
+        FXMLLoader createGameUI = new FXMLLoader(getClass().getResource("CreateGame/CreateGame.fxml"));
         Parent ui = createGameUI.load();
         Stage openStage = new Stage();
         openStage.setTitle("Create New Game");
@@ -96,7 +100,7 @@ public class LobbyController {
 
         if (message instanceof NewGameSuccess){
             openStage.close();
-            //TODO: Open game
+            //TODO: Open game, add to list of open games
         }
         else if(message instanceof NewGameFail){
 
