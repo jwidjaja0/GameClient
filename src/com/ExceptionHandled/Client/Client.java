@@ -1,16 +1,15 @@
 package com.ExceptionHandled.Client;
 
 import com.ExceptionHandled.GameMessages.Connection.*;
+import com.ExceptionHandled.GameMessages.Interfaces.Login;
 import com.ExceptionHandled.GameMessages.Login.LoginSuccess;
 import com.ExceptionHandled.GameMessages.Wrappers.*;
-import com.ExceptionHandled.InternalWrapper.InternalPacket;
 import com.ExceptionHandled.Miscellaneous.MessageSender;
 
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.UUID;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
@@ -37,9 +36,8 @@ public class Client extends Observable implements Observer {
         receive = new Receive(serverConnection, incoming);
         publish = new Publish(incoming);
         publish.addObserver(this);
-        outgoing.add(new Packet("Connection", new Connection("ConnectionRequest",new ConnectionRequest())));
-
         MessageSender.getInstance().setQueue(outgoing);
+        MessageSender.getInstance().sendMessage("Connection", new ConnectionRequest());
     }
 
 
@@ -49,8 +47,8 @@ public class Client extends Observable implements Observer {
         
         if (packet.getMessageType().equals("Login")){
             Login innerPacket = (Login)packet.getMessage();
-            if (innerPacket.getMessageType().equals("LoginSuccess")){
-                playerID = ((LoginSuccess)innerPacket.getMessage()).getPlayerID();
+            if (innerPacket instanceof LoginSuccess){
+                playerID = ((LoginSuccess)innerPacket).getPlayerID();
                 MessageSender.getInstance().setPlayerID(playerID);
             }
         }
