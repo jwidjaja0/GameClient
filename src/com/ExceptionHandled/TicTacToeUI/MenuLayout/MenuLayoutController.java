@@ -2,7 +2,7 @@ package com.ExceptionHandled.TicTacToeUI.MenuLayout;
 
 
 
-import com.ExceptionHandled.GameMessages.Wrappers.Login;
+import com.ExceptionHandled.GameMessages.Interfaces.Login;
 import com.ExceptionHandled.Interfaces.Controller;
 import com.ExceptionHandled.TicTacToeUI.SplashScreen.*;
 import javafx.event.EventHandler;
@@ -17,8 +17,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Observable;
-import java.util.Observer;
 
 public class MenuLayoutController {
 
