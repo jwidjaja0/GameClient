@@ -1,7 +1,6 @@
 import com.ExceptionHandled.Client.Client;
-import com.ExceptionHandled.GameMessages.Interfaces.Game;
+import com.ExceptionHandled.GameMessages.Interfaces.*;
 import com.ExceptionHandled.GameMessages.Wrappers.*;
-import com.ExceptionHandled.TicTacToeUI.BoardUI.GameBoardController;
 import com.ExceptionHandled.TicTacToeUI.Lobby.LobbyController;
 import com.ExceptionHandled.TicTacToeUI.MenuLayout.MenuLayoutController;
 import javafx.application.Application;
@@ -17,6 +16,7 @@ import java.util.Observer;
 
 public class Main extends Application implements Observer {
     private Client client;
+    private LobbyController lbc;
     private MenuLayoutController mlc;
 
     public static void main(String[] args) {
@@ -25,15 +25,17 @@ public class Main extends Application implements Observer {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-//        try{
-//            client = new Client();
-//              client.addObserver(this);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try{
+            client = new Client();
+              client.addObserver(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         // Instantiate the FXML Loader to load the game board UI
         FXMLLoader lobbyUI = new FXMLLoader(getClass().getResource("com/ExceptionHandled/TicTacToeUI/Lobby/Lobby.fxml"));
+        lbc = new LobbyController();
+        lobbyUI.setController(lbc);
         Parent lobby = lobbyUI.load();
 
         // Instantiate the FXML Loader to load the top menu
@@ -61,6 +63,12 @@ public class Main extends Application implements Observer {
         String messageType = packet.getMessageType();
         if(messageType.equals("Login")){
             mlc.messageProcessor(packet.getMessage());
+        }
+        else if (messageType.equals("MainMenu")){
+            lbc.messageProcessor((MainMenu)packet.getMessage());
+        }
+        else if (messageType.equals("Game")){
+            lbc.messageProcessor((Game)packet.getMessage());
         }
     }
 }

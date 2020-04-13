@@ -85,6 +85,7 @@ public class GameBoardController {
         player = "x";
         gameID = newGame.getGameId();
         gameName = newGame.getGameName();
+        player1Label = new Label();
         player1Label.setText("You");
     }
 
@@ -92,7 +93,9 @@ public class GameBoardController {
         player = "o";
         gameID = joinGame.getGameID();
         gameName = joinGame.getGameName();
+        player1Label = new Label();
         player1Label.setText(joinGame.getOtherPlayerName());
+        player2Label = new Label();
         player2Label.setText("You");
     }
 

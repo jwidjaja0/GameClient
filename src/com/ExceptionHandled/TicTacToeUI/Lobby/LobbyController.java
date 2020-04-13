@@ -2,10 +2,11 @@ package com.ExceptionHandled.TicTacToeUI.Lobby;
 
 
 import com.ExceptionHandled.Alerts.AlertFactory;
-import com.ExceptionHandled.GameMessages.Interfaces.MainMenu;
+import com.ExceptionHandled.GameMessages.Interfaces.*;
 import com.ExceptionHandled.GameMessages.MainMenu.*;
 import com.ExceptionHandled.Miscellaneous.MessageSender;
 import com.ExceptionHandled.TicTacToeUI.BoardUI.GameBoardController;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -47,7 +48,7 @@ public class LobbyController {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    createGame();
+                    createGameRequest();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -85,7 +86,7 @@ public class LobbyController {
         gamesList.getItems().setAll(games.getActiveGameHeaderList());
     }
 
-    private void createGame() throws IOException {
+    private void createGameRequest() throws IOException {
         FXMLLoader createGameUI = new FXMLLoader(getClass().getResource("CreateGame/CreateGame.fxml"));
         Parent ui = createGameUI.load();
         Stage openStage = new Stage();
@@ -94,23 +95,35 @@ public class LobbyController {
         openStage.showAndWait();
     }
 
-    private void createGame(NewGameSuccess newGame){
+    private void createGame(NewGameSuccess newGame) throws IOException {
         GameBoardController gbc = new GameBoardController(newGame);
         openGameWindow(gbc, newGame.getGameName());
     }
 
-    private void joinGame(JoinGameSuccess joinGame){
+    private void joinGame(JoinGameSuccess joinGame) throws IOException {
         GameBoardController gbc = new GameBoardController(joinGame);
         openGameWindow(gbc, joinGame.getGameName());
     }
 
-    private void openGameWindow(GameBoardController controller, String gameName){
+    private void openGameWindow(GameBoardController controller, String gameName) throws IOException {
         openGames.add(controller);
-        FXMLLoader game = new FXMLLoader(getClass().getResource("../BoardUI/"));
+        FXMLLoader game = new FXMLLoader(getClass().getResource("../BoardUI/gameBoardScene.fxml"));
         game.setController(controller);
-        Stage stage = new Stage();
-        stage.setTitle(gameName);
-        stage.show();
+        Parent gameWindow = game.load();
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                Stage stage = new Stage();
+                stage.setTitle(gameName);
+                stage.setScene(new Scene(gameWindow));
+                stage.show();
+            }
+        });
+
+    }
+
+    public void messageProcessor(Game message){
+
     }
 
     public void messageProcessor(MainMenu message){
@@ -118,8 +131,12 @@ public class LobbyController {
         (new AlertFactory(message.toString())).displayAlert();
 
         if (message instanceof NewGameSuccess){
-            openStage.close();
-            createGame((NewGameSuccess)message);
+            //openStage.close();
+            try {
+                createGame((NewGameSuccess)message);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         else if(message instanceof NewGameFail){
 
@@ -128,7 +145,11 @@ public class LobbyController {
 
         }
         else if (message instanceof JoinGameSuccess){
-            joinGame((JoinGameSuccess)message);
+            try {
+                joinGame((JoinGameSuccess)message);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         else if (message instanceof SpectateFail){
 

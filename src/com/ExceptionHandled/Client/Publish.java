@@ -38,10 +38,11 @@ public class Publish extends Observable implements Runnable{
 
     private void packetFilter(Packet packet){
         String messageType = packet.getMessageType();
-        if (messageType.equals("Login") || messageType.equals("Game") || messageType.equals("Connection")){
-            setChanged();
-            notifyObservers(packet);
-        }
+        setChanged();
+        notifyObservers(packet);
+//        if (messageType.equals("Login") || messageType.equals("Game") || messageType.equals("Connection")){
+////
+////        }
     }
 
 }

@@ -86,11 +86,11 @@ public class SplashController implements Controller {
         }
         else if (loginMessage instanceof SignUpSuccess){
             getUserInfoController.signUpSuccess((SignUpSuccess) loginMessage);
-            openStage.close();
+            //openStage.close();
         }
         else if (loginMessage instanceof LoginSuccess){
             getUserInfoController.loginSuccess((LoginSuccess) loginMessage);
-            openStage.close();
+            //openStage.close();
         }
     }
 
