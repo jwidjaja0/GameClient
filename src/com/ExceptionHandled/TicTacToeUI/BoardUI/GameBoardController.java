@@ -4,6 +4,8 @@ package com.ExceptionHandled.TicTacToeUI.BoardUI;
 import com.ExceptionHandled.Alerts.AlertFactory;
 import com.ExceptionHandled.GameMessages.Game.*;
 import com.ExceptionHandled.GameMessages.Interfaces.Game;
+import com.ExceptionHandled.GameMessages.MainMenu.JoinGameSuccess;
+import com.ExceptionHandled.GameMessages.MainMenu.NewGameSuccess;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
 import com.ExceptionHandled.Miscellaneous.MessageSender;
 import javafx.event.ActionEvent;
@@ -23,31 +25,76 @@ import java.util.UUID;
 
 public class GameBoardController {
 
-    private String gameID;
-    private String player;
+
 
     double iconSize = 70.0;
 
-    //TODO: Find a way to add buttons to a list
+
     @FXML
     public Button btnExit;
+
+    @FXML
     public Button btnRestart;
+
+    @FXML
     public Button panel1;
+
+    @FXML
     public Button panel2;
+
+    @FXML
     public Button panel3;
+
+    @FXML
     public Button panel4;
+
+    @FXML
     public Button panel5;
+
+    @FXML
     public Button panel6;
+
+    @FXML
     public Button panel7;
+
+    @FXML
     public Button panel8;
+
+    @FXML
     public Button panel9;
 
-    //Score board displays
+    @FXML
     public Label player1Score;
+    @FXML
     public Label player2Score;
 
+    @FXML
+    public Label player1Label;
 
-    ArrayList<Button> buttons;
+    @FXML
+    public Label player2Label;
+
+
+    private ArrayList<Button> buttons;
+    private String gameID;
+    private String gameName;
+    private String player;
+
+
+    public GameBoardController(NewGameSuccess newGame){
+        player = "x";
+        gameID = newGame.getGameId();
+        gameName = newGame.getGameName();
+        player1Label.setText("You");
+    }
+
+    public GameBoardController(JoinGameSuccess joinGame){
+        player = "o";
+        gameID = joinGame.getGameID();
+        gameName = joinGame.getGameName();
+        player1Label.setText(joinGame.getOtherPlayerName());
+        player2Label.setText("You");
+    }
 
 
     /**

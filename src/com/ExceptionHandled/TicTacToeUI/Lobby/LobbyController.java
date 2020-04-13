@@ -94,8 +94,23 @@ public class LobbyController {
         openStage.showAndWait();
     }
 
-    private void openNewGameWindow(NewGameSuccess newGame){
+    private void createGame(NewGameSuccess newGame){
+        GameBoardController gbc = new GameBoardController(newGame);
+        openGameWindow(gbc, newGame.getGameName());
+    }
 
+    private void joinGame(JoinGameSuccess joinGame){
+        GameBoardController gbc = new GameBoardController(joinGame);
+        openGameWindow(gbc, joinGame.getGameName());
+    }
+
+    private void openGameWindow(GameBoardController controller, String gameName){
+        openGames.add(controller);
+        FXMLLoader game = new FXMLLoader(getClass().getResource("../BoardUI/"));
+        game.setController(controller);
+        Stage stage = new Stage();
+        stage.setTitle(gameName);
+        stage.show();
     }
 
     public void messageProcessor(MainMenu message){
@@ -104,7 +119,7 @@ public class LobbyController {
 
         if (message instanceof NewGameSuccess){
             openStage.close();
-            //TODO: Open game, add to list of open games
+            createGame((NewGameSuccess)message);
         }
         else if(message instanceof NewGameFail){
 
@@ -113,7 +128,7 @@ public class LobbyController {
 
         }
         else if (message instanceof JoinGameSuccess){
-
+            joinGame((JoinGameSuccess)message);
         }
         else if (message instanceof SpectateFail){
 
