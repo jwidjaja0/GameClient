@@ -31,8 +31,10 @@ public class CreateGameController {
         opponent.getItems().add("EasyAI");
         opponent.getItems().add("MediumAI");
         opponent.getItems().add("HardAI");
+        opponent.getSelectionModel().selectFirst();
         privateGame.getItems().add("Yes");
         privateGame.getItems().add("No");
+        privateGame.getSelectionModel().selectFirst();
 
 
         create.setOnAction(new EventHandler<ActionEvent>() {
