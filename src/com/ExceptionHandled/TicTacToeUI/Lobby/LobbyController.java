@@ -94,6 +94,10 @@ public class LobbyController {
         openStage.showAndWait();
     }
 
+    private void openNewGameWindow(NewGameSuccess newGame){
+
+    }
+
     public void messageProcessor(MainMenu message){
         //Display Alert
         (new AlertFactory(message.toString())).displayAlert();
