@@ -42,7 +42,7 @@ public class LobbyController {
     public void initialize(){
         openGames = new ArrayList<>();
 
-        //requestGamesListRefresh();
+        requestGamesListRefresh();
 
         createGameButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
