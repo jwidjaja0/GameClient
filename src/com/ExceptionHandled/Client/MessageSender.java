@@ -1,6 +1,5 @@
-package com.ExceptionHandled.Miscellaneous;
+package com.ExceptionHandled.Client;
 
-import com.ExceptionHandled.GameMessages.Interfaces.*;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
 
 import java.io.Serializable;
@@ -20,7 +19,7 @@ public class MessageSender {
         return instance;
     }
 
-    public void setQueue(BlockingQueue<Packet> queue){
+    void setQueue(BlockingQueue<Packet> queue){
         this.queue = queue;
     }
 
@@ -28,7 +27,7 @@ public class MessageSender {
         queue.add(new Packet(wrapperType, playerID, message));
     }
 
-    public void setPlayerID(String playerID){
+    void setPlayerID(String playerID){
         this.playerID = playerID;
     }
 }

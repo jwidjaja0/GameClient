@@ -1,7 +1,7 @@
 package com.ExceptionHandled.TicTacToeUI.Lobby.CreateGame;
 
 import com.ExceptionHandled.GameMessages.MainMenu.NewGameRequest;
-import com.ExceptionHandled.Miscellaneous.MessageSender;
+import com.ExceptionHandled.Client.MessageSender;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;

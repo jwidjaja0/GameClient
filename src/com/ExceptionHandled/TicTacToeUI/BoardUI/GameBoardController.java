@@ -6,8 +6,7 @@ import com.ExceptionHandled.GameMessages.Game.*;
 import com.ExceptionHandled.GameMessages.Interfaces.Game;
 import com.ExceptionHandled.GameMessages.MainMenu.JoinGameSuccess;
 import com.ExceptionHandled.GameMessages.MainMenu.NewGameSuccess;
-import com.ExceptionHandled.GameMessages.Wrappers.Packet;
-import com.ExceptionHandled.Miscellaneous.MessageSender;
+import com.ExceptionHandled.Client.MessageSender;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -20,8 +19,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.UUID;
 
 public class GameBoardController {
 

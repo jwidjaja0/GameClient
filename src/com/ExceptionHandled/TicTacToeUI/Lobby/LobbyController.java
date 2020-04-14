@@ -4,7 +4,7 @@ package com.ExceptionHandled.TicTacToeUI.Lobby;
 import com.ExceptionHandled.Alerts.AlertFactory;
 import com.ExceptionHandled.GameMessages.Interfaces.*;
 import com.ExceptionHandled.GameMessages.MainMenu.*;
-import com.ExceptionHandled.Miscellaneous.MessageSender;
+import com.ExceptionHandled.Client.MessageSender;
 import com.ExceptionHandled.TicTacToeUI.BoardUI.GameBoardController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;

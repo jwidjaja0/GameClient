@@ -4,7 +4,6 @@ import com.ExceptionHandled.GameMessages.Connection.*;
 import com.ExceptionHandled.GameMessages.Interfaces.Login;
 import com.ExceptionHandled.GameMessages.Login.LoginSuccess;
 import com.ExceptionHandled.GameMessages.Wrappers.*;
-import com.ExceptionHandled.Miscellaneous.MessageSender;
 
 import java.io.IOException;
 import java.net.Socket;
