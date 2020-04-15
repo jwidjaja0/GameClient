@@ -76,7 +76,8 @@ public class MenuLayoutController {
             ((SplashController) controller).alert((Login) message);
         }
         else if (message instanceof Stats){
-
+            //Open the stats viewer
+            //Pass in the stats
         }
     }
 }
