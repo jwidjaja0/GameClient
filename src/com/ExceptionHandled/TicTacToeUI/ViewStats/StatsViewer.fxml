@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -10,6 +11,19 @@
       <Label layoutX="72.0" layoutY="27.0" text="Wins" />
       <Label layoutX="285.0" layoutY="27.0" text="Ties" />
       <Label layoutX="501.0" layoutY="27.0" text="Losses" />
-      <Label layoutX="55.0" layoutY="57.0" prefHeight="47.0" prefWidth="63.0" text="Label" />
+      <Label fx:id="wins" alignment="CENTER" contentDisplay="CENTER" layoutX="55.0" layoutY="56.0" prefHeight="47.0" prefWidth="63.0" text="00">
+         <font>
+            <Font size="27.0" />
+         </font></Label>
+      <Label fx:id="ties" alignment="CENTER" layoutX="267.0" layoutY="56.0" prefHeight="47.0" prefWidth="63.0" text="00" textAlignment="CENTER">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Label>
+      <Label fx:id="losses" alignment="CENTER" layoutX="487.0" layoutY="56.0" prefHeight="47.0" prefWidth="63.0" text="00" textAlignment="CENTER">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
