@@ -83,7 +83,12 @@ public class LobbyController {
 
     public void refreshGamesList(ListActiveGames games){
         //TODO: If games dont show properly, check this function
-        gamesList.getItems().setAll(games.getActiveGameHeaderList());
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                gamesList.getItems().setAll(games.getActiveGameHeaderList());
+            }
+        });
     }
 
     private void createGameRequest() throws IOException {
