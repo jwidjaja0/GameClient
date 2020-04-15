@@ -2,9 +2,12 @@ package com.ExceptionHandled.TicTacToeUI.MenuLayout;
 
 
 
-import com.ExceptionHandled.GameMessages.Interfaces.Login;
+import com.ExceptionHandled.Client.MessageSender;
+import com.ExceptionHandled.GameMessages.Interfaces.*;
+import com.ExceptionHandled.GameMessages.Stats.PlayerStatsRequest;
 import com.ExceptionHandled.Interfaces.Controller;
 import com.ExceptionHandled.TicTacToeUI.SplashScreen.*;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +27,9 @@ public class MenuLayoutController {
     MenuItem loginRegisterButton;
 
     @FXML
+    MenuItem personalRecordButton;
+
+    @FXML
     MenuBar menuBar1;
 
     private Controller controller;
@@ -35,9 +41,17 @@ public class MenuLayoutController {
                 loginRegister();
             }
         });
+
+        personalRecordButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                showStats();
+            }
+        });
+
     }
 
-    public void loginRegister(){
+    private void loginRegister(){
         try{
             FXMLLoader splashScreen = new FXMLLoader(getClass().getResource("../SplashScreen/SplashScreen.fxml"));
             controller = new SplashController();
@@ -52,9 +66,17 @@ public class MenuLayoutController {
         }
     }
 
+    private void showStats(){
+        //Send request to server
+        MessageSender.getInstance().sendMessage("PlayerStatsRequest", new PlayerStatsRequest());
+    }
+
     public void messageProcessor(Serializable message){
         if (message instanceof Login){
             ((SplashController) controller).alert((Login) message);
+        }
+        else if (message instanceof Stats){
+
         }
     }
 }

@@ -22,7 +22,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Profile">
                <items>
-                  <MenuItem fx:id="personalRecordOption" mnemonicParsing="false" text="Personal Record" />
+                  <MenuItem fx:id="personalRecordButton" mnemonicParsing="false" text="Personal Record" />
                   <MenuItem fx:id="changeProfileOption" mnemonicParsing="false" text="Change Profile Information" />
                </items>
           </Menu>
