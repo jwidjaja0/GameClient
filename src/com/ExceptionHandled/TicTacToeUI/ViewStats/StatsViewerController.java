@@ -21,7 +21,7 @@ public class StatsViewerController {
     private ListView<String> gamesList;
 
     public void initialize(){
-
+        
     }
 
 
