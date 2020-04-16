@@ -30,6 +30,9 @@ public class MenuLayoutController {
     MenuItem personalRecordButton;
 
     @FXML
+    MenuItem changeProfileInfo;
+
+    @FXML
     MenuBar menuBar1;
 
     private Controller controller;
@@ -46,6 +49,13 @@ public class MenuLayoutController {
             @Override
             public void handle(ActionEvent event) {
                 showStats();
+            }
+        });
+
+        changeProfileInfo.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
             }
         });
 

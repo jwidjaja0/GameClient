@@ -2,6 +2,7 @@ package com.ExceptionHandled.TicTacToeUI.SplashScreen.GetUserInfo;
 import com.ExceptionHandled.Alerts.AlertFactory;
 import com.ExceptionHandled.GameMessages.Login.*;
 import com.ExceptionHandled.Client.MessageSender;
+import com.ExceptionHandled.GameMessages.UserUpdate.UserUpdateRequest;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -37,6 +38,7 @@ public class GetUserInfoController extends Observable {
 
     private String[] info;
     boolean isLogin;
+    boolean isChange;
 
 
     public void initialize(){
@@ -58,6 +60,7 @@ public class GetUserInfoController extends Observable {
     public void setToRegister(){
         action.setText("Register");
         isLogin = false;
+        isChange = false;
     }
 
     public void setToLogin(){
@@ -67,6 +70,17 @@ public class GetUserInfoController extends Observable {
         firstName.setVisible(false);
         lastName.setVisible(false);
         isLogin = true;
+        isChange = false;
+    }
+
+    public void setToChange(){
+        action.setText("Change Profile Information");
+        firstNameLabel.setVisible(false);
+        lastNameLabel.setVisible(false);
+        firstName.setVisible(false);
+        lastName.setVisible(false);
+        isLogin = false;
+        isChange = true;
     }
 
     public void signUpFail(SignUpFail fail){
@@ -90,11 +104,14 @@ public class GetUserInfoController extends Observable {
     }
 
     private void checkValues(){
-        if (info[2].equals("") && info[3].equals("")){
+        if (isLogin && !isChange){
             MessageSender.getInstance().sendMessage("Login", new LoginRequest(info[0], info[1]));
         }
-        else{
+        else if (!isLogin && !isChange){
             MessageSender.getInstance().sendMessage("Login", new SignUpRequest(info[0], info[1], info[2], info[3]));
+        }
+        else {
+            MessageSender.getInstance().sendMessage("UserUpdate", new UserUpdateRequest(info[0], info[1], info[2], info[3]));
         }
 
     }
