@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="189.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="189.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button fx:id="action" layoutX="204.0" layoutY="150.0" mnemonicParsing="false" text="Register" />
       <TextField fx:id="username" layoutX="77.0" layoutY="20.0" prefHeight="25.0" prefWidth="187.0" />
-      <TextField fx:id="password" layoutX="77.0" layoutY="53.0" prefHeight="25.0" prefWidth="187.0" />
       <Label fx:id="usernameLabel" layoutX="12.0" layoutY="24.0" text="Username" />
       <Label fx:id="passwordLabel" layoutX="14.0" layoutY="57.0" text="Password" />
       <Label fx:id="firstNameLabel" layoutX="14.0" layoutY="91.0" text="First Name" />
       <Label fx:id="lastNameLabel" layoutX="15.0" layoutY="124.0" text="Last Name" />
+      <PasswordField fx:id="password" layoutX="77.0" layoutY="53.0" prefHeight="25.0" prefWidth="187.0" />
       <TextField fx:id="firstName" layoutX="77.0" layoutY="87.0" prefHeight="25.0" prefWidth="187.0" />
       <TextField fx:id="lastName" layoutX="77.0" layoutY="120.0" prefHeight="25.0" prefWidth="187.0" />
    </children>
