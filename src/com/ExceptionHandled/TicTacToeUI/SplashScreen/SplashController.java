@@ -25,7 +25,6 @@ public class SplashController implements Controller {
     Button register;
 
     private GetUserInfoController getUserInfoController;
-    private Stage openStage;
 
     public void initialize(){
         login.setOnAction(new EventHandler<ActionEvent>() {
@@ -69,7 +68,7 @@ public class SplashController implements Controller {
         stage.setTitle("Enter Your Information");
         stage.setScene(new Scene(getUserInfoWindow));
         getUserInfoController.setType(type);
-        openStage.showAndWait();
+        stage.showAndWait();
     }
 
     public void alert(Login loginMessage){

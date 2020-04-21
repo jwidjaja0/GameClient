@@ -65,7 +65,7 @@ public class MenuLayoutController {
     private void changeUserInfo(){
         try{
             controller = new GetUserInfoController();
-            FXMLLoader getUserInfo = new FXMLLoader(getClass().getResource("GetUserInfo/GetUserInfo.fxml"));
+            FXMLLoader getUserInfo = new FXMLLoader(getClass().getResource("../SplashScreen/GetUserInfo/GetUserInfo.fxml"));
             getUserInfo.setController(controller);
             Parent getUserInfoWindow = getUserInfo.load();
             Stage stage = new Stage();
