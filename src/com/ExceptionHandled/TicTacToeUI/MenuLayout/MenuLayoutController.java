@@ -7,6 +7,7 @@ import com.ExceptionHandled.GameMessages.Interfaces.*;
 import com.ExceptionHandled.GameMessages.Stats.PlayerStatsRequest;
 import com.ExceptionHandled.Interfaces.Controller;
 import com.ExceptionHandled.TicTacToeUI.SplashScreen.*;
+import com.ExceptionHandled.TicTacToeUI.SplashScreen.GetUserInfo.GetUserInfoController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -63,14 +64,14 @@ public class MenuLayoutController {
 
     private void changeUserInfo(){
         try{
-            FXMLLoader splashScreen = new FXMLLoader(getClass().getResource("../SplashScreen/SplashScreen.fxml"));
-            controller = new SplashController();
-            splashScreen.setController(controller);
-            Parent splashWindow = splashScreen.load();
+            controller = (Controller) new GetUserInfoController("ChangeUserInfo");
+            FXMLLoader getUserInfo = new FXMLLoader(getClass().getResource("GetUserInfo/GetUserInfo.fxml"));
+            getUserInfo.setController(controller);
+            Parent getUserInfoWindow = getUserInfo.load();
             Stage stage = new Stage();
-            stage.setTitle("Welcome!");
-            stage.setScene(new Scene(splashWindow));
-            stage.show();
+            stage.setTitle("Enter Your Information");
+            stage.setScene(new Scene(getUserInfoWindow));
+            stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -79,7 +80,7 @@ public class MenuLayoutController {
     private void loginRegister(){
         try{
             FXMLLoader splashScreen = new FXMLLoader(getClass().getResource("../SplashScreen/SplashScreen.fxml"));
-            controller = new SplashController();
+            SplashController controller = new SplashController();
             splashScreen.setController(controller);
             Parent splashWindow = splashScreen.load();
             Stage stage = new Stage();
@@ -103,6 +104,9 @@ public class MenuLayoutController {
         else if (message instanceof Stats){
             //Open the stats viewer
             //Pass in the stats
+        }
+        else if (message instanceof UserUpdate){
+            ((GetUserInfoController) controller).messageProcessor(message);
         }
     }
 }

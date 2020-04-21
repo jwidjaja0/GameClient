@@ -2,7 +2,7 @@ package com.ExceptionHandled.TicTacToeUI.SplashScreen.GetUserInfo;
 import com.ExceptionHandled.Alerts.AlertFactory;
 import com.ExceptionHandled.GameMessages.Login.*;
 import com.ExceptionHandled.Client.MessageSender;
-import com.ExceptionHandled.GameMessages.UserUpdate.UserUpdateRequest;
+import com.ExceptionHandled.GameMessages.UserUpdate.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -12,6 +12,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.Serializable;
 import java.util.Observable;
 
 
@@ -94,24 +95,62 @@ public class GetUserInfoController extends Observable {
         isChange = true;
     }
 
-    public void signUpFail(SignUpFail fail){
+    private void signUpFail(SignUpFail fail){
         (new AlertFactory(fail.toString())).displayAlert();
         info = new String[4];
     }
 
-    public void loginFail(LoginFail fail){
+    private void loginFail(LoginFail fail){
         (new AlertFactory(fail.toString())).displayAlert();
         info = new String[4];
     }
 
-    public void loginSuccess(LoginSuccess success){
+    private void loginSuccess(LoginSuccess success){
         (new AlertFactory(success.toString())).displayAlert();
         thisStage.close();
     }
 
-    public void signUpSuccess(SignUpSuccess success){
+    private void signUpSuccess(SignUpSuccess success){
         (new AlertFactory(success.toString())).displayAlert();
         thisStage.close();
+    }
+
+    private void updateUserSuccess(UserUpdateSuccess success){
+        (new AlertFactory(success.toString())).displayAlert();
+        thisStage.close();
+    }
+
+    private void userDeleteSuccess(UserUpdateSuccess success){
+        (new AlertFactory(success.toString())).displayAlert();
+        thisStage.close();
+    }
+
+    public void messageProcessor(Serializable message){
+        if (message instanceof SignUpFail){
+            signUpFail((SignUpFail) message);
+        }
+        else if (message instanceof LoginFail){
+            loginFail((LoginFail) message);
+        }
+        //TODO: Add UserUpdateFail
+        else if (message instanceof UserDeleteFail){
+
+        }
+        else if (message instanceof SignUpSuccess){
+            signUpSuccess((SignUpSuccess) message);
+            thisStage.close();
+        }
+        else if (message instanceof LoginSuccess){
+            loginSuccess((LoginSuccess) message);
+            thisStage.close();
+        }
+        else if (message instanceof UserUpdateSuccess){
+
+        }
+        else if (message instanceof UserDeleteSuccess){
+
+        }
+        e
     }
 
     private void checkValues(){

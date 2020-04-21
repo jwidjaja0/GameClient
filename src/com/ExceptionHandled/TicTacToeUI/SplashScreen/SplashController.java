@@ -61,7 +61,6 @@ public class SplashController implements Controller {
 
     private void showInfoScreen(String type) throws IOException {
         getUserInfoController = new GetUserInfoController(type);
-
         FXMLLoader getUserInfo = new FXMLLoader(getClass().getResource("GetUserInfo/GetUserInfo.fxml"));
         getUserInfo.setController(getUserInfoController);
         Parent getUserInfoWindow = getUserInfo.load();
@@ -72,20 +71,7 @@ public class SplashController implements Controller {
     }
 
     public void alert(Login loginMessage){
-        if (loginMessage instanceof SignUpFail){
-            getUserInfoController.signUpFail((SignUpFail) loginMessage);
-    }
-        else if (loginMessage instanceof LoginFail){
-            getUserInfoController.loginFail((LoginFail) loginMessage);
-        }
-        else if (loginMessage instanceof SignUpSuccess){
-            getUserInfoController.signUpSuccess((SignUpSuccess) loginMessage);
-            //openStage.close();
-        }
-        else if (loginMessage instanceof LoginSuccess){
-            getUserInfoController.loginSuccess((LoginSuccess) loginMessage);
-            //openStage.close();
-        }
+
     }
 
 }
