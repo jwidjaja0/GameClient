@@ -26,10 +26,10 @@ public class Receive implements Runnable {
         try {
             ObjectInputStream fromServer = new ObjectInputStream(connection.getInputStream());
             while(true){
-                incoming.add((Packet) fromServer.readObject());
+                incoming.put((Packet) fromServer.readObject());
             }
 
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException | InterruptedException e) {
             e.printStackTrace();
         } finally {
             System.out.println("ClientReceive closing.");
