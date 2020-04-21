@@ -23,13 +23,13 @@ GridPane{
 #topMid{
     -fx-border-style: solid;
     -fx-border-width: 3px;
-    -fx-border-color: transparent black transparent black;
+    -fx-border-color: transparent white transparent white;
 }
 
 #midLeft{
     -fx-border-style: solid;
     -fx-border-width: 3px;
-    -fx-border-color: black transparent black transparent;
+    -fx-border-color: white transparent white transparent;
 }
 
 #midMid{
@@ -41,13 +41,13 @@ GridPane{
 #midRight{
     -fx-border-style: solid;
     -fx-border-width: 3px;
-    -fx-border-color: black transparent black transparent;
+    -fx-border-color: white transparent white transparent;
 }
 
 #botMid{
     -fx-border-style: solid;
     -fx-border-width: 3px;
-    -fx-border-color: transparent black transparent black;
+    -fx-border-color: transparent white transparent white;
 }
 
 #btnExit:hover{
@@ -91,6 +91,7 @@ GridPane{
 Button{
     -fx-background-color: white;
     -fx-background-color: grey;
+    -fx-border-color: white;
 }
 
 

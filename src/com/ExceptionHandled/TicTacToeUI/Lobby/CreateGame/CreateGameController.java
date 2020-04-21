@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import jfxtras.styles.jmetro.JMetroStyleClass;
 
 
 public class CreateGameController {
@@ -26,7 +28,12 @@ public class CreateGameController {
     @FXML
     ComboBox<String> privateGame;
 
+    @FXML
+    AnchorPane createGameAnchor;
+
     public void initialize(){
+        createGameAnchor.getStyleClass().add(JMetroStyleClass.BACKGROUND);
+
         opponent.getItems().add("Human");
         opponent.getItems().add("EasyAI");
         opponent.getItems().add("MediumAI");

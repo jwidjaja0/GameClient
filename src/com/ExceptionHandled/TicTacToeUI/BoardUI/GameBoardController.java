@@ -16,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import jfxtras.styles.jmetro.JMetroStyleClass;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -71,6 +72,8 @@ public class GameBoardController {
 
     @FXML
     public Label player2Label;
+    @FXML
+    GridPane playArea;
 
 
     private ArrayList<Button> buttons;
@@ -115,6 +118,7 @@ public class GameBoardController {
      * Starts every instance of the window with a game versus the AI
      */
     public void initialize() throws IOException {
+        playArea.getStyleClass().add(JMetroStyleClass.BACKGROUND);
         buttons = new ArrayList<>();
         buttons.add(panel1);
         buttons.add(panel2);

@@ -16,7 +16,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.JMetroStyleClass;
+import jfxtras.styles.jmetro.Style;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,10 +41,19 @@ public class LobbyController {
     @FXML
     Button refreshGames;
 
+    @FXML
+    AnchorPane lobbyAnchor;
+
     private Stage openStage;
     private ArrayList<GameBoardController> openGames;
 
+    private JMetro jMetro;
+
     public void initialize(){
+        jMetro = new JMetro(Style.DARK);
+        //Set background for JMetro skin
+        lobbyAnchor.getStyleClass().add(JMetroStyleClass.BACKGROUND);
+
         openGames = new ArrayList<>();
 
         createGameButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -97,9 +110,11 @@ public class LobbyController {
     private void createGameRequest() throws IOException {
         FXMLLoader createGameUI = new FXMLLoader(getClass().getResource("CreateGame/CreateGame.fxml"));
         Parent ui = createGameUI.load();
+
+        jMetro.setParent(ui);
         Stage openStage = new Stage();
         openStage.setTitle("Create New Game");
-        openStage.setScene(new Scene(ui));
+        openStage.setScene(new Scene(jMetro.getParent()));
         openStage.showAndWait();
     }
 
@@ -123,12 +138,13 @@ public class LobbyController {
         FXMLLoader game = new FXMLLoader(getClass().getResource("../BoardUI/gameBoardScene.fxml"));
         game.setController(controller);
         Parent gameWindow = game.load();
+        jMetro.setParent(gameWindow);
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 Stage stage = new Stage();
                 stage.setTitle(gameName);
-                stage.setScene(new Scene(gameWindow));
+                stage.setScene(new Scene(jMetro.getParent()));
                 controller.setStage(stage);
                 stage.show();
             }

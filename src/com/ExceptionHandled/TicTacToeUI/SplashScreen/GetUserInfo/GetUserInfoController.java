@@ -13,7 +13,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import jfxtras.styles.jmetro.JMetroStyleClass;
 
 import java.io.Serializable;
 import java.util.Observable;
@@ -41,6 +43,8 @@ public class GetUserInfoController extends Observable implements Controller {
 
     @FXML
     Label lastNameLabel;
+    @FXML
+    AnchorPane getInfoAnchor;
 
     private String[] info;
     boolean isLogin;
@@ -48,6 +52,7 @@ public class GetUserInfoController extends Observable implements Controller {
 
 
     public void initialize(){
+        getInfoAnchor.getStyleClass().add(JMetroStyleClass.BACKGROUND);
         info = new String[4];
         action.setOnAction(new EventHandler<ActionEvent>() {
             @Override

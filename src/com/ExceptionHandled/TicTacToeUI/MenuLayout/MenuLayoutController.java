@@ -16,7 +16,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.JMetroStyleClass;
+import jfxtras.styles.jmetro.Style;
 
 
 import java.io.IOException;
@@ -37,8 +41,12 @@ public class MenuLayoutController {
     MenuBar menuBar1;
 
     private Controller controller;
+    private JMetro jMetro;
 
     public void initialize(){
+        jMetro = new JMetro(Style.DARK);
+        menuBar1.getStyleClass().add(JMetroStyleClass.BACKGROUND);
+
         loginRegisterButton.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
             @Override
             public void handle(javafx.event.ActionEvent event) {
@@ -70,7 +78,9 @@ public class MenuLayoutController {
             Parent getUserInfoWindow = getUserInfo.load();
             Stage stage = new Stage();
             stage.setTitle("Enter Your Information");
-            stage.setScene(new Scene(getUserInfoWindow));
+            jMetro.setParent(getUserInfoWindow);
+
+            stage.setScene(new Scene(jMetro.getParent()));
             ((GetUserInfoController) controller).setType("Change");
             stage.showAndWait();
         } catch (IOException e) {
@@ -86,7 +96,9 @@ public class MenuLayoutController {
             Parent splashWindow = splashScreen.load();
             Stage stage = new Stage();
             stage.setTitle("Welcome!");
-            stage.setScene(new Scene(splashWindow));
+
+            jMetro.setParent(splashWindow);
+            stage.setScene(new Scene(jMetro.getParent()));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

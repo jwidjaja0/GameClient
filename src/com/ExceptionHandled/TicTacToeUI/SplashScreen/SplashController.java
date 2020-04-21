@@ -12,7 +12,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.JMetroStyleClass;
+import jfxtras.styles.jmetro.Style;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -25,10 +29,15 @@ public class SplashController implements Controller {
 
     @FXML
     Button register;
+    @FXML
+    AnchorPane splashAnchor;
 
     private GetUserInfoController getUserInfoController;
+    private JMetro jMetro;
 
     public void initialize(){
+        jMetro = new JMetro(Style.DARK);
+        splashAnchor.getStyleClass().add(JMetroStyleClass.BACKGROUND);
         login.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -68,7 +77,8 @@ public class SplashController implements Controller {
         Parent getUserInfoWindow = getUserInfo.load();
         Stage stage = new Stage();
         stage.setTitle("Enter Your Information");
-        stage.setScene(new Scene(getUserInfoWindow));
+        jMetro.setParent(getUserInfoWindow);
+        stage.setScene(new Scene(jMetro.getParent()));
         getUserInfoController.setType(type);
         stage.showAndWait();
     }
