@@ -59,7 +59,12 @@ public class GetUserInfoController extends Observable {
             }
         });
     }
+    private GetUserInfoController(){
+
+    }
+
     public GetUserInfoController(String type){
+        this();
         if (type.equals("Register"))
             setToRegister();
         else if (type.equals("Login"))
