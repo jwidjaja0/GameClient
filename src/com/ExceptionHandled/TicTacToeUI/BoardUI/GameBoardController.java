@@ -203,6 +203,7 @@ public class GameBoardController {
         tc.setMouseTransparent(true);
     }
 
+    //MOved to TTTBC
     @FXML
     public void panelClick(ActionEvent event){
         Button button = (Button) event.getSource();
@@ -290,9 +291,6 @@ public class GameBoardController {
 
     //TODO: Keep but modify
     public void restartGame(ActionEvent actionEvent) {
-
-
-
         for(Button b: buttons){
             b.setGraphic(null);
         }

@@ -1,7 +1,11 @@
 package com.ExceptionHandled.TicTacToeUI.BoardUI;
 
+import com.ExceptionHandled.Client.MessageSender;
+import com.ExceptionHandled.GameMessages.Game.MoveMade;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
 import jfxtras.styles.jmetro.JMetroStyleClass;
 
 import java.io.IOException;
@@ -54,6 +58,27 @@ public class TTTBoardController {
 
     }
 
+    void disableAllPanels(){
+        for(Button b: buttons){
+            b.setMouseTransparent(true);
+        }
+    }
+    void enableAllPanels(){
+        for(Button b: buttons){
+            b.setMouseTransparent(false);
+        }
+    }
 
+    ArrayList<Button> getButtons() {
+        return buttons;
+    }
 
+    @FXML
+    public void panelClick(ActionEvent event){
+        Button button = (Button) event.getSource();
+        int row = GridPane.getRowIndex(button);
+        int column = GridPane.getColumnIndex(button);
+        //Send the move to server
+        MessageSender.getInstance().sendMessage("MoveMade", new MoveMade(gameID, player, row, column));
+    }
 }
