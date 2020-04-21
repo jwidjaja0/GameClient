@@ -118,6 +118,7 @@ public class LobbyController {
         openStage.showAndWait();
     }
 
+    //TODO: Change back to GameBoardController
     private void createGame(NewGameSuccess newGame) throws IOException {
         GameBoardController gbc = new GameBoardController(newGame);
         openGameWindow(gbc, newGame.getGameName());

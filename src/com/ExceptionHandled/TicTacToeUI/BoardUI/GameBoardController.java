@@ -23,12 +23,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class GameBoardController {
-
-
-
     double iconSize = 70.0;
-
-
     @FXML
     public Button btnExit;
 
