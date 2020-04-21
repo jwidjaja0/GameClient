@@ -4,6 +4,7 @@ import com.ExceptionHandled.GameMessages.Interfaces.Login;
 import com.ExceptionHandled.GameMessages.Login.*;
 import com.ExceptionHandled.Interfaces.Controller;
 import com.ExceptionHandled.TicTacToeUI.SplashScreen.GetUserInfo.GetUserInfoController;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -75,6 +76,14 @@ public class SplashController implements Controller {
     @Override
     public void messageProcessor(Serializable message) {
         getUserInfoController.messageProcessor(message);
+        if (message instanceof LoginSuccess || message instanceof SignUpSuccess){
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    ((Stage) login.getScene().getWindow()).close();
+                }
+            });
+        }
     }
 }
 

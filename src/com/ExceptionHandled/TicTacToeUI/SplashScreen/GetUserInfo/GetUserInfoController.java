@@ -2,8 +2,10 @@ package com.ExceptionHandled.TicTacToeUI.SplashScreen.GetUserInfo;
 import com.ExceptionHandled.Alerts.AlertFactory;
 import com.ExceptionHandled.GameMessages.Login.*;
 import com.ExceptionHandled.Client.MessageSender;
+import com.ExceptionHandled.GameMessages.MainMenu.ListActiveGamesRequest;
 import com.ExceptionHandled.GameMessages.UserUpdate.*;
 import com.ExceptionHandled.Interfaces.Controller;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -43,7 +45,6 @@ public class GetUserInfoController extends Observable implements Controller {
     private String[] info;
     boolean isLogin;
     boolean isChange;
-    private Stage thisStage;
 
 
     public void initialize(){
@@ -56,10 +57,19 @@ public class GetUserInfoController extends Observable implements Controller {
                 info[2] = firstName.getText();
                 info[3] = lastName.getText();
                 checkValues();
-                thisStage = (Stage) action.getScene().getWindow();
             }
         });
     }
+
+    private void close(){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                ((Stage) action.getScene().getWindow()).close();
+            }
+        });
+    }
+
 
     public void setType(String type){
         if (type.equals("Register"))
@@ -109,22 +119,43 @@ public class GetUserInfoController extends Observable implements Controller {
 
     private void loginSuccess(LoginSuccess success){
         (new AlertFactory(success.toString())).displayAlert();
-        //thisStage.close();
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                close();
+            }
+        });
+        MessageSender.getInstance().sendMessage("MainMenu", new ListActiveGamesRequest());
     }
 
     private void signUpSuccess(SignUpSuccess success){
         (new AlertFactory(success.toString())).displayAlert();
-        //thisStage.close();
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                close();
+            }
+        });
     }
 
     private void updateUserSuccess(UserUpdateSuccess success){
         (new AlertFactory(success.toString())).displayAlert();
-        //thisStage.close();
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                close();
+            }
+        });
     }
 
     private void userDeleteSuccess(UserUpdateSuccess success){
         (new AlertFactory(success.toString())).displayAlert();
-        //thisStage.close();
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                close();
+            }
+        });
     }
 
     public void messageProcessor(Serializable message){
@@ -140,11 +171,9 @@ public class GetUserInfoController extends Observable implements Controller {
         }
         else if (message instanceof SignUpSuccess){
             signUpSuccess((SignUpSuccess) message);
-            //thisStage.close();
         }
         else if (message instanceof LoginSuccess){
             loginSuccess((LoginSuccess) message);
-            //thisStage.close();
         }
         else if (message instanceof UserUpdateSuccess){
 
@@ -165,14 +194,6 @@ public class GetUserInfoController extends Observable implements Controller {
             MessageSender.getInstance().sendMessage("UserUpdate", new UserUpdateRequest(info[0], info[1], info[2], info[3]));
         }
 
-    }
-
-    private void setStage(Stage stage){
-        thisStage = stage;
-    }
-
-    public String[] getInfo(){
-        return info;
     }
 
 
