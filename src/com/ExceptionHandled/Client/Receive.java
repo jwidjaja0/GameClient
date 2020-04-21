@@ -26,7 +26,8 @@ public class Receive implements Runnable {
         try {
             ObjectInputStream fromServer = new ObjectInputStream(connection.getInputStream());
             while(true){
-                incoming.put((Packet) fromServer.readObject());
+                Packet packet = (Packet) fromServer.readObject();
+                incoming.put(packet);
             }
 
         } catch (IOException | ClassNotFoundException | InterruptedException e) {
