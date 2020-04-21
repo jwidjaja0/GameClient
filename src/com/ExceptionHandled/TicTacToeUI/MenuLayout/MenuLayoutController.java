@@ -55,10 +55,25 @@ public class MenuLayoutController {
         changeProfileInfo.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+                changeUserInfo();
             }
         });
 
+    }
+
+    private void changeUserInfo(){
+        try{
+            FXMLLoader splashScreen = new FXMLLoader(getClass().getResource("../SplashScreen/SplashScreen.fxml"));
+            controller = new SplashController();
+            splashScreen.setController(controller);
+            Parent splashWindow = splashScreen.load();
+            Stage stage = new Stage();
+            stage.setTitle("Welcome!");
+            stage.setScene(new Scene(splashWindow));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void loginRegister(){

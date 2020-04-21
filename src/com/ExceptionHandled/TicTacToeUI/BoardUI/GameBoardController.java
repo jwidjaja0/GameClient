@@ -77,6 +77,7 @@ public class GameBoardController {
     private String gameID;
     private String gameName;
     private String player;
+    private Stage thisStage;
 
 
     public GameBoardController(NewGameSuccess newGame){
@@ -97,7 +98,7 @@ public class GameBoardController {
         player2Label.setText("You");
     }
 
-    public GameBoardController(SpectateSuccess spectateGame){
+    public GameBoardController(SpectateSuccess spectateGame) {
         player = "Spectator";
         gameID = spectateGame.getGameID();
         gameName = spectateGame.getGameName();
@@ -143,6 +144,10 @@ public class GameBoardController {
         else if(gameMessage instanceof WhoseTurn){
             //TODO: if it is this player's turn, enable the board to be clickable
         }
+    }
+
+    public void setStage(Stage thisStage){
+        this.thisStage = thisStage;
     }
 
 

@@ -131,6 +131,7 @@ public class LobbyController {
                 Stage stage = new Stage();
                 stage.setTitle(gameName);
                 stage.setScene(new Scene(gameWindow));
+                controller.setStage(stage);
                 stage.show();
             }
         });

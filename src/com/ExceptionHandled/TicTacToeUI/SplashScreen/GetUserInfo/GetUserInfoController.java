@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.util.Observable;
 
@@ -40,6 +41,7 @@ public class GetUserInfoController extends Observable {
     private String[] info;
     boolean isLogin;
     boolean isChange;
+    private Stage thisStage;
 
 
     public void initialize(){
@@ -52,11 +54,19 @@ public class GetUserInfoController extends Observable {
                 info[2] = firstName.getText();
                 info[3] = lastName.getText();
                 checkValues();
+                thisStage = (Stage) action.getScene().getWindow();
             }
         });
     }
-
-
+    public GetUserInfoController(String type){
+        if (type.equals("Register"))
+            setToRegister();
+        else if (type.equals("Login"))
+            setToLogin();
+        else {
+            setToChange();
+        }
+    }
 
     public void setToRegister(){
         action.setText("Register");
@@ -96,12 +106,12 @@ public class GetUserInfoController extends Observable {
 
     public void loginSuccess(LoginSuccess success){
         (new AlertFactory(success.toString())).displayAlert();
-        //TODO: Close the stage
+        thisStage.close();
     }
 
     public void signUpSuccess(SignUpSuccess success){
         (new AlertFactory(success.toString())).displayAlert();
-        //TODO: Close the stage
+        thisStage.close();
     }
 
     private void checkValues(){
@@ -115,6 +125,10 @@ public class GetUserInfoController extends Observable {
             MessageSender.getInstance().sendMessage("UserUpdate", new UserUpdateRequest(info[0], info[1], info[2], info[3]));
         }
 
+    }
+
+    private void setStage(Stage stage){
+        thisStage = stage;
     }
 
     public String[] getInfo(){
