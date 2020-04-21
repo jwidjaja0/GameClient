@@ -155,7 +155,6 @@ public class GetUserInfoController extends Observable {
         else if (message instanceof UserDeleteSuccess){
 
         }
-        e
     }
 
     private void checkValues(){
