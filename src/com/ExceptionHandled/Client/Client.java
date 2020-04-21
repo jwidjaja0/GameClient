@@ -45,6 +45,7 @@ public class Client extends Observable implements Observer {
         Packet packet = (Packet)arg;
         
         if (packet.getMessageType().equals("Login")){
+            System.out.println("Received Login Message");
             Login innerPacket = (Login)packet.getMessage();
             if (innerPacket instanceof LoginSuccess){
                 playerID = ((LoginSuccess)innerPacket).getPlayerID();
