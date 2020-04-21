@@ -1,20 +1,18 @@
 package com.ExceptionHandled.TicTacToeUI.ViewStats;
 
-import com.ExceptionHandled.GameMessages.Interfaces.Game;
-import com.ExceptionHandled.GameMessages.Interfaces.Stats;
 import com.ExceptionHandled.GameMessages.Stats.GameHistorySummary;
 import com.ExceptionHandled.GameMessages.Stats.PlayerStatsInfo;
+import com.ExceptionHandled.Interfaces.Controller;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.util.List;
+import java.io.Serializable;
 
-public class StatsViewerController {
+public class StatsViewerController implements Controller {
     @FXML
     private Label wins;
 
@@ -47,8 +45,8 @@ public class StatsViewerController {
         matchResult.setCellValueFactory(new PropertyValueFactory<>("matchResult"));
     }
 
-
-    public void messageProcessor(Stats message){
+    @Override
+    public void messageProcessor(Serializable message){
         if (message instanceof PlayerStatsInfo){
             updateStats((PlayerStatsInfo)message);
         }

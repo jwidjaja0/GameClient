@@ -61,6 +61,31 @@ public class GetUserInfoController extends Observable implements Controller {
         });
     }
 
+    public void messageProcessor(Serializable message){
+        if (message instanceof SignUpFail){
+            signUpFail((SignUpFail) message);
+        }
+        else if (message instanceof LoginFail){
+            loginFail((LoginFail) message);
+        }
+        //TODO: Add UserUpdateFail
+        else if (message instanceof UserDeleteFail){
+
+        }
+        else if (message instanceof SignUpSuccess){
+            signUpSuccess((SignUpSuccess) message);
+        }
+        else if (message instanceof LoginSuccess){
+            loginSuccess((LoginSuccess) message);
+        }
+        else if (message instanceof UserUpdateSuccess){
+            updateUserSuccess((UserUpdateSuccess) message);
+        }
+        else if (message instanceof UserDeleteSuccess){
+            userDeleteSuccess((UserDeleteSuccess) message);
+        }
+    }
+
     private void close(){
         Platform.runLater(new Runnable() {
             @Override
@@ -148,7 +173,7 @@ public class GetUserInfoController extends Observable implements Controller {
         });
     }
 
-    private void userDeleteSuccess(UserUpdateSuccess success){
+    private void userDeleteSuccess(UserDeleteSuccess success){
         (new AlertFactory(success.toString())).displayAlert();
         Platform.runLater(new Runnable() {
             @Override
@@ -158,30 +183,7 @@ public class GetUserInfoController extends Observable implements Controller {
         });
     }
 
-    public void messageProcessor(Serializable message){
-        if (message instanceof SignUpFail){
-            signUpFail((SignUpFail) message);
-        }
-        else if (message instanceof LoginFail){
-            loginFail((LoginFail) message);
-        }
-        //TODO: Add UserUpdateFail
-        else if (message instanceof UserDeleteFail){
 
-        }
-        else if (message instanceof SignUpSuccess){
-            signUpSuccess((SignUpSuccess) message);
-        }
-        else if (message instanceof LoginSuccess){
-            loginSuccess((LoginSuccess) message);
-        }
-        else if (message instanceof UserUpdateSuccess){
-            updateUserSuccess((UserUpdateSuccess) message);
-        }
-        else if (message instanceof UserDeleteSuccess){
-
-        }
-    }
 
     private void checkValues(){
         if (isLogin && !isChange){

@@ -65,7 +65,7 @@ public class Main extends Application implements Observer {
             mlc.messageProcessor(packet.getMessage());
         }
         else if (messageType.equals("MainMenu")){
-            lbc.messageProcessor((MainMenu)packet.getMessage());
+            lbc.messageProcessor(packet.getMessage());
         }
         else if (messageType.equals("Game")){
             lbc.messageProcessor((Game)packet.getMessage());

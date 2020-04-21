@@ -6,6 +6,7 @@ import com.ExceptionHandled.GameMessages.Game.*;
 import com.ExceptionHandled.GameMessages.Interfaces.*;
 import com.ExceptionHandled.GameMessages.MainMenu.*;
 import com.ExceptionHandled.Client.MessageSender;
+import com.ExceptionHandled.Interfaces.Controller;
 import com.ExceptionHandled.TicTacToeUI.BoardUI.GameBoardController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -19,9 +20,10 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class LobbyController {
+public class LobbyController implements Controller {
     @FXML
     ListView<ActiveGameHeader> gamesList;
 
@@ -147,7 +149,8 @@ public class LobbyController {
         }
     }
 
-    public void messageProcessor(MainMenu message){
+    @Override
+    public void messageProcessor(Serializable message){
         //Display Alert
         (new AlertFactory(message.toString())).displayAlert();
 
@@ -186,6 +189,4 @@ public class LobbyController {
             }
         }
     }
-
-
 }

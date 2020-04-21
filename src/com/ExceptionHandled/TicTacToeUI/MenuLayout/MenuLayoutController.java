@@ -22,7 +22,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.io.Serializable;
 
-public class MenuLayoutController {
+public class MenuLayoutController implements Controller {
 
     @FXML
     MenuItem loginRegisterButton;
@@ -62,6 +62,11 @@ public class MenuLayoutController {
 
     }
 
+    @Override
+    public void messageProcessor(Serializable message){
+        controller.messageProcessor(message);
+    }
+
     private void changeUserInfo(){
         try{
             controller = new GetUserInfoController();
@@ -98,7 +103,5 @@ public class MenuLayoutController {
         MessageSender.getInstance().sendMessage("PlayerStatsRequest", new PlayerStatsRequest());
     }
 
-    public void messageProcessor(Serializable message){
-        controller.messageProcessor(message);
-    }
+
 }
