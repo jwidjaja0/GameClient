@@ -158,7 +158,6 @@ public class GameBoardController {
         }
     }
 
-
     private void displayMove(MoveValid move){
         if(move.getPlayer().equals("X")){
             setXImage(getButton(move.getxCoord(), move.getyCoord()));
@@ -167,7 +166,6 @@ public class GameBoardController {
             setOImage(getButton(move.getxCoord(), move.getyCoord()));
         }
     }
-
 
     private void setXImage(Button tc){
         Image image = new Image(getClass().getResourceAsStream("../Graphics/XShape.png"));
@@ -179,7 +177,6 @@ public class GameBoardController {
         tc.setMouseTransparent(true);
     }
 
-
     private void setOImage(Button tc){
         Image image = new Image(getClass().getResourceAsStream("../Graphics/WhiteCircle.png"));
         ImageView imageView = new ImageView(image);
@@ -190,12 +187,12 @@ public class GameBoardController {
         tc.setMouseTransparent(true);
     }
 
-
     @FXML
     public void panelClick(ActionEvent event){
         Button button = (Button) event.getSource();
         int row = GridPane.getRowIndex(button);
         int column = GridPane.getColumnIndex(button);
+        //Send the move to server
         MessageSender.getInstance().sendMessage("MoveMade", new MoveMade(gameID, player, row, column));
     }
 

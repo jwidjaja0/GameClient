@@ -65,16 +65,20 @@ public class LobbyController {
         spectateButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+                spectateGameRequest(gamesList.getSelectionModel().getSelectedItem());
             }
         });
 
         refreshGames.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+                requestGamesListRefresh();
             }
         });
+    }
+
+    private void spectateGameRequest(ActiveGameHeader game){
+        MessageSender.getInstance().sendMessage("MainMenu", new SpectateRequest(game.getGameID()));
     }
 
     private void requestGamesListRefresh(){
@@ -144,10 +148,12 @@ public class LobbyController {
             }
         }
         else if(message instanceof NewGameFail){
-
+            //Refresh the list of games
+            requestGamesListRefresh();
         }
         else if (message instanceof JoinGameFail){
-
+            //Refresh the list of games
+            requestGamesListRefresh();
         }
         else if (message instanceof JoinGameSuccess){
             try {
@@ -157,7 +163,8 @@ public class LobbyController {
             }
         }
         else if (message instanceof SpectateFail){
-
+            //Refresh the list of games
+            requestGamesListRefresh();
         }
         else if (message instanceof SpectateSuccess){
             //TODO: Open game
