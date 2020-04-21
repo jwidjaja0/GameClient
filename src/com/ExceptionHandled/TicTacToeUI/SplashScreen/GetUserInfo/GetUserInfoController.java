@@ -176,7 +176,7 @@ public class GetUserInfoController extends Observable implements Controller {
             loginSuccess((LoginSuccess) message);
         }
         else if (message instanceof UserUpdateSuccess){
-
+            updateUserSuccess((UserUpdateSuccess) message);
         }
         else if (message instanceof UserDeleteSuccess){
 
