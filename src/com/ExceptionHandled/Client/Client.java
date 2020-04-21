@@ -6,6 +6,7 @@ import com.ExceptionHandled.GameMessages.Login.LoginSuccess;
 import com.ExceptionHandled.GameMessages.Wrappers.*;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.Socket;
 import java.util.Observable;
 import java.util.Observer;
@@ -46,10 +47,9 @@ public class Client extends Observable implements Observer {
         
         if (packet.getMessageType().equals("Login")){
             System.out.println("Received Login Message");
-            Login innerPacket = (Login)packet.getMessage();
-            if (innerPacket instanceof LoginSuccess){
-                playerID = ((LoginSuccess)innerPacket).getPlayerID();
-                System.out.println(playerID);
+            if (packet.getMessage() instanceof LoginSuccess){
+                playerID = packet.getPlayerID();
+                System.out.println("Player ID: " + playerID);
                 MessageSender.getInstance().setPlayerID(playerID);
             }
         }

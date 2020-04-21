@@ -33,5 +33,6 @@ public class MessageSender {
 
     void setPlayerID(String playerID){
         this.playerID = playerID;
+        System.out.println("Setting player ID in MessageSender");
     }
 }

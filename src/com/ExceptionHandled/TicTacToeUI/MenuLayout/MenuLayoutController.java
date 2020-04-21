@@ -100,7 +100,7 @@ public class MenuLayoutController {
 
     public void messageProcessor(Serializable message){
         if (message instanceof Login){
-            ((SplashController) controller).alert((Login) message);
+            ((SplashController) controller).alert(message);
         }
         else if (message instanceof Stats){
             //Open the stats viewer

@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -71,8 +72,8 @@ public class SplashController implements Controller {
         stage.showAndWait();
     }
 
-    public void alert(Login loginMessage){
-
+    public void alert(Serializable message){
+        getUserInfoController.messageProcessor(message);
     }
 
 }
