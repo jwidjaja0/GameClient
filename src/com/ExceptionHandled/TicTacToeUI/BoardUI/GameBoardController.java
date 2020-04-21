@@ -144,13 +144,17 @@ public class GameBoardController implements Controller {
             displayMove((MoveValid)message);
         }
         else if (message instanceof MoveInvalid){
-            (new AlertFactory(message.toString())).displayAlert();
+            if (((MoveInvalid)message).getPlayer().equals(player))//Only display the alert if you are the player who made an invalid move.
+                (new AlertFactory(message.toString())).displayAlert();
         }
         else if (message instanceof RematchRespond){
             //TODO: Restart game
         }
-        else if(message instanceof WhoseTurn){
-            //TODO: if it is this player's turn, enable the board to be clickable
+        else if (message instanceof WhoseTurn){
+            if (((WhoseTurn)message).getWhoseTurn().equals(player))
+                enableAllPanels();
+            else
+                disableAllPanels();
         }
     }
 
