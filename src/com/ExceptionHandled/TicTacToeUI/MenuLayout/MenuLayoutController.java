@@ -81,7 +81,7 @@ public class MenuLayoutController {
     private void loginRegister(){
         try{
             FXMLLoader splashScreen = new FXMLLoader(getClass().getResource("../SplashScreen/SplashScreen.fxml"));
-            SplashController controller = new SplashController();
+            controller = new SplashController();
             splashScreen.setController(controller);
             Parent splashWindow = splashScreen.load();
             Stage stage = new Stage();
@@ -99,15 +99,6 @@ public class MenuLayoutController {
     }
 
     public void messageProcessor(Serializable message){
-        if (message instanceof Login){
-            ((SplashController) controller).alert(message);
-        }
-        else if (message instanceof Stats){
-            //Open the stats viewer
-            //Pass in the stats
-        }
-        else if (message instanceof UserUpdate){
-            ((GetUserInfoController) controller).messageProcessor(message);
-        }
+        controller.messageProcessor(message);
     }
 }

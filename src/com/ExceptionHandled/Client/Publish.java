@@ -1,5 +1,6 @@
 package com.ExceptionHandled.Client;
 
+import com.ExceptionHandled.GameMessages.Login.LoginSuccess;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
 
 
@@ -22,6 +23,11 @@ public class Publish extends Observable implements Runnable{
         try {
             while (true) {
                 Packet packet = incoming.take();// Get the packet from the incoming queue
+                System.out.println("Received " + packet.getMessageType() + " message.");
+                System.out.println("PlayerID: " + packet.getPlayerID());
+                if (packet.getMessage() instanceof LoginSuccess){
+                    System.out.println(((LoginSuccess) packet.getMessage()).getPlayerID());
+                }
                 packetFilter(packet);
             }
         }

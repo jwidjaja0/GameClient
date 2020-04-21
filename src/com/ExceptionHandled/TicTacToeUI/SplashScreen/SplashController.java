@@ -72,10 +72,10 @@ public class SplashController implements Controller {
         stage.showAndWait();
     }
 
-    public void alert(Serializable message){
+    @Override
+    public void messageProcessor(Serializable message) {
         getUserInfoController.messageProcessor(message);
     }
-
 }
 
 

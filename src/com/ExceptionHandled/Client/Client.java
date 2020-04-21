@@ -48,8 +48,8 @@ public class Client extends Observable implements Observer {
         if (packet.getMessageType().equals("Login")){
             System.out.println("Received Login Message");
             if (packet.getMessage() instanceof LoginSuccess){
-                playerID = packet.getPlayerID();
-                System.out.println("Player ID: " + playerID);
+                playerID = ((LoginSuccess) packet.getMessage()).getPlayerID();
+                System.out.println(playerID);
                 MessageSender.getInstance().setPlayerID(playerID);
             }
         }

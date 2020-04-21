@@ -109,22 +109,22 @@ public class GetUserInfoController extends Observable implements Controller {
 
     private void loginSuccess(LoginSuccess success){
         (new AlertFactory(success.toString())).displayAlert();
-        thisStage.close();
+        //thisStage.close();
     }
 
     private void signUpSuccess(SignUpSuccess success){
         (new AlertFactory(success.toString())).displayAlert();
-        thisStage.close();
+        //thisStage.close();
     }
 
     private void updateUserSuccess(UserUpdateSuccess success){
         (new AlertFactory(success.toString())).displayAlert();
-        thisStage.close();
+        //thisStage.close();
     }
 
     private void userDeleteSuccess(UserUpdateSuccess success){
         (new AlertFactory(success.toString())).displayAlert();
-        thisStage.close();
+        //thisStage.close();
     }
 
     public void messageProcessor(Serializable message){
@@ -140,11 +140,11 @@ public class GetUserInfoController extends Observable implements Controller {
         }
         else if (message instanceof SignUpSuccess){
             signUpSuccess((SignUpSuccess) message);
-            thisStage.close();
+            //thisStage.close();
         }
         else if (message instanceof LoginSuccess){
             loginSuccess((LoginSuccess) message);
-            thisStage.close();
+            //thisStage.close();
         }
         else if (message instanceof UserUpdateSuccess){
 
