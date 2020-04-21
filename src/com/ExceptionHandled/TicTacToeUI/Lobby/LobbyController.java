@@ -2,6 +2,7 @@ package com.ExceptionHandled.TicTacToeUI.Lobby;
 
 
 import com.ExceptionHandled.Alerts.AlertFactory;
+import com.ExceptionHandled.GameMessages.Game.*;
 import com.ExceptionHandled.GameMessages.Interfaces.*;
 import com.ExceptionHandled.GameMessages.MainMenu.*;
 import com.ExceptionHandled.Client.MessageSender;
@@ -114,8 +115,9 @@ public class LobbyController {
         openGameWindow(gbc, joinGame.getGameName());
     }
 
-    private void spectateGame(SpectateSuccess game){
-
+    private void spectateGame(SpectateSuccess spectateGame) throws IOException {
+        GameBoardController gbc = new GameBoardController(spectateGame);
+        openGameWindow(gbc, spectateGame.getGameName());
     }
 
     private void openGameWindow(GameBoardController controller, String gameName) throws IOException {
@@ -136,7 +138,14 @@ public class LobbyController {
     }
 
     public void messageProcessor(Game message){
-
+        String gameID = message.getGameID();
+        //Find the game
+        for (GameBoardController gbc: openGames){
+            if (gbc.getGameID().equals(gameID)){
+                //Pass on the message
+                gbc.messageProcessor(message);
+            }
+        }
     }
 
     public void messageProcessor(MainMenu message){
@@ -171,7 +180,11 @@ public class LobbyController {
             requestGamesListRefresh();
         }
         else if (message instanceof SpectateSuccess){
-            //TODO: Open game
+            try {
+                spectateGame((SpectateSuccess)message);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

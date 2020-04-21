@@ -277,7 +277,6 @@ public class GameBoardController {
         player2Score.setText(String.valueOf(currentScore));
     }
 
-    //TODO: Done
     @FXML
     public void exitPrgm(ActionEvent actionEvent) {
         Stage stage = (Stage) btnExit.getScene().getWindow();
