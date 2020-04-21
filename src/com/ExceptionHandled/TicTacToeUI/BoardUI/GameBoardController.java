@@ -7,6 +7,7 @@ import com.ExceptionHandled.GameMessages.Interfaces.Game;
 import com.ExceptionHandled.GameMessages.MainMenu.JoinGameSuccess;
 import com.ExceptionHandled.GameMessages.MainMenu.NewGameSuccess;
 import com.ExceptionHandled.Client.MessageSender;
+import com.ExceptionHandled.GameMessages.MainMenu.SpectateSuccess;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -94,6 +95,17 @@ public class GameBoardController {
         player1Label.setText(joinGame.getOtherPlayerName());
         player2Label = new Label();
         player2Label.setText("You");
+    }
+
+    public GameBoardController(SpectateSuccess spectateGame){
+        player = "Spectator";
+        gameID = spectateGame.getGameID();
+        gameName = spectateGame.getGameName();
+        player1Label = new Label();
+        player1Label.setText(spectateGame.getPlayer1Name());
+        player2Label = new Label();
+        player2Label.setText(spectateGame.getPlayer2Name());
+        disableAllPanels();
     }
 
 

@@ -114,6 +114,10 @@ public class LobbyController {
         openGameWindow(gbc, joinGame.getGameName());
     }
 
+    private void spectateGame(SpectateSuccess game){
+
+    }
+
     private void openGameWindow(GameBoardController controller, String gameName) throws IOException {
         openGames.add(controller);
         FXMLLoader game = new FXMLLoader(getClass().getResource("../BoardUI/gameBoardScene.fxml"));
