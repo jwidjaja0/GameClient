@@ -71,13 +71,13 @@ public class GetUserInfoController extends Observable implements Controller {
         }
     }
 
-    public void setToRegister(){
+    private void setToRegister(){
         action.setText("Register");
         isLogin = false;
         isChange = false;
     }
 
-    public void setToLogin(){
+    private void setToLogin(){
         action.setText("Login");
         firstNameLabel.setVisible(false);
         lastNameLabel.setVisible(false);
@@ -87,7 +87,7 @@ public class GetUserInfoController extends Observable implements Controller {
         isChange = false;
     }
 
-    public void setToChange(){
+    private void setToChange(){
         action.setText("Change Profile Information");
         firstNameLabel.setVisible(false);
         lastNameLabel.setVisible(false);

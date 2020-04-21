@@ -61,13 +61,14 @@ public class SplashController implements Controller {
 
     private void showInfoScreen(String type) throws IOException {
         getUserInfoController = new GetUserInfoController();
-        getUserInfoController.setType(type);
+
         FXMLLoader getUserInfo = new FXMLLoader(getClass().getResource("GetUserInfo/GetUserInfo.fxml"));
         getUserInfo.setController(getUserInfoController);
         Parent getUserInfoWindow = getUserInfo.load();
         Stage stage = new Stage();
         stage.setTitle("Enter Your Information");
         stage.setScene(new Scene(getUserInfoWindow));
+        getUserInfoController.setType(type);
         openStage.showAndWait();
     }
 

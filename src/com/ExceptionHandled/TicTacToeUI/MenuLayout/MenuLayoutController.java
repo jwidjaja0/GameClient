@@ -65,13 +65,13 @@ public class MenuLayoutController {
     private void changeUserInfo(){
         try{
             controller = new GetUserInfoController();
-            ((GetUserInfoController) controller).setType("Change");
             FXMLLoader getUserInfo = new FXMLLoader(getClass().getResource("GetUserInfo/GetUserInfo.fxml"));
             getUserInfo.setController(controller);
             Parent getUserInfoWindow = getUserInfo.load();
             Stage stage = new Stage();
             stage.setTitle("Enter Your Information");
             stage.setScene(new Scene(getUserInfoWindow));
+            ((GetUserInfoController) controller).setType("Change");
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
