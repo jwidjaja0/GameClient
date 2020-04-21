@@ -78,6 +78,50 @@ public class LobbyController implements Controller {
         });
     }
 
+    @Override
+    public void messageProcessor(Serializable message){
+        //Display Alert
+        (new AlertFactory(message.toString())).displayAlert();
+
+        if (message instanceof NewGameSuccess){
+            //openStage.close();
+            try {
+                createGame((NewGameSuccess)message);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else if(message instanceof NewGameFail){
+            //Refresh the list of games
+            requestGamesListRefresh();
+        }
+        else if (message instanceof JoinGameFail){
+            //Refresh the list of games
+            requestGamesListRefresh();
+        }
+        else if (message instanceof JoinGameSuccess){
+            try {
+                joinGame((JoinGameSuccess)message);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else if (message instanceof SpectateFail){
+            //Refresh the list of games
+            requestGamesListRefresh();
+        }
+        else if (message instanceof SpectateSuccess){
+            try {
+                spectateGame((SpectateSuccess)message);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else if (message instanceof Game){
+            gameMessageProcessor(message);
+        }
+    }
+
     private void spectateGameRequest(ActiveGameHeader game){
         MessageSender.getInstance().sendMessage("MainMenu", new SpectateRequest(game.getGameID()));
     }
@@ -138,8 +182,8 @@ public class LobbyController implements Controller {
 
     }
 
-    public void messageProcessor(Game message){
-        String gameID = message.getGameID();
+    private void gameMessageProcessor(Serializable message){
+        String gameID = ((Game)message).getGameID();
         //Find the game
         for (GameBoardController gbc: openGames){
             if (gbc.getGameID().equals(gameID)){
@@ -149,44 +193,5 @@ public class LobbyController implements Controller {
         }
     }
 
-    @Override
-    public void messageProcessor(Serializable message){
-        //Display Alert
-        (new AlertFactory(message.toString())).displayAlert();
 
-        if (message instanceof NewGameSuccess){
-            //openStage.close();
-            try {
-                createGame((NewGameSuccess)message);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        else if(message instanceof NewGameFail){
-            //Refresh the list of games
-            requestGamesListRefresh();
-        }
-        else if (message instanceof JoinGameFail){
-            //Refresh the list of games
-            requestGamesListRefresh();
-        }
-        else if (message instanceof JoinGameSuccess){
-            try {
-                joinGame((JoinGameSuccess)message);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        else if (message instanceof SpectateFail){
-            //Refresh the list of games
-            requestGamesListRefresh();
-        }
-        else if (message instanceof SpectateSuccess){
-            try {
-                spectateGame((SpectateSuccess)message);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }
