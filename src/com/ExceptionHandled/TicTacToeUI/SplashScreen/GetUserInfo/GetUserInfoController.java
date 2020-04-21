@@ -3,6 +3,7 @@ import com.ExceptionHandled.Alerts.AlertFactory;
 import com.ExceptionHandled.GameMessages.Login.*;
 import com.ExceptionHandled.Client.MessageSender;
 import com.ExceptionHandled.GameMessages.UserUpdate.*;
+import com.ExceptionHandled.Interfaces.Controller;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -17,7 +18,7 @@ import java.util.Observable;
 
 
 //TODO: Add error checking
-public class GetUserInfoController extends Observable {
+public class GetUserInfoController extends Observable implements Controller {
     @FXML
     Button action;
 
@@ -59,12 +60,8 @@ public class GetUserInfoController extends Observable {
             }
         });
     }
-    private GetUserInfoController(){
 
-    }
-
-    public GetUserInfoController(String type){
-        this();
+    public void setType(String type){
         if (type.equals("Register"))
             setToRegister();
         else if (type.equals("Login"))

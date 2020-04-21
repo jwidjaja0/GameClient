@@ -64,7 +64,8 @@ public class MenuLayoutController {
 
     private void changeUserInfo(){
         try{
-            controller = (Controller) new GetUserInfoController("ChangeUserInfo");
+            controller = new GetUserInfoController();
+            ((GetUserInfoController) controller).setType("Change");
             FXMLLoader getUserInfo = new FXMLLoader(getClass().getResource("GetUserInfo/GetUserInfo.fxml"));
             getUserInfo.setController(controller);
             Parent getUserInfoWindow = getUserInfo.load();
