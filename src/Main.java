@@ -58,9 +58,7 @@ public class Main extends Application implements Observer {
 
         // Create the main application window
         primaryStage.setTitle("TicTacToe Board");
-        Scene scene1 = new Scene(mainScreen);
-        scene1.getStylesheets().add("com/ExceptionHandled/TicTacToeUI/CSS/structStyle.css");
-        primaryStage.setScene(scene1);
+        primaryStage.setScene(new Scene(mainScreen));
 
         primaryStage.show();
 

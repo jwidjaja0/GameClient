@@ -10,11 +10,16 @@ import com.ExceptionHandled.Client.MessageSender;
 import com.ExceptionHandled.GameMessages.MainMenu.SpectateSuccess;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetroStyleClass;
 
@@ -69,6 +74,7 @@ public class GameBoardController {
     public Label player2Label;
     @FXML
     GridPane playArea;
+    @FXML GridPane tttPane;
 
 
     private ArrayList<Button> buttons;
@@ -107,6 +113,12 @@ public class GameBoardController {
         disableAllPanels();
     }
 
+    public void setTTTPaneStyle(){
+        System.out.println("SetTTTPaneStyle called");
+        for(Button b: buttons){
+            b.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+        }
+    }
 
     /**
      * initialize()
