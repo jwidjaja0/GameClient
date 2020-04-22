@@ -24,29 +24,18 @@ import jfxtras.styles.jmetro.Style;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class LobbyController {
-    @FXML
-    ListView<ActiveGameHeader> gamesList;
-
-    @FXML
-    Button createGameButton;
-
-    @FXML
-    Button joinGameButton;
-
-    @FXML
-    Button spectateButton;
-
-    @FXML
-    Button refreshGames;
-
-    @FXML
-    AnchorPane lobbyAnchor;
+    @FXML ListView<ActiveGameHeader> gamesList;
+    @FXML Button createGameButton;
+    @FXML Button joinGameButton;
+    @FXML Button spectateButton;
+    @FXML Button refreshGames;
+    @FXML AnchorPane lobbyAnchor;
 
     private Stage openStage;
     private ArrayList<GameBoardController> openGames;
-
     private JMetro jMetro;
 
     public void initialize(){
@@ -151,7 +140,6 @@ public class LobbyController {
                 stage.show();
             }
         });
-
     }
 
     public void messageProcessor(Game message){
@@ -203,7 +191,15 @@ public class LobbyController {
                 e.printStackTrace();
             }
         }
-    }
+        else if (message instanceof ListActiveGames){
+            ListActiveGames list = (ListActiveGames)message;
+            List<ActiveGameHeader> gameList = list.getActiveGameHeaderList();
 
+            for(ActiveGameHeader h : gameList){
+                gamesList.getItems().add(h);
+            }
+
+        }
+    }
 
 }
