@@ -139,12 +139,14 @@ public class LobbyController {
         game.setController(controller);
 
         Parent gameWindow = game.load();
+        jMetro.setParent(gameWindow);
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 Stage stage = new Stage();
                 stage.setTitle(gameName);
-                stage.setScene(new Scene(gameWindow));
+                //stage.setScene(new Scene(gameWindow));
+                stage.setScene(new Scene(jMetro.getParent()));
                 controller.setStage(stage);
                 stage.show();
             }

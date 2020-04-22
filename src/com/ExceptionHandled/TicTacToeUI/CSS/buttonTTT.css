@@ -1,11 +1,14 @@
 Button{
-    -fx-background-color: grey;
+}
+
+#topMid{
+    -fx-background-color: blue;
     -fx-border-color: white;
     -fx-border-width: 3;
 }
 
-#topMid{
-    -fx-background-color: grey;
+#buttonColor{
+    -fx-background-color: gray;
     -fx-border-color: white;
     -fx-border-width: 3;
 }
