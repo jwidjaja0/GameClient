@@ -68,7 +68,7 @@ public class Main extends Application implements Observer {
     public void update(Observable o, Object arg) {
         Packet packet = (Packet) arg;
         String messageType = packet.getMessageType();
-        if(messageType.equals("Login")){
+        if(messageType.equals("Login") || messageType.equals("UserUpdate")){
             mlc.messageProcessor(packet.getMessage());
         }
         else if (messageType.equals("MainMenu") || messageType.equals("Game")){

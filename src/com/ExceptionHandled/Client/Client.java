@@ -4,6 +4,7 @@ import com.ExceptionHandled.GameMessages.Connection.*;
 import com.ExceptionHandled.GameMessages.Interfaces.Login;
 import com.ExceptionHandled.GameMessages.Login.LoginSuccess;
 import com.ExceptionHandled.GameMessages.Login.LogoutSuccess;
+import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteSuccess;
 import com.ExceptionHandled.GameMessages.Wrappers.*;
 
 import java.io.IOException;
@@ -44,17 +45,22 @@ public class Client extends Observable implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         Packet packet = (Packet)arg;
-        
-        if (packet.getMessageType().equals("Login")){
+        String messageType = packet.getMessageType();
+        Serializable message = packet.getMessage();
+        if (messageType.equals("Login")) {
             System.out.println("Received Login Message");
-            if (packet.getMessage() instanceof LoginSuccess){
-                playerID = ((LoginSuccess) packet.getMessage()).getPlayerID();//Sets the player id in MessageSender
+            if (message instanceof LoginSuccess) {
+                playerID = ((LoginSuccess) message).getPlayerID();//Sets the player id in MessageSender
                 System.out.println("Player Logged In. ID : " + playerID);
                 MessageSender.getInstance().setPlayerID(playerID);
-            }
-            else if (packet.getMessage() instanceof LogoutSuccess){
+            } else if (message instanceof LogoutSuccess) {
                 System.out.println("Received Logout Success message. Removing PlayerID from MessageSender.");
                 MessageSender.getInstance().logOut();//Sets playerID in MessageSender to null
+            }
+        }
+        else if (messageType.equals("UserUpdate")){
+            if (message instanceof UserDeleteSuccess){
+                System.out.println("Received User Delete Success. Removing PlayerID from MessageSender.");
             }
         }
         setChanged();
