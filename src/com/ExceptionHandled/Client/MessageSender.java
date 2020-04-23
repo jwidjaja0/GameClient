@@ -35,4 +35,8 @@ public class MessageSender {
         this.playerID = playerID;
         System.out.println("Setting player ID in MessageSender");
     }
+
+    void logOut(){
+        playerID = null;
+    }
 }
