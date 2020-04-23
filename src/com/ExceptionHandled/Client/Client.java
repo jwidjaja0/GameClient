@@ -3,6 +3,7 @@ package com.ExceptionHandled.Client;
 import com.ExceptionHandled.GameMessages.Connection.*;
 import com.ExceptionHandled.GameMessages.Interfaces.Login;
 import com.ExceptionHandled.GameMessages.Login.LoginSuccess;
+import com.ExceptionHandled.GameMessages.Login.LogoutSuccess;
 import com.ExceptionHandled.GameMessages.Wrappers.*;
 
 import java.io.IOException;
@@ -48,9 +49,13 @@ public class Client extends Observable implements Observer {
         if (packet.getMessageType().equals("Login")){
             System.out.println("Received Login Message");
             if (packet.getMessage() instanceof LoginSuccess){
-                playerID = ((LoginSuccess) packet.getMessage()).getPlayerID();
-                System.out.println(playerID);
+                playerID = ((LoginSuccess) packet.getMessage()).getPlayerID();//Sets the player id in MessageSender
+                System.out.println("Player Logged In. ID : " + playerID);
                 MessageSender.getInstance().setPlayerID(playerID);
+            }
+            else if (packet.getMessage() instanceof LogoutSuccess){
+                System.out.println("Received Logout Success message. Removing PlayerID from MessageSender.");
+                MessageSender.getInstance().logOut();//Sets playerID in MessageSender to null
             }
         }
         setChanged();
