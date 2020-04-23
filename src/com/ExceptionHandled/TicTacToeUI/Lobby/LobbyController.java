@@ -6,6 +6,7 @@ import com.ExceptionHandled.GameMessages.Game.*;
 import com.ExceptionHandled.GameMessages.Interfaces.*;
 import com.ExceptionHandled.GameMessages.MainMenu.*;
 import com.ExceptionHandled.Client.MessageSender;
+import com.ExceptionHandled.Interfaces.Controller;
 import com.ExceptionHandled.TicTacToeUI.BoardUI.GameBoardController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -23,10 +24,11 @@ import jfxtras.styles.jmetro.JMetroStyleClass;
 import jfxtras.styles.jmetro.Style;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LobbyController {
+public class LobbyController implements Controller {
     @FXML ListView<ActiveGameHeader> gamesList;
     @FXML Button createGameButton;
     @FXML Button joinGameButton;
@@ -78,6 +80,59 @@ public class LobbyController {
         });
     }
 
+    @Override
+    public void messageProcessor(Serializable message){
+        //Display Alert
+        (new AlertFactory(message.toString())).displayAlert();
+
+        if (message instanceof NewGameSuccess){
+            //openStage.close();
+            try {
+                createGame((NewGameSuccess)message);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else if(message instanceof NewGameFail){
+            //Refresh the list of games
+            requestGamesListRefresh();
+        }
+        else if (message instanceof JoinGameFail){
+            //Refresh the list of games
+            requestGamesListRefresh();
+        }
+        else if (message instanceof JoinGameSuccess){
+            try {
+                joinGame((JoinGameSuccess)message);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else if (message instanceof SpectateFail){
+            //Refresh the list of games
+            requestGamesListRefresh();
+        }
+        else if (message instanceof SpectateSuccess){
+            try {
+                spectateGame((SpectateSuccess)message);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else if (message instanceof Game){
+            gameMessageProcessor(message);
+        }
+        else if (message instanceof ListActiveGames){
+            ListActiveGames list = (ListActiveGames)message;
+            List<ActiveGameHeader> gameList = list.getActiveGameHeaderList();
+
+            for(ActiveGameHeader h : gameList){
+                gamesList.getItems().add(h);
+            }
+
+        }
+    }
+
     private void spectateGameRequest(ActiveGameHeader game){
         MessageSender.getInstance().sendMessage("MainMenu", new SpectateRequest(game.getGameID()));
     }
@@ -126,7 +181,6 @@ public class LobbyController {
         openGames.add(controller);
         FXMLLoader game = new FXMLLoader(getClass().getResource("../BoardUI/gameBoardScene.fxml"));
         game.setController(controller);
-
         Parent gameWindow = game.load();
         jMetro.setParent(gameWindow);
         Platform.runLater(new Runnable() {
@@ -142,8 +196,8 @@ public class LobbyController {
         });
     }
 
-    public void messageProcessor(Game message){
-        String gameID = message.getGameID();
+    private void gameMessageProcessor(Serializable message){
+        String gameID = ((Game)message).getGameID();
         //Find the game
         for (GameBoardController gbc: openGames){
             if (gbc.getGameID().equals(gameID)){
@@ -152,54 +206,4 @@ public class LobbyController {
             }
         }
     }
-
-    public void messageProcessor(MainMenu message){
-        //Display Alert
-        (new AlertFactory(message.toString())).displayAlert();
-
-        if (message instanceof NewGameSuccess){
-            //openStage.close();
-            try {
-                createGame((NewGameSuccess)message);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        else if(message instanceof NewGameFail){
-            //Refresh the list of games
-            requestGamesListRefresh();
-        }
-        else if (message instanceof JoinGameFail){
-            //Refresh the list of games
-            requestGamesListRefresh();
-        }
-        else if (message instanceof JoinGameSuccess){
-            try {
-                joinGame((JoinGameSuccess)message);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        else if (message instanceof SpectateFail){
-            //Refresh the list of games
-            requestGamesListRefresh();
-        }
-        else if (message instanceof SpectateSuccess){
-            try {
-                spectateGame((SpectateSuccess)message);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        else if (message instanceof ListActiveGames){
-            ListActiveGames list = (ListActiveGames)message;
-            List<ActiveGameHeader> gameList = list.getActiveGameHeaderList();
-
-            for(ActiveGameHeader h : gameList){
-                gamesList.getItems().add(h);
-            }
-
-        }
-    }
-
 }

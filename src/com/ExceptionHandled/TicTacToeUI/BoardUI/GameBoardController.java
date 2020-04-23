@@ -8,6 +8,7 @@ import com.ExceptionHandled.GameMessages.MainMenu.JoinGameSuccess;
 import com.ExceptionHandled.GameMessages.MainMenu.NewGameSuccess;
 import com.ExceptionHandled.Client.MessageSender;
 import com.ExceptionHandled.GameMessages.MainMenu.SpectateSuccess;
+import com.ExceptionHandled.Interfaces.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -27,7 +28,10 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class GameBoardController {
+public class GameBoardController implements Controller {
+
+
+
     double iconSize = 70.0;
     @FXML
     public Button btnExit;
@@ -139,28 +143,38 @@ public class GameBoardController {
 
     }
 
-    public void incomingMessage(Game gameMessage){
-        if (gameMessage instanceof GameOverLoss || gameMessage instanceof GameOverWin || gameMessage instanceof GameOverTie){
-            messageProcessor(gameMessage);
+    @Override
+    public void messageProcessor(Serializable message){
+        if (message instanceof GameOverLoss){
+            gameOver("Loss", (GameOverLoss)message);
         }
-        else if (gameMessage instanceof MoveValid){
-            displayMove((MoveValid)gameMessage);
+        else if (message instanceof GameOverTie){
+            gameOver("Tie", (GameOverTie)message);
         }
-        else if (gameMessage instanceof MoveInvalid){
-            (new AlertFactory(gameMessage.toString())).displayAlert();
+        else if (message instanceof GameOverWin){
+            gameOver("Win", (GameOverWin)message);
         }
-        else if (gameMessage instanceof RematchRespond){
+        else if (message instanceof MoveValid){
+            displayMove((MoveValid)message);
+        }
+        else if (message instanceof MoveInvalid){
+            if (((MoveInvalid)message).getPlayer().equals(player))//Only display the alert if you are the player who made an invalid move.
+                (new AlertFactory(message.toString())).displayAlert();
+        }
+        else if (message instanceof RematchRespond){
             //TODO: Restart game
         }
-        else if(gameMessage instanceof WhoseTurn){
-            //TODO: if it is this player's turn, enable the board to be clickable
+        else if (message instanceof WhoseTurn){
+            if (((WhoseTurn)message).getWhoseTurn().equals(player))
+                enableAllPanels();
+            else
+                disableAllPanels();
         }
     }
 
     public void setStage(Stage thisStage){
         this.thisStage = thisStage;
     }
-
 
     public String getGameID(){
         return gameID;
@@ -225,17 +239,7 @@ public class GameBoardController {
         MessageSender.getInstance().sendMessage("MoveMade", new MoveMade(gameID, player, row, column));
     }
 
-    public void messageProcessor(Game gameMessage){
-        if (gameMessage instanceof GameOverLoss){
-            gameOver("Loss", (GameOverLoss)gameMessage);
-        }
-        else if (gameMessage instanceof GameOverTie){
-            gameOver("Tie", (GameOverTie)gameMessage);
-        }
-        else if (gameMessage instanceof GameOverWin){
-            gameOver("Win", (GameOverWin)gameMessage);
-        }
-    }
+
 
     private void gameOver(String status, Serializable message){
         disableAllPanels();
