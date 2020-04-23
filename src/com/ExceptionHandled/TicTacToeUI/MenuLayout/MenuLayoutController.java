@@ -2,9 +2,16 @@ package com.ExceptionHandled.TicTacToeUI.MenuLayout;
 
 
 
+import com.ExceptionHandled.Alerts.AlertFactory;
 import com.ExceptionHandled.Client.MessageSender;
 import com.ExceptionHandled.GameMessages.Interfaces.*;
+import com.ExceptionHandled.GameMessages.Login.LogoutFail;
+import com.ExceptionHandled.GameMessages.Login.LogoutRequest;
+import com.ExceptionHandled.GameMessages.Login.LogoutSuccess;
 import com.ExceptionHandled.GameMessages.Stats.PlayerStatsRequest;
+import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteFail;
+import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteRequest;
+import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteSuccess;
 import com.ExceptionHandled.Interfaces.Controller;
 import com.ExceptionHandled.TicTacToeUI.SplashScreen.*;
 import com.ExceptionHandled.TicTacToeUI.SplashScreen.GetUserInfo.GetUserInfoController;
@@ -38,6 +45,8 @@ public class MenuLayoutController implements Controller {
 
     @FXML MenuItem logout;
 
+    @FXML MenuItem deleteAccount;
+
 
 
     private Controller controller;
@@ -68,11 +77,39 @@ public class MenuLayoutController implements Controller {
             }
         });
 
+        logout.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                logoutAccount();
+            }
+        });
+
+        deleteAccount.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                deleteUserAccount();
+            }
+        });
     }
 
     @Override
     public void messageProcessor(Serializable message){
-        controller.messageProcessor(message);
+        if (message instanceof UserDeleteSuccess){
+            (new AlertFactory(message.toString())).displayAlert();
+        }
+        else if (message instanceof UserDeleteFail){
+            (new AlertFactory(message.toString())).displayAlert();
+        }
+        else if (message instanceof LogoutSuccess){
+            (new AlertFactory(message.toString())).displayAlert();
+        }
+        else if (message instanceof LogoutFail){
+            (new AlertFactory(message.toString())).displayAlert();
+        }
+        else{
+            controller.messageProcessor(message);
+        }
+
     }
 
     private void changeUserInfo(){
@@ -115,5 +152,12 @@ public class MenuLayoutController implements Controller {
         MessageSender.getInstance().sendMessage("PlayerStatsRequest", new PlayerStatsRequest());
     }
 
+    private void logoutAccount(){
+        MessageSender.getInstance().sendMessage("Login", new LogoutRequest());
+    }
+
+    private void deleteUserAccount(){
+        MessageSender.getInstance().sendMessage("UserUpdate", new UserDeleteRequest());
+    }
 
 }
