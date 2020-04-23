@@ -41,7 +41,6 @@ public class Client extends Observable implements Observer {
         MessageSender.getInstance().sendMessage("Connection", new ConnectionRequest());
     }
 
-
     @Override
     public void update(Observable o, Object arg) {
         Packet packet = (Packet)arg;
