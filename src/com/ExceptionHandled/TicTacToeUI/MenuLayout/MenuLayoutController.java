@@ -28,17 +28,17 @@ import java.io.Serializable;
 
 public class MenuLayoutController implements Controller {
 
-    @FXML
-    MenuItem loginRegisterButton;
+    @FXML MenuItem loginRegisterButton;
 
-    @FXML
-    MenuItem personalRecordButton;
+    @FXML MenuItem personalRecordButton;
 
-    @FXML
-    MenuItem changeProfileInfo;
+    @FXML MenuItem changeProfileInfo;
 
-    @FXML
-    MenuBar menuBar1;
+    @FXML MenuBar menuBar1;
+
+    @FXML MenuItem logout;
+
+
 
     private Controller controller;
     private JMetro jMetro;

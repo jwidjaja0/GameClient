@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-
-<HBox prefHeight="24.0" prefWidth="508.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<HBox prefHeight="24.0" prefWidth="508.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <MenuBar fx:id="menuBar1">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
                   <MenuItem fx:id="loginRegisterButton" mnemonicParsing="false" text="Login\Register" />
+                  <MenuItem fx:id="logout" mnemonicParsing="false" text="Logout" />
                   <Menu mnemonicParsing="false" text="Change Versus">
                     <items>
                       <MenuItem fx:id="menuSwitchToHuman" mnemonicParsing="false" text="Vs Human (Local)" />
@@ -27,6 +25,7 @@
                <items>
                   <MenuItem fx:id="personalRecordButton" mnemonicParsing="false" text="Personal Record" />
                   <MenuItem fx:id="changeProfileInfo" mnemonicParsing="false" text="Change Profile Information" />
+                  <MenuItem fx:id="deleteAccount" mnemonicParsing="false" text="Delete Account" />
                </items>
           </Menu>
         </menus>
