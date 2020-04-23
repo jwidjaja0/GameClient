@@ -4,6 +4,7 @@ import com.ExceptionHandled.GameMessages.Connection.*;
 import com.ExceptionHandled.GameMessages.Interfaces.Login;
 import com.ExceptionHandled.GameMessages.Login.LoginSuccess;
 import com.ExceptionHandled.GameMessages.Login.LogoutSuccess;
+import com.ExceptionHandled.GameMessages.Login.SignUpSuccess;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteSuccess;
 import com.ExceptionHandled.GameMessages.Wrappers.*;
 

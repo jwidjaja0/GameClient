@@ -5,9 +5,7 @@ package com.ExceptionHandled.TicTacToeUI.MenuLayout;
 import com.ExceptionHandled.Alerts.AlertFactory;
 import com.ExceptionHandled.Client.MessageSender;
 import com.ExceptionHandled.GameMessages.Interfaces.*;
-import com.ExceptionHandled.GameMessages.Login.LogoutFail;
-import com.ExceptionHandled.GameMessages.Login.LogoutRequest;
-import com.ExceptionHandled.GameMessages.Login.LogoutSuccess;
+import com.ExceptionHandled.GameMessages.Login.*;
 import com.ExceptionHandled.GameMessages.Stats.PlayerStatsRequest;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteFail;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteRequest;
@@ -55,6 +53,8 @@ public class MenuLayoutController implements Controller {
     public void initialize(){
         jMetro = new JMetro(Style.DARK);
         menuBar1.getStyleClass().add(JMetroStyleClass.BACKGROUND);
+        logout.setDisable(true);
+        deleteAccount.setDisable(true);
 
         loginRegisterButton.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
             @Override
@@ -96,18 +96,25 @@ public class MenuLayoutController implements Controller {
     public void messageProcessor(Serializable message){
         if (message instanceof UserDeleteSuccess){
             (new AlertFactory(message.toString())).displayAlert();
+            logoutAccount();//Log out
         }
         else if (message instanceof UserDeleteFail){
             (new AlertFactory(message.toString())).displayAlert();
         }
         else if (message instanceof LogoutSuccess){
             (new AlertFactory(message.toString())).displayAlert();
+            logout.setDisable(true);
+            deleteAccount.setDisable(true);
         }
         else if (message instanceof LogoutFail){
             (new AlertFactory(message.toString())).displayAlert();
         }
         else{
-            controller.messageProcessor(message);
+            controller.messageProcessor(message);//Send it first because alerts handled in subsequent screens
+            if (message instanceof LoginSuccess || message instanceof SignUpSuccess){
+                logout.setDisable(false);
+                deleteAccount.setDisable(false);
+            }
         }
 
     }

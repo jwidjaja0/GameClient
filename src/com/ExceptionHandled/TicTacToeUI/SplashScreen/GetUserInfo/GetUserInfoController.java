@@ -160,6 +160,8 @@ public class GetUserInfoController extends Observable implements Controller {
 
     private void signUpSuccess(SignUpSuccess success){
         (new AlertFactory(success.toString())).displayAlert();
+        //Send Login Request to Server
+        MessageSender.getInstance().sendMessage("Login", new LoginRequest(info[0], info[1]));
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
