@@ -7,6 +7,7 @@ import com.ExceptionHandled.GameMessages.Interfaces.*;
 import com.ExceptionHandled.GameMessages.MainMenu.*;
 import com.ExceptionHandled.Client.MessageSender;
 import com.ExceptionHandled.Interfaces.Controller;
+import com.ExceptionHandled.InternalPacketsAndWrappers.RemoveGame;
 import com.ExceptionHandled.TicTacToeUI.BoardUI.GameBoardController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -27,8 +28,10 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
-public class LobbyController implements Controller {
+public class LobbyController implements Controller, Observer {
     @FXML ListView<ActiveGameHeader> gamesList;
     @FXML Button createGameButton;
     @FXML Button joinGameButton;
@@ -123,13 +126,7 @@ public class LobbyController implements Controller {
             gameMessageProcessor(message);
         }
         else if (message instanceof ListActiveGames){
-            ListActiveGames list = (ListActiveGames)message;
-            List<ActiveGameHeader> gameList = list.getActiveGameHeaderList();
-
-            for(ActiveGameHeader h : gameList){
-                gamesList.getItems().add(h);
-            }
-
+            refreshGamesList((ListActiveGames) message);
         }
     }
 
@@ -142,13 +139,12 @@ public class LobbyController implements Controller {
     }
 
     public void refreshGamesList(ListActiveGames games){
-        //TODO: If games dont show properly, check this function
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                gamesList.getItems().setAll(games.getActiveGameHeaderList());
-            }
-        });
+        //Remove all items from current list
+        gamesList.getItems().clear();
+        //Add new items
+        for(ActiveGameHeader h : games.getActiveGameHeaderList()){
+            gamesList.getItems().add(h);
+        }
     }
 
     private void createGameRequest() throws IOException {
@@ -190,7 +186,6 @@ public class LobbyController implements Controller {
                 stage.setTitle(gameName);
                 //stage.setScene(new Scene(gameWindow));
                 stage.setScene(new Scene(jMetro.getParent()));
-                controller.setStage(stage);
                 stage.show();
             }
         });
@@ -204,6 +199,17 @@ public class LobbyController implements Controller {
                 //Pass on the message
                 gbc.messageProcessor(message);
             }
+        }
+    }
+
+    private void removeGame(RemoveGame game){
+        openGames.remove(game.getController());
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if (arg instanceof RemoveGame){
+            removeGame((RemoveGame) arg);
         }
     }
 }

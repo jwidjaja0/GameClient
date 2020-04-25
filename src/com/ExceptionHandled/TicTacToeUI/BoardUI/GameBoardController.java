@@ -9,7 +9,9 @@ import com.ExceptionHandled.GameMessages.MainMenu.NewGameSuccess;
 import com.ExceptionHandled.Client.MessageSender;
 import com.ExceptionHandled.GameMessages.MainMenu.SpectateSuccess;
 import com.ExceptionHandled.Interfaces.Controller;
+import com.ExceptionHandled.InternalPacketsAndWrappers.RemoveGame;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -27,57 +29,43 @@ import jfxtras.styles.jmetro.JMetroStyleClass;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Observable;
 
-public class GameBoardController implements Controller {
-
-
+public class GameBoardController extends Observable implements Controller {
 
     double iconSize = 70.0;
-    @FXML
-    public Button btnExit;
+    @FXML public Button btnExit;
 
-    @FXML
-    public Button btnRestart;
+    @FXML public Button btnRestart;
 
-    @FXML
-    public Button panel1;
+    @FXML public Button panel1;
 
-    @FXML
-    public Button panel2;
+    @FXML public Button panel2;
 
-    @FXML
-    public Button panel3;
+    @FXML public Button panel3;
 
-    @FXML
-    public Button panel4;
+    @FXML public Button panel4;
 
-    @FXML
-    public Button panel5;
+    @FXML public Button panel5;
 
-    @FXML
-    public Button panel6;
+    @FXML public Button panel6;
 
-    @FXML
-    public Button panel7;
+    @FXML public Button panel7;
 
-    @FXML
-    public Button panel8;
+    @FXML public Button panel8;
 
-    @FXML
-    public Button panel9;
+    @FXML public Button panel9;
 
-    @FXML
-    public Label player1Score;
-    @FXML
-    public Label player2Score;
+    @FXML public Label player1Score;
 
-    @FXML
-    public Label player1Label;
+    @FXML public Label player2Score;
 
-    @FXML
-    public Label player2Label;
-    @FXML
-    GridPane playArea;
+    @FXML public Label player1Label;
+
+    @FXML public Label player2Label;
+
+    @FXML GridPane playArea;
+
     @FXML GridPane tttPane;
 
 
@@ -150,6 +138,20 @@ public class GameBoardController implements Controller {
         buttons.add(panel7);
         buttons.add(panel8);
         buttons.add(panel9);
+
+        btnExit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                exitGame();
+            }
+        });
+
+        btnRestart.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                restartGame();
+            }
+        });
 
     }
 
@@ -235,7 +237,7 @@ public class GameBoardController implements Controller {
         tc.setMouseTransparent(true);
     }
 
-    //MOved to TTTBC
+    //Moved to TTTBC
     @FXML
     public void panelClick(ActionEvent event){
         Button button = (Button) event.getSource();
@@ -289,7 +291,6 @@ public class GameBoardController implements Controller {
         // Convert to string
         // Pass to player1Score.setText(...);
         player1Score.setText(String.valueOf(currentScore));
-
     }
 
     //TODO: Done
@@ -305,25 +306,58 @@ public class GameBoardController implements Controller {
     }
 
     @FXML
-    public void exitGame() {
-        Stage stage = (Stage) btnExit.getScene().getWindow();
-        //TODO: Send EndGame message to server
+    private void exitGame() {
+        Stage stage = (Stage) playArea.getScene().getWindow();
+        //TODO: Temporary Implementation, remove later
+        //Send ForfeitGame message
+        MessageSender.getInstance().sendMessage("Game", new ForfeitGame(gameID));
+        //Tell Main to remove game from list
+        setChanged();
+        notifyObservers(new RemoveGame(this));
+        //Close window
         stage.close();
+
+        //TODO: Implement Below:
+        //Check if game is still going on,
+        //If game is still going on, display alert asking if player wants to resume game later
+            //If yes, send GamePause message
+            //Else send ForfeitGame message
+        //Tell Main to remove game from list
+        //Close the stage
+
 
     }
 
-    //TODO: Keep but modify
-    public void restartGame(ActionEvent actionEvent) {
-        for(Button b: buttons){
-            b.setGraphic(null);
-        }
-        //TODO:Send Signal to Server to restartgame
-        enableAllPanels();
+    /**
+     * restartGame(ActionEvent actionEvent)
+     * Sends a message to the server to request a new game. This option forfeits the current game. The game will prompt
+     * users to rematch on a finished game already. This button is meant for in-progress game.
+     */
+    private void restartGame() {
+        //Send message to server to forfeit game
+        MessageSender.getInstance().sendMessage("Game", new ForfeitGame(gameID));
+        //Send message to request rematch
+        MessageSender.getInstance().sendMessage("Game", new RematchRequest(gameID));
+        //Reset Board
+        resetBoard();
     }
 
     private void setGameName(String gameName){
         //TODO: Give an fxID to the anchorpane and use that instead
         Stage stage = (Stage) btnExit.getScene().getWindow();//Picked a random button to get the stage
         stage.setTitle(gameName);
+    }
+
+    private void rematchRequest(){
+        //Display Alert
+        //Send rematch request
+        MessageSender.getInstance().sendMessage("Game", new RematchRequest(gameID));
+    }
+
+    private void resetBoard(){
+        for(Button b: buttons){
+            b.setGraphic(null);
+        }
+        enableAllPanels();
     }
 }
