@@ -77,7 +77,6 @@ public class GameBoardController extends Observable implements Controller {
     @FXML GridPane tttPane;
 
 
-    private ArrayList<Button> buttons;
     private String gameID;
     private String player;
 
@@ -146,16 +145,7 @@ public class GameBoardController extends Observable implements Controller {
         }
     }
 
-    /**
-     * setTTTPaneStyle()
-     * Sets the CSS style sheet for the game window
-     */
-    private void setTTTPaneStyle(){
-        System.out.println("SetTTTPaneStyle called");
-        for(Button b: buttons){
-            b.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-        }
-    }
+
 
     /**
      * initialize()
@@ -163,16 +153,69 @@ public class GameBoardController extends Observable implements Controller {
      */
     public void initialize() throws IOException {
         playArea.getStyleClass().add(JMetroStyleClass.BACKGROUND);
-        buttons = new ArrayList<>();
-        buttons.add(panel1);
-        buttons.add(panel2);
-        buttons.add(panel3);
-        buttons.add(panel4);
-        buttons.add(panel5);
-        buttons.add(panel6);
-        buttons.add(panel7);
-        buttons.add(panel8);
-        buttons.add(panel9);
+
+        panel1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                panelClick(0,0);
+            }
+        });
+
+        panel2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                panelClick(0,1);
+            }
+        });
+
+        panel3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                panelClick(0,2);
+            }
+        });
+
+        panel4.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                panelClick(1,0);
+            }
+        });
+
+        panel5.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                panelClick(1,1);
+            }
+        });
+
+        panel6.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                panelClick(1,2);
+            }
+        });
+
+        panel7.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                panelClick(2,0);
+            }
+        });
+
+        panel8.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                panelClick(2,1);
+            }
+        });
+
+        panel9.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                panelClick(2,2);
+            }
+        });
 
         btnExit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -231,9 +274,15 @@ public class GameBoardController extends Observable implements Controller {
      * Prevents any clicking of the game board
      */
     private void disableAllPanels(){
-        for(Button b: buttons){
-            b.setMouseTransparent(true);
-        }
+        panel1.setMouseTransparent(true);
+        panel2.setMouseTransparent(true);
+        panel3.setMouseTransparent(true);
+        panel4.setMouseTransparent(true);
+        panel5.setMouseTransparent(true);
+        panel6.setMouseTransparent(true);
+        panel7.setMouseTransparent(true);
+        panel8.setMouseTransparent(true);
+        panel9.setMouseTransparent(true);
     }
 
     /**
@@ -241,9 +290,15 @@ public class GameBoardController extends Observable implements Controller {
      * Enables clicking of the game board
      */
     private void enableAllPanels(){
-        for(Button b: buttons){
-            b.setMouseTransparent(false);
-        }
+        panel1.setMouseTransparent(false);
+        panel2.setMouseTransparent(false);
+        panel3.setMouseTransparent(false);
+        panel4.setMouseTransparent(false);
+        panel5.setMouseTransparent(false);
+        panel6.setMouseTransparent(false);
+        panel7.setMouseTransparent(false);
+        panel8.setMouseTransparent(false);
+        panel9.setMouseTransparent(false);
     }
 
     private void displayMove(MoveValid move){
@@ -275,12 +330,9 @@ public class GameBoardController extends Observable implements Controller {
         tc.setMouseTransparent(true);
     }
 
-    //Moved to TTTBC
+
     @FXML
-    public void panelClick(ActionEvent event){
-        Button button = (Button) event.getSource();
-        int row = GridPane.getRowIndex(button);
-        int column = GridPane.getColumnIndex(button);
+    public void panelClick(int row, int column){
         //Send the move to server
         MessageSender.getInstance().sendMessage("MoveMade", new MoveMade(gameID, player, row, column));
     }
@@ -306,7 +358,8 @@ public class GameBoardController extends Observable implements Controller {
 
     //TODO: Done
     private Button getButton(int row, int col){
-        return buttons.get(3 * row + col);
+        Button[][] buttons = {{panel1, panel2, panel3}, {panel4, panel5, panel6}, {panel7, panel8, panel9}};
+        return buttons[row][col];
     }
 
     //TODO: Done
@@ -394,9 +447,7 @@ public class GameBoardController extends Observable implements Controller {
     }
 
     private void resetBoard(){
-        for(Button b: buttons){
-            b.setGraphic(null);
-        }
+        resetAllPanelGraphics();
         enableAllPanels();
     }
 
@@ -439,5 +490,38 @@ public class GameBoardController extends Observable implements Controller {
         catch(Exception e){
             System.out.println(e.getMessage());
         }
+    }
+
+    /**
+     * setTTTPaneStyle()
+     * Sets the CSS style sheet for the game window
+     */
+    private void setTTTPaneStyle(){
+        System.out.println("SetTTTPaneStyle called");
+        setPanelStyle(panel1);
+        setPanelStyle(panel2);
+        setPanelStyle(panel3);
+        setPanelStyle(panel4);
+        setPanelStyle(panel5);
+        setPanelStyle(panel6);
+        setPanelStyle(panel7);
+        setPanelStyle(panel8);
+        setPanelStyle(panel9);
+    }
+
+    private void setPanelStyle(Button panel) {
+        panel.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+    }
+
+    private void resetAllPanelGraphics(){
+        panel1.setGraphic(null);
+        panel2.setGraphic(null);
+        panel3.setGraphic(null);
+        panel4.setGraphic(null);
+        panel5.setGraphic(null);
+        panel6.setGraphic(null);
+        panel7.setGraphic(null);
+        panel8.setGraphic(null);
+        panel9.setGraphic(null);
     }
 }
