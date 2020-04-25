@@ -10,10 +10,17 @@ import com.ExceptionHandled.Client.MessageSender;
 import com.ExceptionHandled.GameMessages.MainMenu.SpectateSuccess;
 import com.ExceptionHandled.Interfaces.Controller;
 import com.ExceptionHandled.InternalPacketsAndWrappers.RemoveGame;
+import com.ExceptionHandled.TicTacToeUI.WinnerNotification.WinnerNotificationController;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -24,6 +31,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import jfxtras.styles.jmetro.JMetroStyleClass;
 
 import java.io.IOException;
@@ -283,14 +291,14 @@ public class GameBoardController extends Observable implements Controller {
         disableAllPanels();
         if (status.equals("Loss")){
             addPlayerScore(winningPlayer);
-            //TODO: Display Loss Banner
+            displayWinnerNotification(winningPlayer);
         }
         else if (status.equals("Win")){
             addPlayerScore(winningPlayer);
-            //TODO: Display Win Banner
+            displayWinnerNotification(winningPlayer);
         }
         else if (status.equals("Tie")){
-            //TODO: Display Tie game banner
+            displayTieNotification();
         }
     }
 
@@ -390,5 +398,46 @@ public class GameBoardController extends Observable implements Controller {
             b.setGraphic(null);
         }
         enableAllPanels();
+    }
+
+    private void displayWinnerNotification(String winner){
+        String winnerGraphic = "";
+        if (winner.equals(player)){
+            winnerGraphic = "../Graphics/XShape.png";
+        }
+        else{
+            winnerGraphic = "../Graphics/WhiteCircle.png";
+        }
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/WinnerNotification.fxml"));
+            WinnerNotificationController wnc = new WinnerNotificationController(new Image(getClass().getResourceAsStream(winnerGraphic)));
+            loader.setController(wnc);
+            Parent winNotification = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(winNotification));
+            stage.show();
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void displayTieNotification(){
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("../FXML/DrawNotification.fxml"));
+            Stage pStage = new Stage();
+            pStage.setScene(new Scene(root));
+
+            Timeline timeline = new Timeline();
+            KeyFrame key = new KeyFrame(Duration.seconds(2), new KeyValue(pStage.opacityProperty(), 0));
+            timeline.getKeyFrames().add(key);
+
+            timeline.play();
+
+            pStage.show();
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 }
