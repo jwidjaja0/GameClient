@@ -83,38 +83,48 @@ public class GameBoardController implements Controller {
 
     private ArrayList<Button> buttons;
     private String gameID;
-    private String gameName;
     private String player;
-    private Stage thisStage;
 
 
     public GameBoardController(NewGameSuccess newGame){
+        //Set member variables
         player = "x";
         gameID = newGame.getGameId();
-        gameName = newGame.getGameName();
+        setGameName(newGame.getGameName());
+        //Set labels
         player1Label = new Label();
         player1Label.setText("You");
     }
 
     public GameBoardController(JoinGameSuccess joinGame){
+        //Set member variables
         player = "o";
         gameID = joinGame.getGameID();
-        gameName = joinGame.getGameName();
+        setGameName(joinGame.getGameName());
+        //Set labels
         player1Label = new Label();
         player1Label.setText(joinGame.getOtherPlayerName());
         player2Label = new Label();
         player2Label.setText("You");
+        //Display Moves made
+        for (MoveValid mv : joinGame.getMovesMade()){
+            displayMove(mv);
+        }
     }
 
     public GameBoardController(SpectateSuccess spectateGame) {
         player = "Spectator";
         gameID = spectateGame.getGameID();
-        gameName = spectateGame.getGameName();
+        setGameName(spectateGame.getGameName());
         player1Label = new Label();
         player1Label.setText(spectateGame.getPlayer1Name());
         player2Label = new Label();
         player2Label.setText(spectateGame.getPlayer2Name());
         disableAllPanels();
+        //Display Moves made
+        for (MoveValid mv : spectateGame.getMovesMade()){
+            displayMove(mv);
+        }
     }
 
     public void setTTTPaneStyle(){
@@ -170,10 +180,6 @@ public class GameBoardController implements Controller {
             else
                 disableAllPanels();
         }
-    }
-
-    public void setStage(Stage thisStage){
-        this.thisStage = thisStage;
     }
 
     public String getGameID(){
@@ -299,10 +305,11 @@ public class GameBoardController implements Controller {
     }
 
     @FXML
-    public void exitPrgm(ActionEvent actionEvent) {
+    public void exitGame() {
         Stage stage = (Stage) btnExit.getScene().getWindow();
+        //TODO: Send EndGame message to server
         stage.close();
-        //TODO: Send disconnect message to server
+
     }
 
     //TODO: Keep but modify
@@ -312,5 +319,11 @@ public class GameBoardController implements Controller {
         }
         //TODO:Send Signal to Server to restartgame
         enableAllPanels();
+    }
+
+    private void setGameName(String gameName){
+        //TODO: Give an fxID to the anchorpane and use that instead
+        Stage stage = (Stage) btnExit.getScene().getWindow();//Picked a random button to get the stage
+        stage.setTitle(gameName);
     }
 }
