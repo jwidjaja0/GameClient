@@ -159,17 +159,33 @@ public class LobbyController implements Controller, Observer {
     }
 
     private void createGame(NewGameSuccess newGame) throws IOException {
+        //Create Game Controller
         GameBoardController gbc = new GameBoardController(newGame);
+        //Add controller to lobby's list of active games
+        openGames.add(gbc);
+        //Add lobby to controller's list of observers
+        gbc.addObserver(this);
+        //Open the game window
         openGameWindow(gbc, newGame.getGameName());
     }
 
     private void joinGame(JoinGameSuccess joinGame) throws IOException {
         GameBoardController gbc = new GameBoardController(joinGame);
+        //Add controller to lobby's list of active games
+        openGames.add(gbc);
+        //Add lobby to controller's list of observers
+        gbc.addObserver(this);
+        //Open the game window
         openGameWindow(gbc, joinGame.getGameName());
     }
 
     private void spectateGame(SpectateSuccess spectateGame) throws IOException {
         GameBoardController gbc = new GameBoardController(spectateGame);
+        //Add controller to lobby's list of active games
+        openGames.add(gbc);
+        //Add lobby to controller's list of observers
+        gbc.addObserver(this);
+        //Open the game window
         openGameWindow(gbc, spectateGame.getGameName());
     }
 
@@ -184,7 +200,6 @@ public class LobbyController implements Controller, Observer {
             public void run() {
                 Stage stage = new Stage();
                 stage.setTitle(gameName);
-                //stage.setScene(new Scene(gameWindow));
                 stage.setScene(new Scene(jMetro.getParent()));
                 stage.show();
             }

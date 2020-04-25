@@ -74,7 +74,14 @@ public class GameBoardController extends Observable implements Controller {
     private String player;
 
 
+    /**
+     * GameBoardController(NewGameSuccess newGame)
+     * @param newGame: NewGameSuccess message
+     * This constructor is used when the client makes a new game
+     */
     public GameBoardController(NewGameSuccess newGame){
+        //Set CSS stle
+        setTTTPaneStyle();
         //Set member variables
         player = "x";
         gameID = newGame.getGameId();
@@ -84,7 +91,14 @@ public class GameBoardController extends Observable implements Controller {
         player1Label.setText("You");
     }
 
+    /**
+     * GameBoardController(JoinGameSuccess newGame)
+     * @param joinGame: JoinGameSuccess message
+     * This constructor is used when the client joins a game
+     */
     public GameBoardController(JoinGameSuccess joinGame){
+        //Set CSS stle
+        setTTTPaneStyle();
         //Set member variables
         player = "o";
         gameID = joinGame.getGameID();
@@ -100,10 +114,19 @@ public class GameBoardController extends Observable implements Controller {
         }
     }
 
+    /**
+     * GameBoardController(SpectateSuccess newGame)
+     * @param spectateGame: SpectateSuccess message
+     * This constructor is used when the client joins a game as a spectator
+     */
     public GameBoardController(SpectateSuccess spectateGame) {
+        //Set CSS stle
+        setTTTPaneStyle();
+        //Set member variables
         player = "Spectator";
         gameID = spectateGame.getGameID();
         setGameName(spectateGame.getGameName());
+        //Set labels
         player1Label = new Label();
         player1Label.setText(spectateGame.getPlayer1Name());
         player2Label = new Label();
@@ -115,7 +138,11 @@ public class GameBoardController extends Observable implements Controller {
         }
     }
 
-    public void setTTTPaneStyle(){
+    /**
+     * setTTTPaneStyle()
+     * Sets the CSS style sheet for the game window
+     */
+    private void setTTTPaneStyle(){
         System.out.println("SetTTTPaneStyle called");
         for(Button b: buttons){
             b.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -157,14 +184,17 @@ public class GameBoardController extends Observable implements Controller {
 
     @Override
     public void messageProcessor(Serializable message){
-        if (message instanceof GameOverLoss){
-            gameOver("Loss", (GameOverLoss)message);
-        }
-        else if (message instanceof GameOverTie){
-            gameOver("Tie", (GameOverTie)message);
-        }
-        else if (message instanceof GameOverWin){
-            gameOver("Win", (GameOverWin)message);
+        if (message instanceof GameOverOutcome){
+            String winningPlayer = ((GameOverOutcome) message).getPlayer();
+            if (winningPlayer.equals(player)){
+                gameOver("Win", winningPlayer);
+            }
+            else if (winningPlayer.equals("none")){
+                gameOver("Tie", winningPlayer);
+            }
+            else{
+                gameOver("Loss", winningPlayer);
+            }
         }
         else if (message instanceof MoveValid){
             displayMove((MoveValid)message);
@@ -249,14 +279,14 @@ public class GameBoardController extends Observable implements Controller {
 
 
 
-    private void gameOver(String status, Serializable message){
+    private void gameOver(String status, String winningPlayer){
         disableAllPanels();
         if (status.equals("Loss")){
-            addPlayerScore(((GameOverLoss)message).getPlayer());
+            addPlayerScore(winningPlayer);
             //TODO: Display Loss Banner
         }
         else if (status.equals("Win")){
-            addPlayerScore(((GameOverLoss)message).getPlayer());
+            addPlayerScore(winningPlayer);
             //TODO: Display Win Banner
         }
         else if (status.equals("Tie")){
@@ -308,22 +338,23 @@ public class GameBoardController extends Observable implements Controller {
     @FXML
     private void exitGame() {
         Stage stage = (Stage) playArea.getScene().getWindow();
-        //TODO: Temporary Implementation, remove later
-        //Send ForfeitGame message
-        MessageSender.getInstance().sendMessage("Game", new ForfeitGame(gameID));
-        //Tell Main to remove game from list
-        setChanged();
-        notifyObservers(new RemoveGame(this));
-        //Close window
-        stage.close();
+        if (!player.equals("Spectator")){
+            //TODO: Temporary Implementation, remove later
+            //Send ForfeitGame message
+            MessageSender.getInstance().sendMessage("Game", new ForfeitGame(gameID));
+            //Tell Main to remove game from list
+            setChanged();
+            notifyObservers(new RemoveGame(this));
 
-        //TODO: Implement Below:
-        //Check if game is still going on,
-        //If game is still going on, display alert asking if player wants to resume game later
+            //TODO: Implement Below:
+            //Check if game is still going on,
+            //If game is still going on, display alert asking if player wants to resume game later
             //If yes, send GamePause message
             //Else send ForfeitGame message
-        //Tell Main to remove game from list
-        //Close the stage
+            //Tell Main to remove game from list
+        }
+        //Close window
+        stage.close();
 
 
     }
@@ -349,7 +380,7 @@ public class GameBoardController extends Observable implements Controller {
     }
 
     private void rematchRequest(){
-        //Display Alert
+        //TODO: Display Alert
         //Send rematch request
         MessageSender.getInstance().sendMessage("Game", new RematchRequest(gameID));
     }
