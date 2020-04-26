@@ -4,8 +4,8 @@ package com.ExceptionHandled.TicTacToeUI.MenuLayout;
 
 import com.ExceptionHandled.Alerts.AlertFactory;
 import com.ExceptionHandled.Client.MessageSender;
-import com.ExceptionHandled.GameMessages.Interfaces.*;
 import com.ExceptionHandled.GameMessages.Login.*;
+import com.ExceptionHandled.GameMessages.Stats.PlayerStatsInfo;
 import com.ExceptionHandled.GameMessages.Stats.PlayerStatsRequest;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteFail;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteRequest;
@@ -13,6 +13,7 @@ import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteSuccess;
 import com.ExceptionHandled.Interfaces.Controller;
 import com.ExceptionHandled.TicTacToeUI.SplashScreen.*;
 import com.ExceptionHandled.TicTacToeUI.SplashScreen.GetUserInfo.GetUserInfoController;
+import com.ExceptionHandled.TicTacToeUI.ViewStats.StatsViewerController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -21,7 +22,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.JMetroStyleClass;
@@ -47,7 +47,8 @@ public class MenuLayoutController implements Controller {
 
 
 
-    private Controller controller;
+    private Controller userInfoController;
+    private Controller userStatsController;
     private JMetro jMetro;
 
     public void initialize(){
@@ -66,7 +67,7 @@ public class MenuLayoutController implements Controller {
         personalRecordButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                showStats();
+                statsRequest();
             }
         });
 
@@ -109,8 +110,11 @@ public class MenuLayoutController implements Controller {
         else if (message instanceof LogoutFail){
             (new AlertFactory(message.toString())).displayAlert();
         }
+        else if (message instanceof PlayerStatsInfo){
+
+        }
         else{
-            controller.messageProcessor(message);//Send it first because alerts handled in subsequent screens
+            userInfoController.messageProcessor(message);//Send it first because alerts handled in subsequent screens
             if (message instanceof LoginSuccess || message instanceof SignUpSuccess){
                 logout.setDisable(false);
                 deleteAccount.setDisable(false);
@@ -119,18 +123,36 @@ public class MenuLayoutController implements Controller {
 
     }
 
+    private void showStats(PlayerStatsInfo stats){
+        try{
+            userStatsController = new StatsViewerController();
+            FXMLLoader statsScreen = new FXMLLoader(getClass().getResource("../ViewStats/StatsViewer.fxml"));
+            userStatsController.messageProcessor(stats);
+            statsScreen.setController(userStatsController);
+            Parent statsScreenWindow = statsScreen.load();
+            Stage stage = new Stage();
+            stage.setTitle("Player Game History");
+            stage.setScene(new Scene(statsScreenWindow));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     private void changeUserInfo(){
         try{
-            controller = new GetUserInfoController();
+            userInfoController = new GetUserInfoController();
             FXMLLoader getUserInfo = new FXMLLoader(getClass().getResource("../SplashScreen/GetUserInfo/GetUserInfo.fxml"));
-            getUserInfo.setController(controller);
+            getUserInfo.setController(userInfoController);
             Parent getUserInfoWindow = getUserInfo.load();
             Stage stage = new Stage();
             stage.setTitle("Enter Your Information");
             jMetro.setParent(getUserInfoWindow);
 
             stage.setScene(new Scene(jMetro.getParent()));
-            ((GetUserInfoController) controller).setType("Change");
+            ((GetUserInfoController) userInfoController).setType("Change");
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
@@ -140,8 +162,8 @@ public class MenuLayoutController implements Controller {
     private void loginRegister(){
         try{
             FXMLLoader splashScreen = new FXMLLoader(getClass().getResource("../SplashScreen/SplashScreen.fxml"));
-            controller = new SplashController();
-            splashScreen.setController(controller);
+            userInfoController = new SplashController();
+            splashScreen.setController(userInfoController);
             Parent splashWindow = splashScreen.load();
             Stage stage = new Stage();
             stage.setTitle("Welcome!");
@@ -154,7 +176,7 @@ public class MenuLayoutController implements Controller {
         }
     }
 
-    private void showStats(){
+    private void statsRequest(){
         //Send request to server
         MessageSender.getInstance().sendMessage("PlayerStatsRequest", new PlayerStatsRequest());
     }

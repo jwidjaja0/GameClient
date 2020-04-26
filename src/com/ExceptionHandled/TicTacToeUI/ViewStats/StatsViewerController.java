@@ -13,29 +13,23 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.Serializable;
 
 public class StatsViewerController implements Controller {
-    @FXML
-    private Label wins;
+    @FXML private Label wins;
 
-    @FXML
-    private Label ties;
+    @FXML private Label ties;
 
-    @FXML
-    private Label losses;
+    @FXML private Label losses;
 
-    @FXML
-    private TableView<GameHistorySummary> gamesList;
+    @FXML private TableView<GameHistorySummary> gamesList;
 
-    @FXML
-    private TableColumn<GameHistorySummary, String> gameID;
+    @FXML private TableColumn<GameHistorySummary, String> gameID;
 
-    @FXML
-    private TableColumn<GameHistorySummary, String> player1;
+    @FXML private TableColumn<GameHistorySummary, String> player1;
 
-    @FXML
-    private TableColumn<GameHistorySummary, String> player2;
+    @FXML private TableColumn<GameHistorySummary, String> player2;
 
-    @FXML
-    private TableColumn<GameHistorySummary, String> matchResult;
+    @FXML private TableColumn<GameHistorySummary, String> matchResult;
+
+
 
     public void initialize(){
         //Sets the Cell Value Factory identifiers for each column
