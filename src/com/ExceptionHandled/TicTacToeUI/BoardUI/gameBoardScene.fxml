@@ -40,22 +40,22 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
             </rowConstraints>
             <children>
-                <Button id="buttonColor" fx:id="panel1" mnemonicParsing="false" onAction="#panelClick" prefHeight="Infinity" prefWidth="Infinity" styleClass="vPanels" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                <Button id="buttonColor" fx:id="panel2" mnemonicParsing="false" onAction="#panelClick" prefHeight="Infinity" prefWidth="Infinity" styleClass="vPanels" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                <Button id="buttonColor" fx:id="panel3" mnemonicParsing="false" onAction="#panelClick" prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-                <Button id="buttonColor" fx:id="panel4" mnemonicParsing="false" onAction="#panelClick" prefHeight="Infinity" prefWidth="Infinity" styleClass="hPanels" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                <Button id="buttonColor" fx:id="panel5" mnemonicParsing="false" onAction="#panelClick" prefHeight="Infinity" prefWidth="Infinity" styleClass="vPanels, hPanels" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <Button id="buttonColor" fx:id="panel6" mnemonicParsing="false" onAction="#panelClick" prefHeight="Infinity" prefWidth="Infinity" styleClass="hPanels" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                <Button id="buttonColor" fx:id="panel7" mnemonicParsing="false" onAction="#panelClick" prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                <Button id="buttonColor" fx:id="panel8" mnemonicParsing="false" onAction="#panelClick" prefHeight="Infinity" prefWidth="Infinity" styleClass="vPanels" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <Button id="buttonColor" fx:id="panel9" mnemonicParsing="false" onAction="#panelClick" prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                <Button id="buttonColor" fx:id="panel1" mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" styleClass="vPanels" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Button id="buttonColor" fx:id="panel2" mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" styleClass="vPanels" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Button id="buttonColor" fx:id="panel3" mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                <Button id="buttonColor" fx:id="panel4" mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" styleClass="hPanels" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Button id="buttonColor" fx:id="panel5" mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" styleClass="vPanels, hPanels" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Button id="buttonColor" fx:id="panel6" mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" styleClass="hPanels" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <Button id="buttonColor" fx:id="panel7" mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <Button id="buttonColor" fx:id="panel8" mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" styleClass="vPanels" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Button id="buttonColor" fx:id="panel9" mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             </children>
 
         </GridPane>
       <HBox fx:id="functionButtonsBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <children>
-            <Button id="btnRestart" fx:id="btnRestart" mnemonicParsing="false" onAction="#restartGame" prefHeight="50.0" prefWidth="100.0" text="Restart" />
-            <Button id="btnExit" fx:id="btnExit" mnemonicParsing="false" onAction="#exitPrgm" prefHeight="50.0" prefWidth="100.0" text="Exit" />
+            <Button id="btnRestart" fx:id="btnRestart" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Restart" />
+            <Button id="btnExit" fx:id="btnExit" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Exit" />
          </children>
          <GridPane.margin>
             <Insets />
