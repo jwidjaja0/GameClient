@@ -139,12 +139,17 @@ public class LobbyController implements Controller, Observer {
     }
 
     public void refreshGamesList(ListActiveGames games){
-        //Remove all items from current list
-        gamesList.getItems().clear();
-        //Add new items
-        for(ActiveGameHeader h : games.getActiveGameHeaderList()){
-            gamesList.getItems().add(h);
-        }
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                //Remove all items from current list
+                gamesList.getItems().clear();
+                //Add new items
+                for(ActiveGameHeader h : games.getActiveGameHeaderList()){
+                    gamesList.getItems().add(h);
+                }
+            }
+        });
     }
 
     private void createGameRequest() throws IOException {

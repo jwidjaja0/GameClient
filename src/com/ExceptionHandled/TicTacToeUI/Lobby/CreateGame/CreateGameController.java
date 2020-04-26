@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetroStyleClass;
 
 
@@ -56,6 +57,7 @@ public class CreateGameController {
         System.out.println(opponent.getValue());
         System.out.println(privateGame.getValue());
         MessageSender.getInstance().sendMessage("NewGameRequest", new NewGameRequest(opponent.getValue(), gameName.getText(), (privateGame.getValue().equals("Yes")), password.getText()));
+        ((Stage)(create.getScene().getWindow())).close();
     }
 
 }
