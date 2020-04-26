@@ -14,6 +14,7 @@ import com.ExceptionHandled.TicTacToeUI.WinnerNotification.WinnerNotificationCon
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -92,7 +93,6 @@ public class GameBoardController extends Observable implements Controller {
         //Set member variables
         player = "x";
         gameID = newGame.getGameId();
-        setGameName(newGame.getGameName());
         //Set labels
         player1Label = new Label();
         player1Label.setText("You");
@@ -109,7 +109,6 @@ public class GameBoardController extends Observable implements Controller {
         //Set member variables
         player = "o";
         gameID = joinGame.getGameID();
-        setGameName(joinGame.getGameName());
         //Set labels
         player1Label = new Label();
         player1Label.setText(joinGame.getOtherPlayerName());
@@ -132,7 +131,6 @@ public class GameBoardController extends Observable implements Controller {
         //Set member variables
         player = "Spectator";
         gameID = spectateGame.getGameID();
-        setGameName(spectateGame.getGameName());
         //Set labels
         player1Label = new Label();
         player1Label.setText(spectateGame.getPlayer1Name());
@@ -432,12 +430,6 @@ public class GameBoardController extends Observable implements Controller {
         MessageSender.getInstance().sendMessage("Game", new RematchRequest(gameID));
         //Reset Board
         resetBoard();
-    }
-
-    private void setGameName(String gameName){
-        //TODO: Give an fxID to the anchorpane and use that instead
-        Stage stage = (Stage) btnExit.getScene().getWindow();//Picked a random button to get the stage
-        stage.setTitle(gameName);
     }
 
     private void rematchRequest(){
