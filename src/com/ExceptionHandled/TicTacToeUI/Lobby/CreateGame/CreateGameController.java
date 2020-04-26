@@ -53,6 +53,8 @@ public class CreateGameController {
     }
 
     private void createGame(){
+        System.out.println(opponent.getValue());
+        System.out.println(privateGame.getValue());
         MessageSender.getInstance().sendMessage("NewGameRequest", new NewGameRequest(opponent.getValue(), gameName.getText(), (privateGame.getValue().equals("Yes")), password.getText()));
     }
 

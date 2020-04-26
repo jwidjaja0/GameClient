@@ -88,7 +88,7 @@ public class GameBoardController extends Observable implements Controller {
      */
     public GameBoardController(NewGameSuccess newGame){
         //Set CSS stle
-        setTTTPaneStyle();
+        //setTTTPaneStyle();
         //Set member variables
         player = "x";
         gameID = newGame.getGameId();
@@ -105,7 +105,7 @@ public class GameBoardController extends Observable implements Controller {
      */
     public GameBoardController(JoinGameSuccess joinGame){
         //Set CSS stle
-        setTTTPaneStyle();
+        //setTTTPaneStyle();
         //Set member variables
         player = "o";
         gameID = joinGame.getGameID();
@@ -128,7 +128,7 @@ public class GameBoardController extends Observable implements Controller {
      */
     public GameBoardController(SpectateSuccess spectateGame) {
         //Set CSS stle
-        setTTTPaneStyle();
+        //setTTTPaneStyle();
         //Set member variables
         player = "Spectator";
         gameID = spectateGame.getGameID();
