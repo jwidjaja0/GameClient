@@ -134,7 +134,6 @@ public class MenuLayoutController implements Controller {
             stage.setTitle("Player Game History");
             stage.setScene(new Scene(statsScreenWindow));
             stage.show();
-
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,10 +1,7 @@
 package com.ExceptionHandled.Client;
 
 import com.ExceptionHandled.GameMessages.Connection.*;
-import com.ExceptionHandled.GameMessages.Interfaces.Login;
-import com.ExceptionHandled.GameMessages.Login.LoginSuccess;
-import com.ExceptionHandled.GameMessages.Login.LogoutSuccess;
-import com.ExceptionHandled.GameMessages.Login.SignUpSuccess;
+import com.ExceptionHandled.GameMessages.Login.*;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteSuccess;
 import com.ExceptionHandled.GameMessages.Wrappers.*;
 
@@ -16,12 +13,11 @@ import java.util.Observer;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
-public class Client extends Observable implements Observer {
+public class Client extends Observable implements Runnable {
     private Socket serverConnection;
     private String username;
     private Send send;
     private Receive receive;
-    private Publish publish;
     private String playerID;
 
     //TODO: Change to packet
@@ -37,16 +33,37 @@ public class Client extends Observable implements Observer {
 
         send = new Send(serverConnection, outgoing);
         receive = new Receive(serverConnection, incoming);
-        publish = new Publish(incoming);
-        publish.addObserver(this);
+
         MessageSender.getInstance().setQueue(outgoing);
         MessageSender.getInstance().sendMessage("Connection", new ConnectionRequest());
+
+        Thread self = new Thread(this);
+        self.start();
     }
 
     @Override
-    public void update(Observable o, Object arg) {
-        Packet packet = (Packet)arg;
+    public void run() {
+        // Grabs available messages from incoming and processes it and sends to relevant object
+        try {
+            while (true) {
+                Packet packet = incoming.take();// Get the packet from the incoming queue
+                if (packet.getMessage() instanceof LoginSuccess){
+                    System.out.println(((LoginSuccess) packet.getMessage()).getPlayerID());
+                }
+                messageProcessor(packet);
+            }
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finally {
+            System.out.println("Client closing.");
+        }
+    }
+
+    private void messageProcessor(Packet packet){
         String messageType = packet.getMessageType();
+        System.out.println("Received " + messageType + " message.");
         Serializable message = packet.getMessage();
         if (messageType.equals("Login")) {
             System.out.println("Received Login Message");
@@ -65,6 +82,7 @@ public class Client extends Observable implements Observer {
             }
         }
         setChanged();
-        notifyObservers(arg);
+        notifyObservers(packet);
     }
+
 }
