@@ -12,7 +12,7 @@ public class MessageSender {
     private BlockingQueue<Packet> queue;
 
     private MessageSender(){
-
+        playerID = null;
     }
 
     public static MessageSender getInstance(){
@@ -24,8 +24,12 @@ public class MessageSender {
     }
 
     public void sendMessage(String wrapperType, Serializable message){
+        sendMessage(wrapperType, playerID, message);
+    }
+
+    public void sendMessage(String wrapperType, String id, Serializable message){
         try {
-            queue.put(new Packet(wrapperType, playerID, message));
+            queue.put(new Packet(wrapperType, id, message));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

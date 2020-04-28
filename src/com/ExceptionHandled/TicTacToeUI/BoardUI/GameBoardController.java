@@ -80,7 +80,8 @@ public class GameBoardController extends Observable implements Controller {
 
     private String gameID;
     private String player;
-
+    private String[][] board;
+    private boolean vsAI;
 
     /**
      * GameBoardController(NewGameSuccess newGame)
@@ -96,6 +97,7 @@ public class GameBoardController extends Observable implements Controller {
         //Set labels
         player1Label = new Label();
         player1Label.setText("You");
+        fillBoard();
     }
 
     /**
@@ -118,6 +120,8 @@ public class GameBoardController extends Observable implements Controller {
         for (MoveValid mv : joinGame.getMovesMade()){
             displayMove(mv);
         }
+        vsAI = false;
+        fillBoard();
     }
 
     /**
@@ -141,9 +145,18 @@ public class GameBoardController extends Observable implements Controller {
         for (MoveValid mv : spectateGame.getMovesMade()){
             displayMove(mv);
         }
+        vsAI = false;
+        fillBoard();
     }
 
-
+    private void fillBoard(){
+        this.board = new String[3][3];
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                this.board[i][j] = board[i][j];
+            }
+        }
+    }
 
     /**
      * initialize()
@@ -516,4 +529,9 @@ public class GameBoardController extends Observable implements Controller {
         panel8.setGraphic(null);
         panel9.setGraphic(null);
     }
+
+    private void setBoard(MoveValid move){
+        board[move.getxCoord()][move.getyCoord()] = move.getPlayer();
+    }
+
 }
