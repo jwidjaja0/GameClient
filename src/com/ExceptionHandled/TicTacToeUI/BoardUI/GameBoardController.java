@@ -99,6 +99,7 @@ public class GameBoardController extends Observable implements Controller {
         player1Label = new Label();
         player1Label.setText("You");
         fillBoard();
+        vsAI = !newGame.getOpponent().equals("Human");
     }
 
     /**
