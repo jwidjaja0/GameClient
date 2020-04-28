@@ -1,9 +1,13 @@
 package com.ExceptionHandled.TicTacToeUI.AI;
 
+/**
+ * This class is only meant to be used by the AI. That is why all methods are package private.
+ */
 public class AIBoard {
+
     private String[][] board;
 
-    public AIBoard(String[][] board){
+    AIBoard(String[][] board){
         this.board = new String[3][3];
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
@@ -13,7 +17,7 @@ public class AIBoard {
     }
 
     //game is over if either player won or the board is full
-    private boolean isGameOver(){
+    boolean isGameOver(){
         return isWon("x") || isWon("o") || isFull();
     }
 
@@ -23,7 +27,7 @@ public class AIBoard {
     }
 
     //checks if the player token has a winning set of moves
-    public boolean isWon(String token) {
+    boolean isWon(String token) {
         //check horizontals
         for(int i = 0; i < 3; i++){
             if(board[i][0].equals(token)
@@ -47,9 +51,9 @@ public class AIBoard {
             return true;
         }
         //check other diagonal
-        if(board[0][2] == token
-                && board[1][1] == token
-                && board[2][0] == token){
+        if(board[0][2].equals(token)
+                && board[1][1].equals(token)
+                && board[2][0].equals(token)){
             return true;
         }
         //otherwise they didn't win
@@ -57,15 +61,12 @@ public class AIBoard {
     }
 
     //returns true if neither player won but the board is full
-    public boolean isDraw(){
-        if (isFull() && !isWon("x") && !isWon("o"))
-            return true;
-        else
-            return false;
+    boolean isDraw(){
+        return isFull() && !isWon("x") && !isWon("o");
     }
 
     //returns true of there are no available moves left
-    public boolean isFull(){
+    boolean isFull(){
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
                 if(board[i][j].equals(" "))
@@ -75,4 +76,29 @@ public class AIBoard {
         return true;
     }
 
+    //calculates how many moves are left in the game
+    int remainingMoves(){
+        int count = 9;
+        for (int i = 0; i < board.length; ++i){
+            for (int j = 0; j < board[i].length; ++j){
+                if (!board[i][j].equals(" ")){
+                    --count;
+                }
+            }
+        }
+        return count;
+    }
+
+    //resets the move at x,y to a blank
+    void unSetMove(int row, int col){
+        board[row][col] = " ";
+    }
+
+    int getSideDim(){
+        return board.length;
+    }
+
+    String getMoveAt(int x, int y){
+        return board[x][y];
+    }
 }

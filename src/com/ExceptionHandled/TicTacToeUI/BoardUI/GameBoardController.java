@@ -10,6 +10,7 @@ import com.ExceptionHandled.Client.MessageSender;
 import com.ExceptionHandled.GameMessages.MainMenu.SpectateSuccess;
 import com.ExceptionHandled.Interfaces.Controller;
 import com.ExceptionHandled.InternalPacketsAndWrappers.RemoveGame;
+import com.ExceptionHandled.TicTacToeUI.AI.AI;
 import com.ExceptionHandled.TicTacToeUI.WinnerNotification.WinnerNotificationController;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -153,7 +154,7 @@ public class GameBoardController extends Observable implements Controller {
         this.board = new String[3][3];
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
-                this.board[i][j] = board[i][j];
+                this.board[i][j] = " ";
             }
         }
     }
@@ -259,7 +260,8 @@ public class GameBoardController extends Observable implements Controller {
             }
         }
         else if (message instanceof MoveValid){
-            displayMove((MoveValid)message);
+            displayMove((MoveValid)message);//Display the move for the player
+            setBoard((MoveValid) message);//Set the board, in case of game vsAI
         }
         else if (message instanceof MoveInvalid){
             if (((MoveInvalid)message).getPlayer().equals(player))//Only display the alert if you are the player who made an invalid move.
@@ -272,6 +274,9 @@ public class GameBoardController extends Observable implements Controller {
             if (((WhoseTurn)message).getWhoseTurn().equals(player))
                 enableAllPanels();
             else
+                if (vsAI){//If it is a game vs the AI, tell the AI to make a move
+                    AI.getInstance().makeMove(board, gameID);
+                }
                 disableAllPanels();
         }
     }
