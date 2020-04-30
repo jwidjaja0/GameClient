@@ -180,6 +180,8 @@ public class GameBoardController extends Observable implements Controller {
      */
     public void initialize() {
         instantiatePanels();
+        btnExit = new Button();
+        btnRestart = new Button();
         playArea = new GridPane();
         playArea.getStyleClass().add(JMetroStyleClass.BACKGROUND);
 
