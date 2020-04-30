@@ -36,9 +36,7 @@ public class CreateGameController {
         createGameAnchor.getStyleClass().add(JMetroStyleClass.BACKGROUND);
 
         opponent.getItems().add("Human");
-        opponent.getItems().add("EasyAI");
-        opponent.getItems().add("MediumAI");
-        opponent.getItems().add("HardAI");
+        opponent.getItems().add("AI");
         opponent.getSelectionModel().selectFirst();
         privateGame.getItems().add("Yes");
         privateGame.getItems().add("No");
