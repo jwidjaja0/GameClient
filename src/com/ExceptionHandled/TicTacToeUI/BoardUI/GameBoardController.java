@@ -86,6 +86,7 @@ public class GameBoardController extends Observable implements Controller {
      * This constructor is used when the client makes a new game
      */
     public GameBoardController(NewGameSuccess newGame){
+        initialize();
         //Set CSS stle
         //setTTTPaneStyle();
         //Set member variables
@@ -111,6 +112,7 @@ public class GameBoardController extends Observable implements Controller {
      * This constructor is used when the client joins a game
      */
     public GameBoardController(JoinGameSuccess joinGame){
+        initialize();
         //Set CSS stle
         //setTTTPaneStyle();
         //Set member variables
@@ -139,6 +141,7 @@ public class GameBoardController extends Observable implements Controller {
      * This constructor is used when the client joins a game as a spectator
      */
     public GameBoardController(SpectateSuccess spectateGame) {
+        initialize();
         //Set CSS stle
         //setTTTPaneStyle();
         //Set member variables
@@ -175,9 +178,10 @@ public class GameBoardController extends Observable implements Controller {
      * initialize()
      * Starts every instance of the window with a game versus the AI
      */
-    public void initialize() throws IOException {
-        playArea.getStyleClass().add(JMetroStyleClass.BACKGROUND);
+    public void initialize() {
+        instantiatePanels();
 
+        playArea.getStyleClass().add(JMetroStyleClass.BACKGROUND);
         panel1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -304,6 +308,18 @@ public class GameBoardController extends Observable implements Controller {
                 AlertFactory.getInstance().displayAlert(playerJoined.toString());
             }
         });
+    }
+
+    private void instantiatePanels(){
+        panel1 = new Button();
+        panel2 = new Button();
+        panel3 = new Button();
+        panel4 = new Button();
+        panel5 = new Button();
+        panel6 = new Button();
+        panel7 = new Button();
+        panel8 = new Button();
+        panel9 = new Button();
     }
 
     public String getGameID(){
