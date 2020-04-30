@@ -35,7 +35,6 @@ import jfxtras.styles.jmetro.JMetroStyleClass;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Observable;
 
 public class GameBoardController extends Observable implements Controller {
@@ -316,15 +315,21 @@ public class GameBoardController extends Observable implements Controller {
      * Prevents any clicking of the game board
      */
     private void disableAllPanels(){
-        panel1.setMouseTransparent(true);
-        panel2.setMouseTransparent(true);
-        panel3.setMouseTransparent(true);
-        panel4.setMouseTransparent(true);
-        panel5.setMouseTransparent(true);
-        panel6.setMouseTransparent(true);
-        panel7.setMouseTransparent(true);
-        panel8.setMouseTransparent(true);
-        panel9.setMouseTransparent(true);
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                panel1.setMouseTransparent(true);
+                panel2.setMouseTransparent(true);
+                panel3.setMouseTransparent(true);
+                panel4.setMouseTransparent(true);
+                panel5.setMouseTransparent(true);
+                panel6.setMouseTransparent(true);
+                panel7.setMouseTransparent(true);
+                panel8.setMouseTransparent(true);
+                panel9.setMouseTransparent(true);
+            }
+        });
+
     }
 
     /**
@@ -332,15 +337,21 @@ public class GameBoardController extends Observable implements Controller {
      * Enables clicking of the game board
      */
     private void enableAllPanels(){
-        panel1.setMouseTransparent(false);
-        panel2.setMouseTransparent(false);
-        panel3.setMouseTransparent(false);
-        panel4.setMouseTransparent(false);
-        panel5.setMouseTransparent(false);
-        panel6.setMouseTransparent(false);
-        panel7.setMouseTransparent(false);
-        panel8.setMouseTransparent(false);
-        panel9.setMouseTransparent(false);
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                panel1.setMouseTransparent(false);
+                panel2.setMouseTransparent(false);
+                panel3.setMouseTransparent(false);
+                panel4.setMouseTransparent(false);
+                panel5.setMouseTransparent(false);
+                panel6.setMouseTransparent(false);
+                panel7.setMouseTransparent(false);
+                panel8.setMouseTransparent(false);
+                panel9.setMouseTransparent(false);
+            }
+        });
+
     }
 
     private void displayMove(MoveValid move){
