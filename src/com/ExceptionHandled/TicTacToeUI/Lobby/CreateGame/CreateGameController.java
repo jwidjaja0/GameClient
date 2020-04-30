@@ -34,7 +34,6 @@ public class CreateGameController {
 
     public void initialize(){
         createGameAnchor.getStyleClass().add(JMetroStyleClass.BACKGROUND);
-
         opponent.getItems().add("Human");
         opponent.getItems().add("AI");
         opponent.getSelectionModel().selectFirst();

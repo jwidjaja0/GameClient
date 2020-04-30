@@ -3,11 +3,8 @@ package com.ExceptionHandled.TicTacToeUI.BoardUI;
 
 import com.ExceptionHandled.Alerts.AlertFactory;
 import com.ExceptionHandled.GameMessages.Game.*;
-import com.ExceptionHandled.GameMessages.Interfaces.Game;
-import com.ExceptionHandled.GameMessages.MainMenu.JoinGameSuccess;
-import com.ExceptionHandled.GameMessages.MainMenu.NewGameSuccess;
+import com.ExceptionHandled.GameMessages.MainMenu.*;
 import com.ExceptionHandled.Client.MessageSender;
-import com.ExceptionHandled.GameMessages.MainMenu.SpectateSuccess;
 import com.ExceptionHandled.Interfaces.Controller;
 import com.ExceptionHandled.InternalPacketsAndWrappers.RemoveGame;
 import com.ExceptionHandled.TicTacToeUI.AI.AI;
@@ -98,8 +95,15 @@ public class GameBoardController extends Observable implements Controller {
         //Set labels
         player1Label = new Label();
         player1Label.setText("You");
+        player2Label = new Label();
+        player2Label.setText("TBD");
         fillBoard();
         vsAI = !newGame.getOpponent().equals("Human");
+        disableAllPanels();
+        player1Score = new Label();
+        player1Score.setText("0");
+        player2Score = new Label();
+        player2Score.setText("0");
     }
 
     /**
@@ -124,6 +128,10 @@ public class GameBoardController extends Observable implements Controller {
         }
         vsAI = false;
         fillBoard();
+        player1Score = new Label();
+        player1Score.setText("0");
+        player2Score = new Label();
+        player2Score.setText("0");
     }
 
     /**
@@ -149,6 +157,10 @@ public class GameBoardController extends Observable implements Controller {
         }
         vsAI = false;
         fillBoard();
+        player1Score = new Label();
+        player1Score.setText("0");
+        player2Score = new Label();
+        player2Score.setText("0");
     }
 
     private void fillBoard(){
@@ -280,6 +292,18 @@ public class GameBoardController extends Observable implements Controller {
                 }
                 disableAllPanels();
         }
+        else if (message instanceof PlayerJoined){
+            setPlayer2((PlayerJoined) message);
+        }
+    }
+
+    private void setPlayer2(PlayerJoined playerJoined){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                player2Label.setText(playerJoined.getOtherPlayerName());
+            }
+        });
     }
 
     public String getGameID(){
