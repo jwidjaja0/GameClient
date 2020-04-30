@@ -138,17 +138,17 @@ public class GetUserInfoController extends Observable implements Controller {
     }
 
     private void signUpFail(SignUpFail fail){
-        (new AlertFactory(fail.toString())).displayAlert();
+        AlertFactory.getInstance().displayAlert(fail.toString());
         info = new String[4];
     }
 
     private void loginFail(LoginFail fail){
-        (new AlertFactory(fail.toString())).displayAlert();
+        AlertFactory.getInstance().displayAlert(fail.toString());
         info = new String[4];
     }
 
     private void loginSuccess(LoginSuccess success){
-        (new AlertFactory(success.toString())).displayAlert();
+        AlertFactory.getInstance().displayAlert(success.toString());
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -159,7 +159,7 @@ public class GetUserInfoController extends Observable implements Controller {
     }
 
     private void signUpSuccess(SignUpSuccess success){
-        (new AlertFactory(success.toString())).displayAlert();
+        AlertFactory.getInstance().displayAlert(success.toString());
         //Send Login Request to Server
         MessageSender.getInstance().sendMessage("Login", new LoginRequest(info[0], info[1]));
         Platform.runLater(new Runnable() {
@@ -171,7 +171,7 @@ public class GetUserInfoController extends Observable implements Controller {
     }
 
     private void updateUserSuccess(UserUpdateSuccess success){
-        (new AlertFactory(success.toString())).displayAlert();
+        AlertFactory.getInstance().displayAlert(success.toString());
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -181,7 +181,7 @@ public class GetUserInfoController extends Observable implements Controller {
     }
 
     private void userDeleteSuccess(UserDeleteSuccess success){
-        (new AlertFactory(success.toString())).displayAlert();
+        AlertFactory.getInstance().displayAlert(success.toString());
         Platform.runLater(new Runnable() {
             @Override
             public void run() {

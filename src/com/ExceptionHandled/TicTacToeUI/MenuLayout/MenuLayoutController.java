@@ -96,22 +96,22 @@ public class MenuLayoutController implements Controller {
     @Override
     public void messageProcessor(Serializable message){
         if (message instanceof UserDeleteSuccess){
-            (new AlertFactory(message.toString())).displayAlert();
+            AlertFactory.getInstance().displayAlert(message.toString());
             logoutAccount();//Log out
         }
         else if (message instanceof UserDeleteFail){
-            (new AlertFactory(message.toString())).displayAlert();
+            AlertFactory.getInstance().displayAlert(message.toString());
         }
         else if (message instanceof LogoutSuccess){
-            (new AlertFactory(message.toString())).displayAlert();
+            AlertFactory.getInstance().displayAlert(message.toString());
             logout.setDisable(true);
             deleteAccount.setDisable(true);
         }
         else if (message instanceof LogoutFail){
-            (new AlertFactory(message.toString())).displayAlert();
+            AlertFactory.getInstance().displayAlert(message.toString());
         }
         else if (message instanceof PlayerStatsInfo){
-
+            showStats((PlayerStatsInfo) message);
         }
         else{
             userInfoController.messageProcessor(message);//Send it first because alerts handled in subsequent screens

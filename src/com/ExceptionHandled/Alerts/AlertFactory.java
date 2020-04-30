@@ -1,16 +1,19 @@
 package com.ExceptionHandled.Alerts;
 
-import com.ExceptionHandled.Interfaces.Alert;
 
 import javax.swing.*;
 
 public class AlertFactory {
-    private String alert;
-    public AlertFactory(String reason){
-        alert = reason;
+    private static AlertFactory instance = new AlertFactory();
+
+    private AlertFactory(){
     }
 
-    public void displayAlert(){
-        JOptionPane.showMessageDialog(null, alert);
+    public static AlertFactory getInstance(){
+        return instance;
+    }
+
+    public void displayAlert(String reason){
+        JOptionPane.showMessageDialog(null, reason);
     }
 }

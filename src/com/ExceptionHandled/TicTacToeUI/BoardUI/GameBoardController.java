@@ -278,7 +278,7 @@ public class GameBoardController extends Observable implements Controller {
         }
         else if (message instanceof MoveInvalid){
             if (((MoveInvalid)message).getPlayer().equals(player))//Only display the alert if you are the player who made an invalid move.
-                (new AlertFactory(message.toString())).displayAlert();
+                AlertFactory.getInstance().displayAlert(message.toString());
         }
         else if (message instanceof RematchRespond){
             //TODO: Restart game
@@ -302,6 +302,7 @@ public class GameBoardController extends Observable implements Controller {
             @Override
             public void run() {
                 player2Label.setText(playerJoined.getOtherPlayerName());
+                AlertFactory.getInstance().displayAlert(playerJoined.toString());
             }
         });
     }

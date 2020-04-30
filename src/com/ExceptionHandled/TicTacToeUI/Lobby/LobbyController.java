@@ -86,7 +86,7 @@ public class LobbyController implements Controller, Observer {
     @Override
     public void messageProcessor(Serializable message){
         //Display Alert
-        (new AlertFactory(message.toString())).displayAlert();
+        AlertFactory.getInstance().displayAlert(message.toString());
 
         if (message instanceof NewGameSuccess){
             //openStage.close();
