@@ -1,0 +1,79 @@
+* {
+    basecolor: black;
+    mycolor: red;
+    buttonbase: #555555;
+    -fx-text-fill: white;
+
+}
+
+AnchorPane{
+    -fx-background-color: basecolor;
+}
+
+HBox{
+    -fx-background-color: basecolor;
+}
+
+.menu{
+    -fx-background-color: basecolor;
+}
+
+.menu-bar{
+    -fx-background-color: basecolor;
+}
+
+.menu:expanded{
+    -fx-background-color: blue;
+    -fx-border-style: solid;
+}
+
+.menu{
+    -fx-border-color: black;
+}
+
+.menu-item:expanded{
+    -fx-background-color: yellow;
+}
+
+.menu:showing,.menu:pressed{
+    -fx-background-color: gray;
+}
+
+.menu-bar:showing, .menu-item:pressed{
+    -fx-background-color: red;
+}
+
+
+
+
+.menu-item{
+    -fx-border-color: basecolor;
+    -fx-background-color: basecolor;
+
+}
+.menu-item:hover{
+    -fx-border-color: buttonbase;
+}
+
+
+Button{
+    -fx-background-color: buttonbase;
+}
+
+ListView{
+    -fx-background-color: buttonbase;
+}
+
+TextField{
+    -fx-background-color: buttonbase;
+}
+
+ComboBox{
+    -fx-background-color: buttonbase;
+}
+
+
+
+
+
+

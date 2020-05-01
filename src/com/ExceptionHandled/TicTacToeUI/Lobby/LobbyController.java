@@ -46,7 +46,7 @@ public class LobbyController implements Controller, Observer {
     public void initialize(){
         jMetro = new JMetro(Style.DARK);
         //Set background for JMetro skin
-        lobbyAnchor.getStyleClass().add(JMetroStyleClass.BACKGROUND);
+        //lobbyAnchor.getStyleClass().add(JMetroStyleClass.BACKGROUND);
 
         openGames = new ArrayList<>();
 

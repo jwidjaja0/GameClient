@@ -41,7 +41,7 @@ public class Main extends Application implements Observer {
         Parent lobby = lobbyUI.load();
 
         JMetro jLobby = new JMetro(Style.DARK);
-        jLobby.setParent(lobby);
+        //jLobby.setParent(lobby);
 
         // Instantiate the FXML Loader to load the top menu
         FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("com/ExceptionHandled/TicTacToeUI/MenuLayout/MenuLayout.fxml"));
@@ -50,11 +50,11 @@ public class Main extends Application implements Observer {
         Parent menu = menuLoader.load();
 
         JMetro jMenu = new JMetro(Style.LIGHT);
-        jMenu.setParent(menu);
+        //jMenu.setParent(menu);
 
         // Create the main vBox that holds both the menu and the game board
-        //VBox mainScreen = new VBox(menu, lobby);
-        VBox mainScreen = new VBox(jMenu.getParent(), jLobby.getParent());
+        VBox mainScreen = new VBox(menu, lobby);
+        //VBox mainScreen = new VBox(jMenu.getParent(), jLobby.getParent());
 
         // Create the main application window
         primaryStage.setTitle("TicTacToe Board");
