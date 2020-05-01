@@ -4,6 +4,7 @@
     buttonbase: #555555;
     -fx-text-fill: white;
 
+
 }
 
 AnchorPane{
@@ -14,37 +15,19 @@ HBox{
     -fx-background-color: basecolor;
 }
 
-.menu{
-    -fx-background-color: basecolor;
-}
-
 .menu-bar{
     -fx-background-color: basecolor;
 }
 
-.menu:expanded{
-    -fx-background-color: blue;
-    -fx-border-style: solid;
-}
-
 .menu{
     -fx-border-color: black;
+    -fx-background-color: black;
 }
 
-.menu-item:expanded{
+.menu:expanded{
     -fx-background-color: yellow;
+    -fx-border-color: purple;
 }
-
-.menu:showing,.menu:pressed{
-    -fx-background-color: gray;
-}
-
-.menu-bar:showing, .menu-item:pressed{
-    -fx-background-color: red;
-}
-
-
-
 
 .menu-item{
     -fx-border-color: basecolor;
@@ -64,13 +47,24 @@ ListView{
     -fx-background-color: buttonbase;
 }
 
-TextField{
+.combo-box-base, .text-field, .text-area{
     -fx-background-color: buttonbase;
 }
 
-ComboBox{
+.combo-box-popup .list-cell{
     -fx-background-color: buttonbase;
 }
+
+.combo-box-popup .list-cell:hover{
+    -fx-border-color: gray;
+}
+
+
+
+
+
+
+
 
 
 

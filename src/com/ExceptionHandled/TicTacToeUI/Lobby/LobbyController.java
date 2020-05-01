@@ -156,10 +156,10 @@ public class LobbyController implements Controller, Observer {
         FXMLLoader createGameUI = new FXMLLoader(getClass().getResource("CreateGame/CreateGame.fxml"));
         Parent ui = createGameUI.load();
 
-        jMetro.setParent(ui);
+        //jMetro.setParent(ui);
         Stage openStage = new Stage();
         openStage.setTitle("Create New Game");
-        openStage.setScene(new Scene(jMetro.getParent()));
+        openStage.setScene(new Scene(ui));
         openStage.showAndWait();
     }
 
