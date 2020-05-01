@@ -24,9 +24,20 @@ HBox{
     -fx-background-color: black;
 }
 
-.menu:expanded{
-    -fx-background-color: yellow;
-    -fx-border-color: purple;
+.context-menu{
+    -fx-background-color: black;
+}
+
+.menu-item .label {
+    -fx-text-fill: white;
+}
+
+.menu-item:focused {
+    -fx-background-color: darkgray;
+}
+
+.menu-item:focused .label {
+    -fx-text-fill: blue;
 }
 
 .menu-item{
