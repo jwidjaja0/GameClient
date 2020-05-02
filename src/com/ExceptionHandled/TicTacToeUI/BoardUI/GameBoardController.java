@@ -86,7 +86,7 @@ public class GameBoardController extends Observable implements Controller {
      * This constructor is used when the client makes a new game
      */
     public GameBoardController(NewGameSuccess newGame){
-        initialize();
+        //initialize();
         //Set CSS style
         //setTTTPaneStyle();
         //Set member variables
@@ -112,7 +112,7 @@ public class GameBoardController extends Observable implements Controller {
      * This constructor is used when the client joins a game
      */
     public GameBoardController(JoinGameSuccess joinGame){
-        initialize();
+        //initialize();
         //Set CSS style
         //setTTTPaneStyle();
         //Set member variables
@@ -141,7 +141,7 @@ public class GameBoardController extends Observable implements Controller {
      * This constructor is used when the client joins a game as a spectator
      */
     public GameBoardController(SpectateSuccess spectateGame) {
-        initialize();
+        //initialize();
         //Set CSS style
         //setTTTPaneStyle();
         //Set member variables
