@@ -2,18 +2,16 @@
     basecolor: black;
     mycolor: red;
     buttonbase: #555555;
+    buttonhover: gray;
     -fx-text-fill: white;
 
 
 }
 
-AnchorPane{
+AnchorPane, HBox, VBox{
     -fx-background-color: basecolor;
 }
 
-HBox{
-    -fx-background-color: basecolor;
-}
 
 .menu-bar{
     -fx-background-color: basecolor;
@@ -28,12 +26,8 @@ HBox{
     -fx-background-color: black;
 }
 
-.menu-item .label {
-    -fx-text-fill: white;
-}
-
-.menu-item:focused {
-    -fx-background-color: darkgray;
+.menu-item:focused, .button:hover, .menu:hover {
+    -fx-background-color: buttonhover;
 }
 
 .menu-item:focused .label {
@@ -45,10 +39,6 @@ HBox{
     -fx-background-color: basecolor;
 
 }
-.menu-item:hover{
-    -fx-border-color: buttonbase;
-}
-
 
 Button{
     -fx-background-color: buttonbase;
@@ -68,6 +58,13 @@ ListView{
 
 .combo-box-popup .list-cell:hover{
     -fx-border-color: gray;
+}
+
+.table-view{
+    -fx-background-color: gray;
+}
+.table-column{
+    -fx-background-color: #413b42;
 }
 
 
