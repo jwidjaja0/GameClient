@@ -27,7 +27,7 @@ public class MessageSender {
         sendMessage(wrapperType, playerID, message);
     }
 
-    public void sendMessage(String wrapperType, String id, Serializable message){
+    private void sendMessage(String wrapperType, String id, Serializable message){
         try {
             queue.put(new Packet(wrapperType, id, message));
         } catch (InterruptedException e) {
