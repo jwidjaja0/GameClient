@@ -81,11 +81,11 @@ public class GameBoardController extends Observable implements Controller {
     private boolean vsAI;
 
     /**
-     * GameBoardController(NewGameSuccess newGame)
+     * void setInformation(NewGameSuccess newGame)
      * @param newGame: NewGameSuccess message
      * This constructor is used when the client makes a new game
      */
-    public GameBoardController(NewGameSuccess newGame){
+    public void setInformation(NewGameSuccess newGame){
         //initialize();
         //Set CSS style
         //setTTTPaneStyle();
@@ -107,11 +107,11 @@ public class GameBoardController extends Observable implements Controller {
     }
 
     /**
-     * GameBoardController(JoinGameSuccess newGame)
+     * void setInformation(JoinGameSuccess newGame)
      * @param joinGame: JoinGameSuccess message
      * This constructor is used when the client joins a game
      */
-    public GameBoardController(JoinGameSuccess joinGame){
+    public void setInformation(JoinGameSuccess joinGame){
         //initialize();
         //Set CSS style
         //setTTTPaneStyle();
@@ -136,11 +136,11 @@ public class GameBoardController extends Observable implements Controller {
     }
 
     /**
-     * GameBoardController(SpectateSuccess newGame)
+     * void setInformation(SpectateSuccess newGame)
      * @param spectateGame: SpectateSuccess message
      * This constructor is used when the client joins a game as a spectator
      */
-    public GameBoardController(SpectateSuccess spectateGame) {
+    public void setInformation(SpectateSuccess spectateGame) {
         //initialize();
         //Set CSS style
         //setTTTPaneStyle();

@@ -172,31 +172,34 @@ public class LobbyController implements Controller, Observer {
 
     private void createGame(NewGameSuccess newGame) throws IOException {
         //Create Game Controller
-        GameBoardController gbc = new GameBoardController(newGame);
+        GameBoardController gbc = new GameBoardController();
         //Add controller to lobby's list of active games
         openGames.add(gbc);
         //Add lobby to controller's list of observers
         gbc.addObserver(this);
+        gbc.setInformation(newGame);
         //Open the game window
         openGameWindow(gbc, newGame.getGameName());
     }
 
     private void joinGame(JoinGameSuccess joinGame) throws IOException {
-        GameBoardController gbc = new GameBoardController(joinGame);
+        GameBoardController gbc = new GameBoardController();
         //Add controller to lobby's list of active games
         openGames.add(gbc);
         //Add lobby to controller's list of observers
         gbc.addObserver(this);
+        gbc.setInformation(joinGame);
         //Open the game window
         openGameWindow(gbc, joinGame.getGameName());
     }
 
     private void spectateGame(SpectateSuccess spectateGame) throws IOException {
-        GameBoardController gbc = new GameBoardController(spectateGame);
+        GameBoardController gbc = new GameBoardController();
         //Add controller to lobby's list of active games
         openGames.add(gbc);
         //Add lobby to controller's list of observers
         gbc.addObserver(this);
+        gbc.setInformation(spectateGame);
         //Open the game window
         openGameWindow(gbc, spectateGame.getGameName());
     }
