@@ -41,6 +41,7 @@ public class LobbyController implements Controller, Observer {
 
     private Stage openStage;
     private ArrayList<GameBoardController> openGames;
+    private List<ActiveGameHeader>games;
     private JMetro jMetro;
 
     public void initialize(){
@@ -130,6 +131,10 @@ public class LobbyController implements Controller, Observer {
         }
     }
 
+    private void joinGameRequest(){
+
+    }
+
     private void spectateGameRequest(ActiveGameHeader game){
         MessageSender.getInstance().sendMessage("MainMenu", new SpectateRequest(game.getGameID()));
     }
@@ -138,14 +143,15 @@ public class LobbyController implements Controller, Observer {
         MessageSender.getInstance().sendMessage("MainMenu", new ListActiveGamesRequest());
     }
 
-    public void refreshGamesList(ListActiveGames games){
+    public void refreshGamesList(ListActiveGames activeGames){
+        games = activeGames.getActiveGameHeaderList();
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 //Remove all items from current list
                 gamesList.getItems().clear();
                 //Add new items
-                for(ActiveGameHeader h : games.getActiveGameHeaderList()){
+                for(ActiveGameHeader h : games){
                     gamesList.getItems().add(h);
                 }
             }
