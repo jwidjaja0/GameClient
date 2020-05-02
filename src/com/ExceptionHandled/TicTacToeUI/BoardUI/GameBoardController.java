@@ -374,7 +374,7 @@ public class GameBoardController extends Observable implements Controller {
     }
 
     private void displayMove(MoveValid move){
-        if(move.getPlayer().equals("X")){
+        if(move.getPlayer().equals("x")){
             setXImage(getButton(move.getxCoord(), move.getyCoord()));
         }
         else {
@@ -425,8 +425,6 @@ public class GameBoardController extends Observable implements Controller {
             displayTieNotification();
         }
     }
-
-
 
     //TODO: Done
     private Button getButton(int row, int col){
