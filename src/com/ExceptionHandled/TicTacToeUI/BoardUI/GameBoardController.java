@@ -376,9 +376,11 @@ public class GameBoardController extends Observable implements Controller {
     private void displayMove(MoveValid move){
         if(move.getPlayer().equals("x")){
             setXImage(getButton(move.getxCoord(), move.getyCoord()));
+            System.out.println("Placing X at " + move.getxCoord() + " " + move.getyCoord() );
         }
         else {
             setOImage(getButton(move.getxCoord(), move.getyCoord()));
+            System.out.println("Placing O at " + move.getxCoord() + " " + move.getyCoord() );
         }
     }
 
@@ -405,6 +407,7 @@ public class GameBoardController extends Observable implements Controller {
 
     @FXML
     public void panelClick(int row, int column){
+        System.out.println("Panel " + row + " " + column + " clicked.");
         //Send the move to server
         MessageSender.getInstance().sendMessage("MoveMade", new MoveMade(gameID, player, row, column));
     }
@@ -591,6 +594,7 @@ public class GameBoardController extends Observable implements Controller {
 
     private void setBoard(MoveValid move){
         board[move.getxCoord()][move.getyCoord()] = move.getPlayer();
+        System.out.println("Board set at " + move.getxCoord() + " " + move.getyCoord());
     }
 
 }
