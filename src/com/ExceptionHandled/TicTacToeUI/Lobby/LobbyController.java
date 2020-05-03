@@ -171,15 +171,21 @@ public class LobbyController implements Controller, Observer {
     }
 
     private void createGame(NewGameSuccess newGame) throws IOException {
-        //Create Game Controller
-        GameBoardController gbc = new GameBoardController();
-        //Add controller to lobby's list of active games
-        openGames.add(gbc);
-        //Add lobby to controller's list of observers
+        //openGameWindow load fxml and controller, set controller and already added it to openGames
+        GameBoardController gbc = openGameWindow(newGame.getGameName());
         gbc.addObserver(this);
         gbc.setInformation(newGame);
-        //Open the game window
-        openGameWindow(gbc, newGame.getGameName());
+
+
+        //Create Game Controller
+//        GameBoardController gbc = new GameBoardController();
+//        //Add controller to lobby's list of active games
+//        openGames.add(gbc);
+//        //Add lobby to controller's list of observers
+//        gbc.addObserver(this);
+//        gbc.setInformation(newGame);
+//        //Open the game window
+//        openGameWindow(gbc, newGame.getGameName());
     }
 
     private void joinGame(JoinGameSuccess joinGame) throws IOException {
@@ -204,18 +210,38 @@ public class LobbyController implements Controller, Observer {
         openGameWindow(gbc, spectateGame.getGameName());
     }
 
-    private void openGameWindow(GameBoardController controller, String gameName) throws IOException {
-        openGames.add(controller);
+    private GameBoardController openGameWindow(String gameName) throws IOException {
         FXMLLoader game = new FXMLLoader(getClass().getResource("../BoardUI/gameBoardScene.fxml"));
-        game.setController(controller);
+        GameBoardController gbc = new GameBoardController();
+        game.setController(gbc);
+        openGames.add(gbc);
         Parent gameWindow = game.load();
-        jMetro.setParent(gameWindow);
+
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 Stage stage = new Stage();
                 stage.setTitle(gameName);
-                stage.setScene(new Scene(jMetro.getParent()));
+                stage.setScene(new Scene(gameWindow));
+                stage.show();
+            }
+        });
+
+        return gbc;
+    }
+
+    private void openGameWindow(GameBoardController controller, String gameName) throws IOException {
+        openGames.add(controller);
+        FXMLLoader game = new FXMLLoader(getClass().getResource("../BoardUI/gameBoardScene.fxml"));
+        game.setController(controller);
+        Parent gameWindow = game.load();
+//        jMetro.setParent(gameWindow);
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                Stage stage = new Stage();
+                stage.setTitle(gameName);
+                stage.setScene(new Scene(gameWindow));
                 stage.show();
             }
         });
