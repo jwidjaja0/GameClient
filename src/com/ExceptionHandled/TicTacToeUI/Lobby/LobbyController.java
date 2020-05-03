@@ -86,6 +86,7 @@ public class LobbyController implements Controller, Observer {
 
     @Override
     public void messageProcessor(Serializable message){
+        System.out.println("Lobby received message ");
         //Display Alert
         AlertFactory.getInstance().displayAlert(message.toString());
 
@@ -234,6 +235,7 @@ public class LobbyController implements Controller, Observer {
         //Find the game
         for (GameBoardController gbc: openGames){
             if (gbc.getGameID().equals(gameID)){
+                System.out.println("Passing message to game " + gameID);
                 //Pass on the message
                 gbc.messageProcessor(message);
             }

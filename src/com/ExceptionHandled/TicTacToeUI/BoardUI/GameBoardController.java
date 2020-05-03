@@ -184,6 +184,7 @@ public class GameBoardController extends Observable implements Controller {
     @Override
     public void messageProcessor(Serializable message){
         if (message instanceof GameOverOutcome){
+            System.out.println("Game " + gameID + " received GameOverOutcome message.");
             String winningPlayer = ((GameOverOutcome) message).getPlayer();
             if (winningPlayer.equals(player)){
                 gameOver("Win", winningPlayer);
@@ -196,18 +197,22 @@ public class GameBoardController extends Observable implements Controller {
             }
         }
         else if (message instanceof MoveValid){
+            System.out.println("Game " + gameID + " received MoveValid message.");
             displayMove((MoveValid)message);//Display the move for the player
             setBoard((MoveValid) message);//Set the board, in case of game vsAI
         }
         else if (message instanceof MoveInvalid){
+            System.out.println("Game " + gameID + " received MoveInvalid message.");
             if (((MoveInvalid)message).getPlayer().equals(player))//Only display the alert if you are the player who made an invalid move.
                 AlertFactory.getInstance().displayAlert(message.toString());
         }
         else if (message instanceof RematchRespond){
+            System.out.println("Game " + gameID + " received RematchRespond message.");
             //TODO: Restart game
         }
         else if (message instanceof WhoseTurn){
             WhoseTurn whoseTurn = (WhoseTurn)message;
+            System.out.println("Game " + gameID + " received WhoseTurn message.");
             System.out.println("Player " + whoseTurn.getWhoseTurn() + "'s turn.");;
             if (whoseTurn.getWhoseTurn().equals(player))
                 enableAllPanels();
@@ -218,6 +223,7 @@ public class GameBoardController extends Observable implements Controller {
                 disableAllPanels();
         }
         else if (message instanceof PlayerJoined){
+            System.out.println("Game " + gameID + " received PlayerJoined message.");
             setPlayer2((PlayerJoined) message);
         }
     }
