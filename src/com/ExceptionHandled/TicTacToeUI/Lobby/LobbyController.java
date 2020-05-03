@@ -173,9 +173,9 @@ public class LobbyController implements Controller, Observer {
     private void createGame(NewGameSuccess newGame) throws IOException {
         //Create FXMLLoader
         FXMLLoader game = new FXMLLoader(getClass().getResource("../BoardUI/gameBoardScene.fxml"));
-        GameBoardController gameBoardController = (GameBoardController) game.getController();
+        GameBoardController gameBoardController = game.getController();
         //Set game details
-        gameBoardController.setDetails(newGame);
+        //gameBoardController.setDetails(newGame);
         //Add lobby to controller's list of observers
         gameBoardController.addObserver(this);
         //Open the game window
@@ -185,9 +185,9 @@ public class LobbyController implements Controller, Observer {
     private void joinGame(JoinGameSuccess joinGame) throws IOException {
         //Create FXMLLoader
         FXMLLoader game = new FXMLLoader(getClass().getResource("../BoardUI/gameBoardScene.fxml"));
-        GameBoardController gameBoardController = (GameBoardController) game.getController();
+        GameBoardController gameBoardController = game.getController();
         //Set game details
-        gameBoardController.setDetails(joinGame);
+        //gameBoardController.setDetails(joinGame);
         //Add lobby to controller's list of observers
         gameBoardController.addObserver(this);
         //Open the game window
@@ -197,9 +197,9 @@ public class LobbyController implements Controller, Observer {
     private void spectateGame(SpectateSuccess spectateGame) throws IOException {
         //Create FXMLLoader
         FXMLLoader game = new FXMLLoader(getClass().getResource("../BoardUI/gameBoardScene.fxml"));
-        GameBoardController gameBoardController = (GameBoardController) game.getController();
+        GameBoardController gameBoardController = game.getController();
         //Set game details
-        gameBoardController.setDetails(spectateGame);
+        //gameBoardController.setDetails(spectateGame);
         //Add lobby to controller's list of observers
         gameBoardController.addObserver(this);
         //Open the game window
