@@ -171,41 +171,46 @@ public class LobbyController implements Controller, Observer {
     }
 
     private void createGame(NewGameSuccess newGame) throws IOException {
-        //Create Game Controller
-        GameBoardController gbc = new GameBoardController(newGame);
-        //Add controller to lobby's list of active games
-        openGames.add(gbc);
+        //Create FXMLLoader
+        FXMLLoader game = new FXMLLoader(getClass().getResource("../BoardUI/gameBoardScene.fxml"));
+        GameBoardController gameBoardController = game.getController();
+        //Set game details
+        gameBoardController.setDetails(newGame);
         //Add lobby to controller's list of observers
-        gbc.addObserver(this);
+        gameBoardController.addObserver(this);
         //Open the game window
-        openGameWindow(gbc, newGame.getGameName());
+        openGameWindow(game, newGame.getGameName());
     }
 
     private void joinGame(JoinGameSuccess joinGame) throws IOException {
-        GameBoardController gbc = new GameBoardController(joinGame);
-        //Add controller to lobby's list of active games
-        openGames.add(gbc);
+        //Create FXMLLoader
+        FXMLLoader game = new FXMLLoader(getClass().getResource("../BoardUI/gameBoardScene.fxml"));
+        GameBoardController gameBoardController = game.getController();
+        //Set game details
+        gameBoardController.setDetails(joinGame);
         //Add lobby to controller's list of observers
-        gbc.addObserver(this);
+        gameBoardController.addObserver(this);
         //Open the game window
-        openGameWindow(gbc, joinGame.getGameName());
+        openGameWindow(game, joinGame.getGameName());
     }
 
     private void spectateGame(SpectateSuccess spectateGame) throws IOException {
-        GameBoardController gbc = new GameBoardController(spectateGame);
-        //Add controller to lobby's list of active games
-        openGames.add(gbc);
+        //Create FXMLLoader
+        FXMLLoader game = new FXMLLoader(getClass().getResource("../BoardUI/gameBoardScene.fxml"));
+        GameBoardController gameBoardController = game.getController();
+        //Set game details
+        gameBoardController.setDetails(spectateGame);
         //Add lobby to controller's list of observers
-        gbc.addObserver(this);
+        gameBoardController.addObserver(this);
         //Open the game window
-        openGameWindow(gbc, spectateGame.getGameName());
+        openGameWindow(game, spectateGame.getGameName());
     }
 
-    private void openGameWindow(GameBoardController controller, String gameName) throws IOException {
-        openGames.add(controller);
-        FXMLLoader game = new FXMLLoader(getClass().getResource("../BoardUI/gameBoardScene.fxml"));
-        game.setController(controller);
-        Parent gameWindow = game.load();
+    private void openGameWindow(FXMLLoader fxmlLoader, String gameName) throws IOException {
+        //Add games to open games list
+        openGames.add(fxmlLoader.getController());
+        //Load the window
+        Parent gameWindow = fxmlLoader.load();
         jMetro.setParent(gameWindow);
         Platform.runLater(new Runnable() {
             @Override
