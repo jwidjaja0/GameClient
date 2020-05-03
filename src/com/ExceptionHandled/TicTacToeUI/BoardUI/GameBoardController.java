@@ -207,7 +207,9 @@ public class GameBoardController extends Observable implements Controller {
             //TODO: Restart game
         }
         else if (message instanceof WhoseTurn){
-            if (((WhoseTurn)message).getWhoseTurn().equals(player))
+            WhoseTurn whoseTurn = (WhoseTurn)message;
+            System.out.println("Player " + whoseTurn.getWhoseTurn() + "'s turn.");;
+            if (whoseTurn.getWhoseTurn().equals(player))
                 enableAllPanels();
             else
                 if (vsAI){//If it is a game vs the AI, tell the AI to make a move
@@ -430,10 +432,10 @@ public class GameBoardController extends Observable implements Controller {
 
     //TODO: Done
     private void addPlayerScore(String player){
-        if (player.equals("X")){
+        if (player.equals("x")){
             increasePlayer1Score();
         }
-        else if (player.equals("O")){
+        else if (player.equals("o")){
             increasePlayer2Score();
         }
     }
