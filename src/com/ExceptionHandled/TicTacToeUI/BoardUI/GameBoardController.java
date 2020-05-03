@@ -80,90 +80,7 @@ public class GameBoardController extends Observable implements Controller {
     private String[][] board;
     private boolean vsAI;
 
-    /**
-     * GameBoardController(NewGameSuccess newGame)
-     * @param newGame: NewGameSuccess message
-     * This constructor is used when the client makes a new game
-     */
-    public GameBoardController(NewGameSuccess newGame){
-        initialize();
-        //Set CSS style
-        //setTTTPaneStyle();
-        //Set member variables
-        player = "x";
-        gameID = newGame.getGameId();
-        //Set labels
-        player1Label = new Label();
-        player1Label.setText("You");
-        player2Label = new Label();
-        player2Label.setText("TBD");
-        fillBoard();
-        vsAI = !newGame.getOpponent().equals("Human");
-        disableAllPanels();
-        player1Score = new Label();
-        player1Score.setText("0");
-        player2Score = new Label();
-        player2Score.setText("0");
-    }
 
-    /**
-     * GameBoardController(JoinGameSuccess newGame)
-     * @param joinGame: JoinGameSuccess message
-     * This constructor is used when the client joins a game
-     */
-    public GameBoardController(JoinGameSuccess joinGame){
-        initialize();
-        //Set CSS style
-        //setTTTPaneStyle();
-        //Set member variables
-        player = "o";
-        gameID = joinGame.getGameID();
-        //Set labels
-        player1Label = new Label();
-        player1Label.setText(joinGame.getOtherPlayerName());
-        player2Label = new Label();
-        player2Label.setText("You");
-        //Display Moves made
-        for (MoveValid mv : joinGame.getMovesMade()){
-            displayMove(mv);
-        }
-        vsAI = false;
-        fillBoard();
-        player1Score = new Label();
-        player1Score.setText("0");
-        player2Score = new Label();
-        player2Score.setText("0");
-    }
-
-    /**
-     * GameBoardController(SpectateSuccess newGame)
-     * @param spectateGame: SpectateSuccess message
-     * This constructor is used when the client joins a game as a spectator
-     */
-    public GameBoardController(SpectateSuccess spectateGame) {
-        initialize();
-        //Set CSS style
-        //setTTTPaneStyle();
-        //Set member variables
-        player = "Spectator";
-        gameID = spectateGame.getGameID();
-        //Set labels
-        player1Label = new Label();
-        player1Label.setText(spectateGame.getPlayer1Name());
-        player2Label = new Label();
-        player2Label.setText(spectateGame.getPlayer2Name());
-        disableAllPanels();
-        //Display Moves made
-        for (MoveValid mv : spectateGame.getMovesMade()){
-            displayMove(mv);
-        }
-        vsAI = false;
-        fillBoard();
-        player1Score = new Label();
-        player1Score.setText("0");
-        player2Score = new Label();
-        player2Score.setText("0");
-    }
 
     private void fillBoard(){
         this.board = new String[3][3];
@@ -179,10 +96,10 @@ public class GameBoardController extends Observable implements Controller {
      * Starts every instance of the window with a game versus the AI
      */
     public void initialize() {
-        instantiatePanels();
-        btnExit = new Button();
-        btnRestart = new Button();
-        playArea = new GridPane();
+        //instantiatePanels();
+        //btnExit = new Button();
+        //btnRestart = new Button();
+        //playArea = new GridPane();
         playArea.getStyleClass().add(JMetroStyleClass.BACKGROUND);
 
         panel1.setOnAction(new EventHandler<ActionEvent>() {
@@ -311,6 +228,82 @@ public class GameBoardController extends Observable implements Controller {
                 AlertFactory.getInstance().displayAlert(playerJoined.toString());
             }
         });
+    }
+
+    /**
+     * GameBoardController(NewGameSuccess newGame)
+     * @param newGame: NewGameSuccess message
+     * This constructor is used when the client makes a new game
+     */
+    public void setDetails(NewGameSuccess newGame){
+        //Set member variables
+        player = "x";
+        gameID = newGame.getGameId();
+        //Set labels
+        player1Label = new Label();
+        player1Label.setText("You");
+        player2Label = new Label();
+        player2Label.setText("TBD");
+        fillBoard();
+        vsAI = !newGame.getOpponent().equals("Human");
+        disableAllPanels();
+        player1Score = new Label();
+        player1Score.setText("0");
+        player2Score = new Label();
+        player2Score.setText("0");
+    }
+
+    /**
+     * GameBoardController(JoinGameSuccess newGame)
+     * @param joinGame: JoinGameSuccess message
+     * This constructor is used when the client joins a game
+     */
+    public void setDetails(JoinGameSuccess joinGame){
+        //Set member variables
+        player = "o";
+        gameID = joinGame.getGameID();
+        //Set labels
+        player1Label = new Label();
+        player1Label.setText(joinGame.getOtherPlayerName());
+        player2Label = new Label();
+        player2Label.setText("You");
+        //Display Moves made
+        for (MoveValid mv : joinGame.getMovesMade()){
+            displayMove(mv);
+        }
+        vsAI = false;
+        fillBoard();
+        player1Score = new Label();
+        player1Score.setText("0");
+        player2Score = new Label();
+        player2Score.setText("0");
+    }
+
+    /**
+     * GameBoardController(SpectateSuccess newGame)
+     * @param spectateGame: SpectateSuccess message
+     * This constructor is used when the client joins a game as a spectator
+     */
+    public void setDetails(SpectateSuccess spectateGame) {
+        //Set member variables
+        player = "Spectator";
+        gameID = spectateGame.getGameID();
+        //Set labels
+        player1Label = new Label();
+        player1Label.setText(spectateGame.getPlayer1Name());
+        player2Label = new Label();
+        player2Label.setText(spectateGame.getPlayer2Name());
+        disableAllPanels();
+        //Display Moves made
+        for (MoveValid mv : spectateGame.getMovesMade()){
+            displayMove(mv);
+        }
+        vsAI = false;
+        fillBoard();
+        player1Score = new Label();
+        player1Score.setText("0");
+        player2Score = new Label();
+        player2Score.setText("0");
     }
 
     private void instantiatePanels(){
