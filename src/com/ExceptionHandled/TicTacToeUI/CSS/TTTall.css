@@ -44,9 +44,10 @@ Button{
     -fx-background-color: buttonbase;
 }
 
-ListView{
+.list-view, .list-cell{
     -fx-background-color: buttonbase;
 }
+
 
 .combo-box-base, .text-field, .text-area{
     -fx-background-color: buttonbase;

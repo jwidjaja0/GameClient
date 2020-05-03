@@ -179,7 +179,8 @@ public class GameBoardController extends Observable implements Controller {
      * Starts every instance of the window with a game versus the AI
      */
     public void initialize() {
-        instantiatePanels();
+//        instantiatePanels();
+        System.out.println("Initialize called in TTT");
         btnExit = new Button();
         btnRestart = new Button();
         playArea = new GridPane();
@@ -334,20 +335,30 @@ public class GameBoardController extends Observable implements Controller {
      * Prevents any clicking of the game board
      */
     private void disableAllPanels(){
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                panel1.setMouseTransparent(true);
-                panel2.setMouseTransparent(true);
-                panel3.setMouseTransparent(true);
-                panel4.setMouseTransparent(true);
-                panel5.setMouseTransparent(true);
-                panel6.setMouseTransparent(true);
-                panel7.setMouseTransparent(true);
-                panel8.setMouseTransparent(true);
-                panel9.setMouseTransparent(true);
-            }
-        });
+
+        panel1.setMouseTransparent(true);
+        panel2.setMouseTransparent(true);
+        panel3.setMouseTransparent(true);
+        panel4.setMouseTransparent(true);
+        panel5.setMouseTransparent(true);
+        panel6.setMouseTransparent(true);
+        panel7.setMouseTransparent(true);
+        panel8.setMouseTransparent(true);
+        panel9.setMouseTransparent(true);
+//        Platform.runLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                panel1.setMouseTransparent(true);
+//                panel2.setMouseTransparent(true);
+//                panel3.setMouseTransparent(true);
+//                panel4.setMouseTransparent(true);
+//                panel5.setMouseTransparent(true);
+//                panel6.setMouseTransparent(true);
+//                panel7.setMouseTransparent(true);
+//                panel8.setMouseTransparent(true);
+//                panel9.setMouseTransparent(true);
+//            }
+//        });
 
     }
 
