@@ -63,10 +63,10 @@ public class Client extends Observable implements Runnable {
 
     private void messageProcessor(Packet packet){
         String messageType = packet.getMessageType();
-        System.out.println("Received " + messageType + " message.");
+        System.out.println("Client received " + messageType + " message.");
         Serializable message = packet.getMessage();
         if (messageType.equals("Login")) {
-            System.out.println("Received Login Message");
+            System.out.println("Client changing UserInfo");
             if (message instanceof LoginSuccess) {
                 playerID = ((LoginSuccess) message).getPlayerID();//Sets the player id in MessageSender
                 System.out.println("Player Logged In. ID : " + playerID);
@@ -77,6 +77,7 @@ public class Client extends Observable implements Runnable {
             }
         }
         else if (messageType.equals("UserUpdate")){
+            System.out.println("Client changing UserInfo");
             if (message instanceof UserDeleteSuccess){
                 System.out.println("Received User Delete Success. Removing PlayerID from MessageSender.");
             }
