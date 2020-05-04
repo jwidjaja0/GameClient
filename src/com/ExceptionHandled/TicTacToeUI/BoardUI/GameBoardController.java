@@ -391,8 +391,13 @@ public class GameBoardController extends Observable implements Controller {
 
         imageView.setFitHeight(iconSize);
         imageView.setFitWidth(iconSize);
-        tc.setGraphic(imageView);
-        tc.setMouseTransparent(true);
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                tc.setGraphic(imageView);
+            }
+        });
+
     }
 
     private void setOImage(Button tc){
@@ -401,8 +406,12 @@ public class GameBoardController extends Observable implements Controller {
 
         imageView.setFitHeight(iconSize);
         imageView.setFitWidth(iconSize);
-        tc.setGraphic(imageView);
-        tc.setMouseTransparent(true);
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                tc.setGraphic(imageView);
+            }
+        });
     }
 
 

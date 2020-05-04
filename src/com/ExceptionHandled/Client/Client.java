@@ -64,6 +64,10 @@ public class Client extends Observable implements Runnable {
     private void messageProcessor(Packet packet){
         String messageType = packet.getMessageType();
         System.out.println("Client received " + messageType + " message.");
+        if (!packet.getPlayerID().equals(playerID)){
+            System.out.println("Message is not for this client.");
+            return;
+        }
         Serializable message = packet.getMessage();
         if (messageType.equals("Login")) {
             System.out.println("Client changing UserInfo");
