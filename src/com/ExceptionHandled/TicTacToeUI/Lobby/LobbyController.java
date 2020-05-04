@@ -86,11 +86,11 @@ public class LobbyController implements Controller, Observer {
 
     @Override
     public void messageProcessor(Serializable message){
-        System.out.println("Lobby received message ");
         //Display Alert
         AlertFactory.getInstance().displayAlert(message.toString());
 
         if (message instanceof NewGameSuccess){
+            System.out.println("Lobby received message NewGameSuccess");
             //openStage.close();
             try {
                 createGame((NewGameSuccess)message);
@@ -99,14 +99,17 @@ public class LobbyController implements Controller, Observer {
             }
         }
         else if(message instanceof NewGameFail){
+            System.out.println("Lobby received message NewGameFail");
             //Refresh the list of games
             requestGamesListRefresh();
         }
         else if (message instanceof JoinGameFail){
+            System.out.println("Lobby received message JoinGameFail");
             //Refresh the list of games
             requestGamesListRefresh();
         }
         else if (message instanceof JoinGameSuccess){
+            System.out.println("Lobby received message JoinGameSuccess");
             try {
                 joinGame((JoinGameSuccess)message);
             } catch (IOException e) {
@@ -114,10 +117,12 @@ public class LobbyController implements Controller, Observer {
             }
         }
         else if (message instanceof SpectateFail){
+            System.out.println("Lobby received message SpectateFail");
             //Refresh the list of games
             requestGamesListRefresh();
         }
         else if (message instanceof SpectateSuccess){
+            System.out.println("Lobby received message SpectateSuccess");
             try {
                 spectateGame((SpectateSuccess)message);
             } catch (IOException e) {
@@ -125,9 +130,11 @@ public class LobbyController implements Controller, Observer {
             }
         }
         else if (message instanceof Game){
+            System.out.println("Lobby received message Game");
             gameMessageProcessor(message);
         }
         else if (message instanceof ListActiveGames){
+            System.out.println("Lobby received message ListActiveGames");
             refreshGamesList((ListActiveGames) message);
         }
     }

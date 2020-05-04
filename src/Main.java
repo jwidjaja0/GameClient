@@ -66,12 +66,15 @@ public class Main extends Application implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
+        System.out.println("Main received message.");
         Packet packet = (Packet) arg;
         String messageType = packet.getMessageType();
         if(messageType.equals("Login") || messageType.equals("UserUpdate")){
+            System.out.println("Main passing message to MLC");
             mlc.messageProcessor(packet.getMessage());
         }
         else if (messageType.equals("MainMenu") || messageType.equals("Game")){
+            System.out.println("Main passing message to LBC");
             lbc.messageProcessor(packet.getMessage());
         }
     }
