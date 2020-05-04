@@ -458,26 +458,36 @@ public class GameBoardController extends Observable implements Controller {
 
     //TODO: Done
     private void increasePlayer1Score(){
-        // Get text from player1Score
-        // Convert to integer
-        int currentScore = Integer.parseInt(player1Score.getText());
-        // Increase by 1
-        ++currentScore;
-        // Convert to string
-        // Pass to player1Score.setText(...);
-        player1Score.setText(String.valueOf(currentScore));
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                // Get text from player1Score
+                // Convert to integer
+                int currentScore = Integer.parseInt(player1Score.getText());
+                // Increase by 1
+                ++currentScore;
+                // Convert to string
+                // Pass to player1Score.setText(...);
+                player1Score.setText(String.valueOf(currentScore));
+            }
+        });
     }
 
     //TODO: Done
     private void increasePlayer2Score(){
-        // Get text from player2Score
-        // Convert to integer
-        int currentScore = Integer.parseInt(player2Score.getText());
-        // Increase by 1
-        ++currentScore;
-        // Convert to string
-        // Pass to player2Score.setText(...);
-        player2Score.setText(String.valueOf(currentScore));
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                // Get text from player2Score
+                // Convert to integer
+                int currentScore = Integer.parseInt(player2Score.getText());
+                // Increase by 1
+                ++currentScore;
+                // Convert to string
+                // Pass to player2Score.setText(...);
+                player2Score.setText(String.valueOf(currentScore));
+            }
+        });
     }
 
     @FXML
