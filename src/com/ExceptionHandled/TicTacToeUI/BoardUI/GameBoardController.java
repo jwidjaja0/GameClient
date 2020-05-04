@@ -216,11 +216,12 @@ public class GameBoardController extends Observable implements Controller {
             System.out.println("Player " + whoseTurn.getWhoseTurn() + "'s turn.");;
             if (whoseTurn.getWhoseTurn().equals(player))
                 enableAllPanels();
-            else
-                if (vsAI){//If it is a game vs the AI, tell the AI to make a move
+            else {
+                if (vsAI) {//If it is a game vs the AI, tell the AI to make a move
                     AI.getInstance().makeMove(board, gameID);
                 }
                 disableAllPanels();
+            }
         }
         else if (message instanceof PlayerJoined){
             System.out.println("Game " + gameID + " received PlayerJoined message.");
