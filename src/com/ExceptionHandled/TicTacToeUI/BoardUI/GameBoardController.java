@@ -33,7 +33,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import jfxtras.styles.jmetro.JMetroStyleClass;
 
-import java.io.IOException;
+
 import java.io.Serializable;
 import java.util.Observable;
 
