@@ -64,7 +64,7 @@ public class Client extends Observable implements Runnable {
     private void messageProcessor(Packet packet){
         String messageType = packet.getMessageType();
         System.out.println("Client received " + messageType + " message.");
-        if (!packet.getPlayerID().equals(playerID)){
+        if (!packet.getPlayerID().equals(playerID) && (!messageType.equals("Login") && !messageType.equals("UserUpdate"))){
             System.out.println("Message is not for this client.");
             return;
         }
