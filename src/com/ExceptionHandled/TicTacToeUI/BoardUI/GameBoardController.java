@@ -254,7 +254,7 @@ public class GameBoardController extends Observable implements Controller {
         //player2Label = new Label();
         player2Label.setText("TBD");
         fillBoard();
-        vsAI = !newGame.getOpponent().equals("Human");
+        vsAI = newGame.getOpponent().equals("AI");
         disableAllPanels();
         //player1Score = new Label();
         player1Score.setText("0");
