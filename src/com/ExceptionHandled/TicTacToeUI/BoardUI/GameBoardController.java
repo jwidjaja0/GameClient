@@ -185,16 +185,7 @@ public class GameBoardController extends Observable implements Controller {
     public void messageProcessor(Serializable message){
         if (message instanceof GameOverOutcome){
             System.out.println("Game " + gameID + " received GameOverOutcome message.");
-            String winningPlayer = ((GameOverOutcome) message).getPlayer();
-            if (winningPlayer.equals(player)){
-                gameOver("Win", winningPlayer);
-            }
-            else if (winningPlayer.equals("none")){
-                gameOver("Tie", winningPlayer);
-            }
-            else{
-                gameOver("Loss", winningPlayer);
-            }
+            gameOver(((GameOverOutcome) message).getPlayer());
         }
         else if (message instanceof MoveValid){
             System.out.println("Game " + gameID + " received MoveValid message.");
@@ -425,18 +416,13 @@ public class GameBoardController extends Observable implements Controller {
 
 
 
-    private void gameOver(String status, String winningPlayer){
+    private void gameOver(String winningPlayer){
         disableAllPanels();
-        if (status.equals("Loss")){
-            addPlayerScore(winningPlayer);
-            displayWinnerNotification(winningPlayer);
-        }
-        else if (status.equals("Win")){
-            addPlayerScore(winningPlayer);
-            displayWinnerNotification(winningPlayer);
-        }
-        else if (status.equals("Tie")){
+        if (winningPlayer.equals("d")){
             displayTieNotification();
+        }
+        else{
+            displayWinnerNotification(winningPlayer);
         }
     }
 
