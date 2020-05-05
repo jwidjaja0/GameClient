@@ -145,7 +145,7 @@ public class LobbyController implements Controller, Observer {
 
     private void joinGameRequest(){
         ActiveGameHeader game = games.get(gamesList.getSelectionModel().getSelectedIndex());
-        MessageSender.getInstance().sendMessage("MainMenu", new JoinGameRequest(game.getGameID(), ""));
+        MessageSender.getInstance().sendMessage("MainMenu", new JoinGameRequest(game.getGameID()));
     }
 
     private void spectateGameRequest(ActiveGameHeader game){
