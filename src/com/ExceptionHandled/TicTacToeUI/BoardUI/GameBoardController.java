@@ -540,44 +540,57 @@ public class GameBoardController extends Observable implements Controller {
     }
 
     private void displayWinnerNotification(String winner){
-        String winnerGraphic = "";
-        if (winner.equals(player)){
-            winnerGraphic = "../Graphics/XShape.png";
-        }
-        else{
-            winnerGraphic = "../Graphics/WhiteCircle.png";
-        }
-        try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/WinnerNotification.fxml"));
-            WinnerNotificationController wnc = new WinnerNotificationController(new Image(getClass().getResourceAsStream(winnerGraphic)));
-            loader.setController(wnc);
-            Parent winNotification = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(winNotification));
-            stage.show();
-        }
-        catch(Exception e){
-            System.out.println(e.getMessage());
-        }
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    String winnerGraphic = "";
+                    if (winner.equals(player)){
+                        winnerGraphic = "../Graphics/XShape.png";
+                    }
+                    else{
+                        winnerGraphic = "../Graphics/WhiteCircle.png";
+                    }
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("../WinnerNotification/WinnerNotification.fxml"));
+                    WinnerNotificationController wnc = new WinnerNotificationController(new Image(getClass().getResourceAsStream(winnerGraphic)));
+                    loader.setController(wnc);
+                    Parent winNotification = loader.load();
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(winNotification));
+                    stage.show();
+                }
+                catch(Exception e){
+                    System.out.println(e.getMessage());
+                }
+            }
+        });
+
     }
 
     private void displayTieNotification(){
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("../FXML/DrawNotification.fxml"));
-            Stage pStage = new Stage();
-            pStage.setScene(new Scene(root));
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Parent root = FXMLLoader.load(getClass().getResource("../DrawNotification/DrawNotification.fxml"));
+                    Stage pStage = new Stage();
+                    pStage.setScene(new Scene(root));
 
-            Timeline timeline = new Timeline();
-            KeyFrame key = new KeyFrame(Duration.seconds(2), new KeyValue(pStage.opacityProperty(), 0));
-            timeline.getKeyFrames().add(key);
+                    Timeline timeline = new Timeline();
+                    KeyFrame key = new KeyFrame(Duration.seconds(2), new KeyValue(pStage.opacityProperty(), 0));
+                    timeline.getKeyFrames().add(key);
 
-            timeline.play();
+                    timeline.play();
 
-            pStage.show();
-        }
-        catch(Exception e){
-            System.out.println(e.getMessage());
-        }
+                    pStage.show();
+                }
+                catch(Exception e){
+                    System.out.println(e.getMessage());
+                }
+            }
+        });
+
     }
 
     /**
