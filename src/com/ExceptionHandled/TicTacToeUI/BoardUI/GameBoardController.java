@@ -249,17 +249,20 @@ public class GameBoardController extends Observable implements Controller {
         player = "x";
         gameID = newGame.getGameId();
         //Set labels
-        //player1Label = new Label();
         player1Label.setText("You");
-        //player2Label = new Label();
-        player2Label.setText("TBD");
         fillBoard();
         vsAI = newGame.getOpponent().equals("AI");
-        disableAllPanels();
-        //player1Score = new Label();
+        if(vsAI){
+            player2Label.setText("AI");
+        }
+        else{
+            player2Label.setText("TBD");
+        }
+        //Set Score texts
         player1Score.setText("0");
-        //player2Score = new Label();
         player2Score.setText("0");
+        //Disable panels until other player joins
+        disableAllPanels();
     }
 
     /**
@@ -272,9 +275,7 @@ public class GameBoardController extends Observable implements Controller {
         player = "o";
         gameID = joinGame.getGameID();
         //Set labels
-        player1Label = new Label();
         player1Label.setText(joinGame.getOtherPlayerName());
-        player2Label = new Label();
         player2Label.setText("You");
         //Display Moves made
         for (MoveValid mv : joinGame.getMovesMade()){
@@ -282,10 +283,11 @@ public class GameBoardController extends Observable implements Controller {
         }
         vsAI = false;
         fillBoard();
-        player1Score = new Label();
+        //Set Score texts
         player1Score.setText("0");
-        player2Score = new Label();
         player2Score.setText("0");
+        //Disable panels until other player joins
+        disableAllPanels();
     }
 
     /**
@@ -298,21 +300,19 @@ public class GameBoardController extends Observable implements Controller {
         player = "Spectator";
         gameID = spectateGame.getGameID();
         //Set labels
-        player1Label = new Label();
         player1Label.setText(spectateGame.getPlayer1Name());
-        player2Label = new Label();
         player2Label.setText(spectateGame.getPlayer2Name());
-        disableAllPanels();
         //Display Moves made
         for (MoveValid mv : spectateGame.getMovesMade()){
             displayMove(mv);
         }
         vsAI = false;
         fillBoard();
-        player1Score = new Label();
+        //Set Score texts
         player1Score.setText("0");
-        player2Score = new Label();
         player2Score.setText("0");
+        //Disable panels until other player joins
+        disableAllPanels();
     }
 
     private void instantiatePanels(){
