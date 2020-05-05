@@ -14,6 +14,7 @@ import com.ExceptionHandled.Interfaces.Controller;
 import com.ExceptionHandled.TicTacToeUI.SplashScreen.*;
 import com.ExceptionHandled.TicTacToeUI.SplashScreen.GetUserInfo.GetUserInfoController;
 import com.ExceptionHandled.TicTacToeUI.ViewStats.StatsViewerController;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -124,55 +125,68 @@ public class MenuLayoutController implements Controller {
     }
 
     private void showStats(PlayerStatsInfo stats){
-        try{
-            userStatsController = new StatsViewerController();
-            FXMLLoader statsScreen = new FXMLLoader(getClass().getResource("../ViewStats/StatsViewer.fxml"));
-            userStatsController.messageProcessor(stats);
-            statsScreen.setController(userStatsController);
-            Parent statsScreenWindow = statsScreen.load();
-            Stage stage = new Stage();
-            stage.setTitle("Player Game History");
-            stage.setScene(new Scene(statsScreenWindow));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    FXMLLoader statsScreen = new FXMLLoader(getClass().getResource("../ViewStats/StatsViewer.fxml"));
+                    Parent statsScreenWindow = statsScreen.load();
+                    userStatsController = statsScreen.getController();
+                    userStatsController.messageProcessor(stats);
+                    Stage stage = new Stage();
+                    stage.setTitle("Player Game History");
+                    stage.setScene(new Scene(statsScreenWindow));
+                    stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
 
     }
 
     private void changeUserInfo(){
-        try{
-            userInfoController = new GetUserInfoController();
-            FXMLLoader getUserInfo = new FXMLLoader(getClass().getResource("../SplashScreen/GetUserInfo/GetUserInfo.fxml"));
-            getUserInfo.setController(userInfoController);
-            Parent getUserInfoWindow = getUserInfo.load();
-            Stage stage = new Stage();
-            stage.setTitle("Enter Your Information");
-            jMetro.setParent(getUserInfoWindow);
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    FXMLLoader getUserInfo = new FXMLLoader(getClass().getResource("../SplashScreen/GetUserInfo/GetUserInfo.fxml"));
+                    Parent getUserInfoWindow = getUserInfo.load();
+                    userInfoController = getUserInfo.getController();
+                    Stage stage = new Stage();
+                    stage.setTitle("Enter Your Information");
+                    jMetro.setParent(getUserInfoWindow);
 
-            stage.setScene(new Scene(jMetro.getParent()));
-            ((GetUserInfoController) userInfoController).setType("Change");
-            stage.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+                    stage.setScene(new Scene(jMetro.getParent()));
+                    ((GetUserInfoController) userInfoController).setType("Change");
+                    stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     private void loginRegister(){
-        try{
-            FXMLLoader splashScreen = new FXMLLoader(getClass().getResource("../SplashScreen/SplashScreen.fxml"));
-            userInfoController = new SplashController();
-            splashScreen.setController(userInfoController);
-            Parent splashWindow = splashScreen.load();
-            Stage stage = new Stage();
-            stage.setTitle("Welcome!");
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    FXMLLoader splashScreen = new FXMLLoader(getClass().getResource("../SplashScreen/SplashScreen.fxml"));
+                    Parent splashWindow = splashScreen.load();
+                    userInfoController = splashScreen.getController();
+                    Stage stage = new Stage();
+                    stage.setTitle("Welcome!");
+                    jMetro.setParent(splashWindow);
+                    stage.setScene(new Scene(jMetro.getParent()));
+                    stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
-            jMetro.setParent(splashWindow);
-            stage.setScene(new Scene(jMetro.getParent()));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     private void statsRequest(){

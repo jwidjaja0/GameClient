@@ -3,7 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="splashAnchor" prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="splashAnchor" prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ExceptionHandled.TicTacToeUI.SplashScreen.SplashController">
    <children>
       <Button fx:id="login" layoutX="42.0" layoutY="88.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" text="Login" />
       <Button fx:id="register" layoutX="42.0" layoutY="131.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" text="Register" />

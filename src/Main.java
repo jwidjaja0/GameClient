@@ -70,7 +70,7 @@ public class Main extends Application implements Observer {
         Packet packet = (Packet) arg;
         String messageType = packet.getMessageType();
         System.out.println("Main received " + messageType + " message.");
-        if(messageType.equals("Login") || messageType.equals("UserUpdate")){
+        if(messageType.equals("Login") || messageType.equals("UserUpdate") || messageType.equals("Stats")){
             System.out.println("Main passing message to MLC");
             mlc.messageProcessor(packet.getMessage());
         }

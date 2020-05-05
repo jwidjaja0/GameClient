@@ -27,7 +27,7 @@ public class StatsViewerController implements Controller {
 
     @FXML private TableColumn<GameHistorySummary, String> player2;
 
-    @FXML private TableColumn<GameHistorySummary, String> matchResult;
+    @FXML private TableColumn<GameHistorySummary, String> outcome;
 
 
 
@@ -36,8 +36,8 @@ public class StatsViewerController implements Controller {
         gameID.setCellValueFactory(new PropertyValueFactory<>("gameID"));
         player1.setCellValueFactory(new PropertyValueFactory<>("player1"));
         player2.setCellValueFactory(new PropertyValueFactory<>("player2"));
-        matchResult.setCellValueFactory(new PropertyValueFactory<>("matchResult"));
-    }
+        outcome.setCellValueFactory(new PropertyValueFactory<>("matchResult"));
+}
 
     @Override
     public void messageProcessor(Serializable message){
