@@ -86,8 +86,6 @@ public class LobbyController implements Controller, Observer {
 
     @Override
     public void messageProcessor(Serializable message){
-        //Display Alert
-        AlertFactory.getInstance().displayAlert(message.toString());
 
         if (message instanceof NewGameSuccess){
             System.out.println("Lobby received message NewGameSuccess");
@@ -100,11 +98,15 @@ public class LobbyController implements Controller, Observer {
         }
         else if(message instanceof NewGameFail){
             System.out.println("Lobby received message NewGameFail");
+            //Display Alert
+            AlertFactory.getInstance().displayAlert(message.toString());
             //Refresh the list of games
             requestGamesListRefresh();
         }
         else if (message instanceof JoinGameFail){
             System.out.println("Lobby received message JoinGameFail");
+            //Display Alert
+            AlertFactory.getInstance().displayAlert(message.toString());
             //Refresh the list of games
             requestGamesListRefresh();
         }
@@ -118,6 +120,8 @@ public class LobbyController implements Controller, Observer {
         }
         else if (message instanceof SpectateFail){
             System.out.println("Lobby received message SpectateFail");
+            //Display Alert
+            AlertFactory.getInstance().displayAlert(message.toString());
             //Refresh the list of games
             requestGamesListRefresh();
         }
