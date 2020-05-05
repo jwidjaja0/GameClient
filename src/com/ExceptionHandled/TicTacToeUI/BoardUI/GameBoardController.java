@@ -42,8 +42,6 @@ public class GameBoardController extends Observable implements Controller {
     double iconSize = 70.0;
     @FXML public Button btnExit;
 
-    @FXML public Button btnRestart;
-
     @FXML public Button panel1;
 
     @FXML public Button panel2;
@@ -169,13 +167,6 @@ public class GameBoardController extends Observable implements Controller {
             @Override
             public void handle(ActionEvent event) {
                 exitGame();
-            }
-        });
-
-        btnRestart.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                restartGame();
             }
         });
 
@@ -341,7 +332,6 @@ public class GameBoardController extends Observable implements Controller {
                 panel9.setMouseTransparent(true);
             }
         });
-
     }
 
     /**
@@ -485,31 +475,6 @@ public class GameBoardController extends Observable implements Controller {
         stage.close();
 
 
-    }
-
-    /**
-     * restartGame(ActionEvent actionEvent)
-     * Sends a message to the server to request a new game. This option forfeits the current game. The game will prompt
-     * users to rematch on a finished game already. This button is meant for in-progress game.
-     */
-    private void restartGame() {
-        //Send message to server to forfeit game
-        MessageSender.getInstance().sendMessage("Game", new ForfeitGame(gameID));
-        //Send message to request rematch
-        MessageSender.getInstance().sendMessage("Game", new RematchRequest(gameID));
-        //Reset Board
-        resetBoard();
-    }
-
-    private void rematchRequest(){
-        //TODO: Display Alert
-        //Send rematch request
-        MessageSender.getInstance().sendMessage("Game", new RematchRequest(gameID));
-    }
-
-    private void resetBoard(){
-        resetAllPanelGraphics();
-        enableAllPanels();
     }
 
     private void displayWinnerNotification(String winner){
