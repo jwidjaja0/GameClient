@@ -479,21 +479,8 @@ public class GameBoardController extends Observable implements Controller {
     @FXML
     private void exitGame() {
         Stage stage = (Stage) playArea.getScene().getWindow();
-        if (!player.equals("Spectator")){
-            //TODO: Temporary Implementation, remove later
-            //Send ForfeitGame message
-            MessageSender.getInstance().sendMessage("Game", new ForfeitGame(gameID));
-            //Tell Main to remove game from list
-            setChanged();
-            notifyObservers(new RemoveGame(this));
-
-            //TODO: Implement Below:
-            //Check if game is still going on,
-            //If game is still going on, display alert asking if player wants to resume game later
-            //If yes, send GamePause message
-            //Else send ForfeitGame message
-            //Tell Main to remove game from list
-        }
+        setChanged();
+        notifyObservers(new RemoveGame(this));
         //Close window
         stage.close();
 
