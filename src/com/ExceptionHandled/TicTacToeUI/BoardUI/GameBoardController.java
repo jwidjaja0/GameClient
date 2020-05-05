@@ -532,7 +532,7 @@ public class GameBoardController extends Observable implements Controller {
             public void run() {
                 try{
                     String winnerGraphic = "";
-                    if (winner.equals(player)){
+                    if (winner.equals("x")){
                         winnerGraphic = "../Graphics/XShape.png";
                     }
                     else{
