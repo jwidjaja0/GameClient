@@ -16,11 +16,6 @@ public class AIBoard {
         }
     }
 
-    //game is over if either player won or the board is full
-    boolean isGameOver(){
-        return isWon("x") || isWon("o") || isFull();
-    }
-
     //places the player token in a specific spot on the board
     void setMove(int row, int col, String token){
         board[row][col] = token;
@@ -58,22 +53,6 @@ public class AIBoard {
         }
         //otherwise they didn't win
         return false;
-    }
-
-    //returns true if neither player won but the board is full
-    boolean isDraw(){
-        return isFull() && !isWon("x") && !isWon("o");
-    }
-
-    //returns true of there are no available moves left
-    boolean isFull(){
-        for(int i = 0; i < 3; i++){
-            for(int j = 0; j < 3; j++){
-                if(board[i][j].equals(" "))
-                    return false;
-            }
-        }
-        return true;
     }
 
     //calculates how many moves are left in the game
