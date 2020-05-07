@@ -64,19 +64,11 @@
                <font>
                   <Font name="Berlin Sans FB" size="18.0" />
                </font></Label>
-            <Label fx:id="player1Score" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="98.0" text="0">
-               <font>
-                  <Font name="Berlin Sans FB" size="18.0" />
-               </font></Label>
          </children>
       </VBox>
       <VBox fx:id="player2Box" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <children>
             <Label id="playerLabel" fx:id="player2Label" alignment="CENTER" contentDisplay="CENTER" prefHeight="32.0" prefWidth="94.0" text="Player 2">
-               <font>
-                  <Font name="Berlin Sans FB" size="18.0" />
-               </font></Label>
-            <Label fx:id="player2Score" alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="98.0" text="0">
                <font>
                   <Font name="Berlin Sans FB" size="18.0" />
                </font></Label>
