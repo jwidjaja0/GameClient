@@ -92,6 +92,9 @@ public class MenuLayoutController implements Controller {
                 deleteUserAccount();
             }
         });
+
+        //Open login screen automatically upon startup
+        loginRegister();
     }
 
     @Override
@@ -121,7 +124,6 @@ public class MenuLayoutController implements Controller {
                 deleteAccount.setDisable(false);
             }
         }
-
     }
 
     private void showStats(PlayerStatsInfo stats){
@@ -201,5 +203,7 @@ public class MenuLayoutController implements Controller {
     private void deleteUserAccount(){
         MessageSender.getInstance().sendMessage("UserUpdate", new UserDeleteRequest());
     }
+
+
 
 }
