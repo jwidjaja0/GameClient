@@ -60,10 +60,6 @@ public class GameBoardController extends Observable implements Controller {
 
     @FXML public Button panel9;
 
-    @FXML public Label player1Score;
-
-    @FXML public Label player2Score;
-
     @FXML public Label player1Label;
 
     @FXML public Label player2Label;
@@ -240,9 +236,6 @@ public class GameBoardController extends Observable implements Controller {
         else{
             player2Label.setText("TBD");
         }
-        //Set Score texts
-        player1Score.setText("0");
-        player2Score.setText("0");
         //Disable panels until other player joins
         disableAllPanels();
     }
@@ -265,9 +258,6 @@ public class GameBoardController extends Observable implements Controller {
         }
         vsAI = false;
         fillBoard();
-        //Set Score texts
-        player1Score.setText("0");
-        player2Score.setText("0");
         //Disable panels until other player joins
         disableAllPanels();
     }
@@ -290,9 +280,6 @@ public class GameBoardController extends Observable implements Controller {
         }
         vsAI = false;
         fillBoard();
-        //Set Score texts
-        player1Score.setText("0");
-        player2Score.setText("0");
         //Disable panels until other player joins
         disableAllPanels();
     }
@@ -422,49 +409,7 @@ public class GameBoardController extends Observable implements Controller {
         return buttons[row][col];
     }
 
-    //TODO: Done
-    private void addPlayerScore(String player){
-        if (player.equals("x")){
-            increasePlayer1Score();
-        }
-        else if (player.equals("o")){
-            increasePlayer2Score();
-        }
-    }
 
-    //TODO: Done
-    private void increasePlayer1Score(){
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                // Get text from player1Score
-                // Convert to integer
-                int currentScore = Integer.parseInt(player1Score.getText());
-                // Increase by 1
-                ++currentScore;
-                // Convert to string
-                // Pass to player1Score.setText(...);
-                player1Score.setText(String.valueOf(currentScore));
-            }
-        });
-    }
-
-    //TODO: Done
-    private void increasePlayer2Score(){
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                // Get text from player2Score
-                // Convert to integer
-                int currentScore = Integer.parseInt(player2Score.getText());
-                // Increase by 1
-                ++currentScore;
-                // Convert to string
-                // Pass to player2Score.setText(...);
-                player2Score.setText(String.valueOf(currentScore));
-            }
-        });
-    }
 
     @FXML
     private void exitGame() {
