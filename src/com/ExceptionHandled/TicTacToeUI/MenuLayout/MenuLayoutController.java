@@ -10,10 +10,9 @@ import com.ExceptionHandled.GameMessages.Stats.PlayerStatsRequest;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteFail;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteRequest;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteSuccess;
+import com.ExceptionHandled.Interfaces.Alert;
 import com.ExceptionHandled.Interfaces.Controller;
-import com.ExceptionHandled.TicTacToeUI.SplashScreen.*;
 import com.ExceptionHandled.TicTacToeUI.SplashScreen.GetUserInfo.GetUserInfoController;
-import com.ExceptionHandled.TicTacToeUI.ViewStats.StatsViewerController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -92,24 +91,27 @@ public class MenuLayoutController implements Controller {
                 deleteUserAccount();
             }
         });
+
+        //Open login screen automatically upon startup
+        loginRegister();
     }
 
     @Override
     public void messageProcessor(Serializable message){
         if (message instanceof UserDeleteSuccess){
-            AlertFactory.getInstance().displayAlert(message.toString());
+            AlertFactory.getInstance().displayCommonAlert(message.toString());
             logoutAccount();//Log out
         }
         else if (message instanceof UserDeleteFail){
-            AlertFactory.getInstance().displayAlert(message.toString());
+            AlertFactory.getInstance().displayCommonAlert(message.toString());
         }
         else if (message instanceof LogoutSuccess){
-            AlertFactory.getInstance().displayAlert(message.toString());
+            AlertFactory.getInstance().displayCommonAlert(message.toString());
             logout.setDisable(true);
             deleteAccount.setDisable(true);
         }
         else if (message instanceof LogoutFail){
-            AlertFactory.getInstance().displayAlert(message.toString());
+            AlertFactory.getInstance().displayCommonAlert(message.toString());
         }
         else if (message instanceof PlayerStatsInfo){
             showStats((PlayerStatsInfo) message);
@@ -121,7 +123,6 @@ public class MenuLayoutController implements Controller {
                 deleteAccount.setDisable(false);
             }
         }
-
     }
 
     private void showStats(PlayerStatsInfo stats){
@@ -199,7 +200,8 @@ public class MenuLayoutController implements Controller {
     }
 
     private void deleteUserAccount(){
-        MessageSender.getInstance().sendMessage("UserUpdate", new UserDeleteRequest());
+        if (AlertFactory.getInstance().displayConfirmationAlert("Are you sure you want to delete your account?"))
+            MessageSender.getInstance().sendMessage("UserUpdate", new UserDeleteRequest());
     }
 
 }
