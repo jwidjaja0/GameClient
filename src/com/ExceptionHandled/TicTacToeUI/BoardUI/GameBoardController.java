@@ -473,7 +473,6 @@ public class GameBoardController extends Observable implements Controller {
                 }
             }
         });
-
     }
 
     /**
