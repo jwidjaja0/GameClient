@@ -138,17 +138,17 @@ public class GetUserInfoController extends Observable implements Controller {
     }
 
     private void signUpFail(SignUpFail fail){
-        AlertFactory.getInstance().displayAlert(fail.toString());
+        AlertFactory.getInstance().displayCommonAlert(fail.toString());
         info = new String[4];
     }
 
     private void loginFail(LoginFail fail){
-        AlertFactory.getInstance().displayAlert(fail.toString());
+        AlertFactory.getInstance().displayCommonAlert(fail.toString());
         info = new String[4];
     }
 
     private void loginSuccess(LoginSuccess success){
-        AlertFactory.getInstance().displayAlert(success.toString());
+        AlertFactory.getInstance().displayCommonAlert(success.toString());
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -159,7 +159,7 @@ public class GetUserInfoController extends Observable implements Controller {
     }
 
     private void signUpSuccess(SignUpSuccess success){
-        AlertFactory.getInstance().displayAlert(success.toString());
+        AlertFactory.getInstance().displayCommonAlert(success.toString());
         //Send Login Request to Server
         MessageSender.getInstance().sendMessage("Login", new LoginRequest(info[0], info[1]));
         Platform.runLater(new Runnable() {
@@ -171,7 +171,7 @@ public class GetUserInfoController extends Observable implements Controller {
     }
 
     private void updateUserSuccess(UserUpdateSuccess success){
-        AlertFactory.getInstance().displayAlert(success.toString());
+        AlertFactory.getInstance().displayCommonAlert(success.toString());
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -181,7 +181,7 @@ public class GetUserInfoController extends Observable implements Controller {
     }
 
     private void userDeleteSuccess(UserDeleteSuccess success){
-        AlertFactory.getInstance().displayAlert(success.toString());
+        AlertFactory.getInstance().displayCommonAlert(success.toString());
         Platform.runLater(new Runnable() {
             @Override
             public void run() {

@@ -2,7 +2,6 @@ package com.ExceptionHandled.TicTacToeUI.Lobby;
 
 
 import com.ExceptionHandled.Alerts.AlertFactory;
-import com.ExceptionHandled.GameMessages.Game.*;
 import com.ExceptionHandled.GameMessages.Interfaces.*;
 import com.ExceptionHandled.GameMessages.MainMenu.*;
 import com.ExceptionHandled.Client.MessageSender;
@@ -21,7 +20,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
-import jfxtras.styles.jmetro.JMetroStyleClass;
 import jfxtras.styles.jmetro.Style;
 
 import java.io.IOException;
@@ -99,14 +97,14 @@ public class LobbyController implements Controller, Observer {
         else if(message instanceof NewGameFail){
             System.out.println("Lobby received message NewGameFail");
             //Display Alert
-            AlertFactory.getInstance().displayAlert(message.toString());
+            AlertFactory.getInstance().displayCommonAlert(message.toString());
             //Refresh the list of games
             requestGamesListRefresh();
         }
         else if (message instanceof JoinGameFail){
             System.out.println("Lobby received message JoinGameFail");
             //Display Alert
-            AlertFactory.getInstance().displayAlert(message.toString());
+            AlertFactory.getInstance().displayCommonAlert(message.toString());
             //Refresh the list of games
             requestGamesListRefresh();
         }
@@ -121,7 +119,7 @@ public class LobbyController implements Controller, Observer {
         else if (message instanceof SpectateFail){
             System.out.println("Lobby received message SpectateFail");
             //Display Alert
-            AlertFactory.getInstance().displayAlert(message.toString());
+            AlertFactory.getInstance().displayCommonAlert(message.toString());
             //Refresh the list of games
             requestGamesListRefresh();
         }
