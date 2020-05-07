@@ -9,7 +9,6 @@ public class AI {
     final private String id = "a1234bcd";
 
     private AI(){
-
     }
 
     public void makeMove(String[][] board, String gameID){
@@ -34,7 +33,7 @@ public class AI {
                 if (aiBoard.getMoveAt(x, y).equals(" ")){
                     //test the benefits of this move
                     aiBoard.setMove(x, y, "o");
-                    int temp = minimax(aiBoard, aiBoard.remainingMoves()-1, false, -100, 100);
+                    int temp = minimax(aiBoard, aiBoard.remainingMoves(), false, -100, 100);
                     //if its the best move so far, then save it
                     if (temp < bestMove){
                         bestMove = temp;
@@ -54,7 +53,6 @@ public class AI {
         if (board.isWon("x")) return 10 + board.remainingMoves(); //X is max player
         if (board.isWon("o")) return -10 - board.remainingMoves(); //O is min player
         if (depth == 0) return 0; //tie)
-
 
         int eval;
 
