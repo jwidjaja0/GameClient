@@ -13,7 +13,11 @@ public class AlertFactory {
         return instance;
     }
 
-    public void displayAlert(String reason){
+    public void displayCommonAlert(String reason){
         JOptionPane.showMessageDialog(null, reason);
+    }
+
+    public boolean displayConfirmationAlert(String reason){
+        return JOptionPane.showConfirmDialog(null, reason, "Confirm Account Deletion", JOptionPane.YES_NO_OPTION) == 0;
     }
 }
