@@ -21,13 +21,7 @@ public class CreateGameController {
     TextField gameName;
 
     @FXML
-    TextField password;
-
-    @FXML
     ComboBox<String> opponent;
-
-    @FXML
-    ComboBox<String> privateGame;
 
     @FXML
     AnchorPane createGameAnchor;
@@ -37,9 +31,6 @@ public class CreateGameController {
         opponent.getItems().add("Human");
         opponent.getItems().add("AI");
         opponent.getSelectionModel().selectFirst();
-        privateGame.getItems().add("Yes");
-        privateGame.getItems().add("No");
-        privateGame.getSelectionModel().selectFirst();
 
 
         create.setOnAction(new EventHandler<ActionEvent>() {
@@ -52,7 +43,6 @@ public class CreateGameController {
 
     private void createGame(){
         System.out.println(opponent.getValue());
-        System.out.println(privateGame.getValue());
         MessageSender.getInstance().sendMessage("NewGameRequest", new NewGameRequest(opponent.getValue(), gameName.getText()));
         ((Stage)(create.getScene().getWindow())).close();
     }
