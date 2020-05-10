@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="getInfoAnchor" prefHeight="224.0" prefWidth="324.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ExceptionHandled.TicTacToeUI.SplashScreen.GetUserInfo.GetUserInfoController">
+<AnchorPane fx:id="getInfoAnchor" prefHeight="234.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ExceptionHandled.TicTacToeUI.SplashScreen.GetUserInfo.GetUserInfoController">
    <children>
-      <Button fx:id="action" layoutX="184.0" layoutY="169.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="114.0" text="Register" />
-      <TextField fx:id="username" layoutX="98.0" layoutY="19.0" prefHeight="26.0" prefWidth="200.0" />
+      <Button fx:id="action" layoutX="204.0" layoutY="194.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="114.0" text="Register" />
+      <TextField fx:id="username" layoutX="118.0" layoutY="20.0" prefHeight="26.0" prefWidth="200.0" />
       <Label fx:id="usernameLabel" layoutX="16.0" layoutY="24.0" prefHeight="16.0" prefWidth="80.0" text="Username:" />
-      <Label fx:id="passwordLabel" layoutX="16.0" layoutY="56.0" prefHeight="16.0" prefWidth="80.0" text="Password:" />
-      <Label fx:id="firstNameLabel" layoutX="16.0" layoutY="90.0" prefWidth="80.0" text="First Name:" />
-      <Label fx:id="lastNameLabel" layoutX="16.0" layoutY="123.0" prefWidth="80.0" text="Last Name:" />
-      <PasswordField fx:id="password" layoutX="98.0" layoutY="52.0" prefHeight="26.0" prefWidth="200.0" />
-      <TextField fx:id="firstName" layoutX="98.0" layoutY="86.0" prefHeight="26.0" prefWidth="200.0" />
-      <TextField fx:id="lastName" layoutX="98.0" layoutY="119.0" prefHeight="26.0" prefWidth="200.0" />
+      <Label fx:id="passwordLabel" layoutX="16.0" layoutY="128.0" prefHeight="16.0" prefWidth="80.0" text="Password:" />
+      <Label fx:id="firstNameLabel" layoutX="16.0" layoutY="58.0" prefWidth="80.0" text="First Name:" />
+      <Label fx:id="lastNameLabel" layoutX="16.0" layoutY="91.0" prefWidth="80.0" text="Last Name:" />
+      <PasswordField fx:id="password" layoutX="118.0" layoutY="124.0" prefHeight="26.0" prefWidth="200.0" />
+      <TextField fx:id="firstName" layoutX="118.0" layoutY="54.0" prefHeight="26.0" prefWidth="200.0" />
+      <TextField fx:id="lastName" layoutX="118.0" layoutY="87.0" prefHeight="26.0" prefWidth="200.0" />
+      <Label fx:id="confirmPasswordLabel" layoutX="16.0" layoutY="164.0" prefHeight="17.0" prefWidth="102.0" text="Confirm Password:" />
+      <PasswordField fx:id="confirmPassword" layoutX="118.0" layoutY="160.0" prefHeight="26.0" prefWidth="200.0" />
    </children>
 </AnchorPane>
