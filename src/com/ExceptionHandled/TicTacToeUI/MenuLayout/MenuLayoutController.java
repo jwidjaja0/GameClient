@@ -10,9 +10,8 @@ import com.ExceptionHandled.GameMessages.Stats.PlayerStatsRequest;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteFail;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteRequest;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteSuccess;
-import com.ExceptionHandled.Interfaces.Alert;
 import com.ExceptionHandled.Interfaces.Controller;
-import com.ExceptionHandled.TicTacToeUI.SplashScreen.GetUserInfo.GetUserInfoController;
+import com.ExceptionHandled.TicTacToeUI.GetUserInfo.GetUserInfoController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -152,7 +151,7 @@ public class MenuLayoutController implements Controller {
             @Override
             public void run() {
                 try{
-                    FXMLLoader getUserInfo = new FXMLLoader(getClass().getResource("../SplashScreen/GetUserInfo/GetUserInfo.fxml"));
+                    FXMLLoader getUserInfo = new FXMLLoader(getClass().getResource("../GetUserInfo/GetUserInfo.fxml"));
                     Parent getUserInfoWindow = getUserInfo.load();
                     userInfoController = getUserInfo.getController();
                     Stage stage = new Stage();

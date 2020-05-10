@@ -1,4 +1,4 @@
-package com.ExceptionHandled.TicTacToeUI.SplashScreen.GetUserInfo;
+package com.ExceptionHandled.TicTacToeUI.GetUserInfo;
 import com.ExceptionHandled.Alerts.AlertFactory;
 import com.ExceptionHandled.GameMessages.Login.*;
 import com.ExceptionHandled.Client.MessageSender;

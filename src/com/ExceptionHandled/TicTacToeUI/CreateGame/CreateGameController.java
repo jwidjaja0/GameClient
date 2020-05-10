@@ -1,4 +1,4 @@
-package com.ExceptionHandled.TicTacToeUI.Lobby.CreateGame;
+package com.ExceptionHandled.TicTacToeUI.CreateGame;
 
 import com.ExceptionHandled.GameMessages.MainMenu.NewGameRequest;
 import com.ExceptionHandled.Client.MessageSender;

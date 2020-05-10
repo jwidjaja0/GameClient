@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="getInfoAnchor" prefHeight="234.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ExceptionHandled.TicTacToeUI.SplashScreen.GetUserInfo.GetUserInfoController">
+<AnchorPane fx:id="getInfoAnchor" prefHeight="234.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ExceptionHandled.TicTacToeUI.GetUserInfo.GetUserInfoController">
    <children>
       <Button fx:id="action" layoutX="204.0" layoutY="194.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="114.0" text="Register" />
       <TextField fx:id="username" layoutX="118.0" layoutY="20.0" prefHeight="26.0" prefWidth="200.0" />
