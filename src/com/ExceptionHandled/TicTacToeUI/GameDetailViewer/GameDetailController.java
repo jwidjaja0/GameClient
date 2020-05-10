@@ -23,8 +23,8 @@ public class GameDetailController {
 
     @FXML  TableView<MoveValid> moveHistoryView;
     @FXML  TableColumn<MoveValid, String> playerCol;
-    @FXML  TableColumn<MoveValid, String> xCol;
-    @FXML  TableColumn<MoveValid, String> yCol;
+    @FXML  TableColumn<MoveValid, Integer> xCol;
+    @FXML  TableColumn<MoveValid, Integer> yCol;
     @FXML  TableColumn<MoveValid, Date> timeCol;
 
     @FXML private TableView<UserInfo> viewersView;

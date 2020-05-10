@@ -1,15 +1,25 @@
 package com.ExceptionHandled.TicTacToeUI.ViewStats;
 
+import com.ExceptionHandled.Client.MessageSender;
+import com.ExceptionHandled.GameMessages.Stats.GameHistoryDetail;
+import com.ExceptionHandled.GameMessages.Stats.GameHistoryRequest;
 import com.ExceptionHandled.GameMessages.Stats.GameHistorySummary;
 import com.ExceptionHandled.GameMessages.Stats.PlayerStatsInfo;
 import com.ExceptionHandled.Interfaces.Controller;
+import com.ExceptionHandled.TicTacToeUI.GameDetailViewer.GameDetailController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 public class StatsViewerController implements Controller {
@@ -37,12 +47,27 @@ public class StatsViewerController implements Controller {
         player1.setCellValueFactory(new PropertyValueFactory<>("player1"));
         player2.setCellValueFactory(new PropertyValueFactory<>("player2"));
         outcome.setCellValueFactory(new PropertyValueFactory<>("matchResult"));
+
+        gamesList.setRowFactory(tv -> {
+            TableRow<GameHistorySummary> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    GameHistorySummary summary = row.getItem();
+                    //Send request to server
+                    MessageSender.getInstance().sendMessage("GameHistoryRequest", new GameHistoryRequest(summary.getGameID()));
+                }
+            });
+            return row;
+        });
 }
 
     @Override
     public void messageProcessor(Serializable message){
         if (message instanceof PlayerStatsInfo){
             updateStats((PlayerStatsInfo)message);
+        }
+        else if (message instanceof GameHistoryDetail){
+            showGameHistory((GameHistoryDetail)message);
         }
     }
 
@@ -60,6 +85,21 @@ public class StatsViewerController implements Controller {
                 gamesList.getItems().addAll(info.getGameStatsInfoList());
             }
         });
+    }
+
+    private void showGameHistory(GameHistoryDetail detail){
+        try{
+            FXMLLoader gameDetails = new FXMLLoader(getClass().getResource("../GameDetailViewer/GameDetail.fxml"));
+            Parent gameDetailsWindow = gameDetails.load();
+            ((GameDetailController)gameDetails.getController()).setInfo(detail);
+            Stage stage = new Stage();
+            stage.setTitle("Player Game History");
+            stage.setScene(new Scene(gameDetailsWindow));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }
