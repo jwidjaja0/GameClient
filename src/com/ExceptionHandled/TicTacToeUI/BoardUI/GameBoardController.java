@@ -341,7 +341,7 @@ public class GameBoardController extends Observable implements Controller {
 
     private void displayMove(MoveValid move){
         if(move.getPlayer().equals("x")){
-            setXImage(getButton(move.getYCoord(), move.getXCoord()));
+            setXImage(getButton(move.getXCoord(), move.getYCoord()));
             System.out.println("Placing X at " + move.getXCoord() + " " + move.getYCoord() );
         }
         else {
