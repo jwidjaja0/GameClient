@@ -5,6 +5,7 @@ package com.ExceptionHandled.TicTacToeUI.MenuLayout;
 import com.ExceptionHandled.Alerts.AlertFactory;
 import com.ExceptionHandled.Client.MessageSender;
 import com.ExceptionHandled.GameMessages.Login.*;
+import com.ExceptionHandled.GameMessages.Stats.GameHistoryDetail;
 import com.ExceptionHandled.GameMessages.Stats.PlayerStatsInfo;
 import com.ExceptionHandled.GameMessages.Stats.PlayerStatsRequest;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteFail;
@@ -115,6 +116,9 @@ public class MenuLayoutController implements Controller {
         else if (message instanceof PlayerStatsInfo){
             showStats((PlayerStatsInfo) message);
         }
+        else if (message instanceof GameHistoryDetail){
+            userStatsController.messageProcessor(message);
+        }
         else{
             userInfoController.messageProcessor(message);//Send it first because alerts handled in subsequent screens
             if (message instanceof LoginSuccess || message instanceof SignUpSuccess){
@@ -142,8 +146,6 @@ public class MenuLayoutController implements Controller {
                 }
             }
         });
-
-
     }
 
     private void changeUserInfo(){

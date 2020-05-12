@@ -88,17 +88,22 @@ public class StatsViewerController implements Controller {
     }
 
     private void showGameHistory(GameHistoryDetail detail){
-        try{
-            FXMLLoader gameDetails = new FXMLLoader(getClass().getResource("../GameDetailViewer/GameDetail.fxml"));
-            Parent gameDetailsWindow = gameDetails.load();
-            ((GameDetailController)gameDetails.getController()).setInfo(detail);
-            Stage stage = new Stage();
-            stage.setTitle("Player Game History");
-            stage.setScene(new Scene(gameDetailsWindow));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    FXMLLoader gameDetails = new FXMLLoader(getClass().getResource("../GameDetailViewer/GameDetail.fxml"));
+                    Parent gameDetailsWindow = gameDetails.load();
+                    ((GameDetailController)gameDetails.getController()).setInfo(detail);
+                    Stage stage = new Stage();
+                    stage.setTitle("Player Game History");
+                    stage.setScene(new Scene(gameDetailsWindow));
+                    stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
     }
 

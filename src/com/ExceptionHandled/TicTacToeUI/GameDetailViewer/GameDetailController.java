@@ -38,8 +38,8 @@ public class GameDetailController {
 
     public void initialize(){
         playerCol.setCellValueFactory(new PropertyValueFactory<>("player"));
-        xCol.setCellValueFactory(new PropertyValueFactory<>("xcoord"));
-        yCol.setCellValueFactory(new PropertyValueFactory<>("ycoord"));
+        xCol.setCellValueFactory(new PropertyValueFactory<>("xCoord"));
+        yCol.setCellValueFactory(new PropertyValueFactory<>("yCoord"));
         timeCol.setCellValueFactory(new PropertyValueFactory<>("date"));
 
         vidCol.setCellValueFactory(new PropertyValueFactory<>("userID"));
@@ -65,7 +65,7 @@ public class GameDetailController {
         }
 
         populateMoveList(gameDetail.getMoveMadeList());
-        populateViewers(gameDetail.getViewersInfo());
+        //populateViewers(gameDetail.getViewersInfo());
     }
 
     private void populateMoveList(List<MoveValid> moveList){
