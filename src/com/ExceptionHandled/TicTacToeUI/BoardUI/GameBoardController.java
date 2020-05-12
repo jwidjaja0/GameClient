@@ -280,18 +280,6 @@ public class GameBoardController extends Observable implements Controller {
         disableAllPanels();
     }
 
-    private void instantiatePanels(){
-        panel1 = new Button();
-        panel2 = new Button();
-        panel3 = new Button();
-        panel4 = new Button();
-        panel5 = new Button();
-        panel6 = new Button();
-        panel7 = new Button();
-        panel8 = new Button();
-        panel9 = new Button();
-    }
-
     public String getGameID(){
         return gameID;
     }

@@ -6,7 +6,7 @@ import com.ExceptionHandled.GameMessages.Game.MoveMade;
 public class AI {
 
     private static AI instance = new AI();
-    final private String id = "a1234bcd";
+    final private String id = "Ai";
 
     private AI(){
     }
