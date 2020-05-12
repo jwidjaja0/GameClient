@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="createGameAnchor" prefHeight="137.0" prefWidth="360.0" stylesheets="@../../CSS/TTTall.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ExceptionHandled.TicTacToeUI.Lobby.CreateGame.CreateGameController">
+<AnchorPane fx:id="createGameAnchor" prefHeight="137.0" prefWidth="360.0" stylesheets="@../../CSS/TTTall.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ExceptionHandled.TicTacToeUI.CreateGame.CreateGameController">
    <children>
       <Label layoutX="14.0" layoutY="25.0" text="Game Name:" />
       <TextField fx:id="gameName" layoutX="120.0" layoutY="20.0" prefHeight="26.0" prefWidth="200.0" />

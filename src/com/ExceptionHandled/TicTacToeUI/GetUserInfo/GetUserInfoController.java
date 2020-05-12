@@ -1,4 +1,4 @@
-package com.ExceptionHandled.TicTacToeUI.SplashScreen.GetUserInfo;
+package com.ExceptionHandled.TicTacToeUI.GetUserInfo;
 import com.ExceptionHandled.Alerts.AlertFactory;
 import com.ExceptionHandled.GameMessages.Login.*;
 import com.ExceptionHandled.Client.MessageSender;
@@ -23,28 +23,25 @@ import java.util.Observable;
 
 //TODO: Add error checking
 public class GetUserInfoController extends Observable implements Controller {
-    @FXML
-    Button action;
+    @FXML Button action;
 
-    @FXML
-    TextField username;
+    @FXML TextField username;
 
-    @FXML
-    PasswordField password;
+    @FXML PasswordField password;
 
-    @FXML
-    TextField firstName;
+    @FXML TextField firstName;
 
-    @FXML
-    TextField lastName;
+    @FXML TextField lastName;
 
-    @FXML
-    Label firstNameLabel;
+    @FXML TextField confirmPassword;
 
-    @FXML
-    Label lastNameLabel;
-    @FXML
-    AnchorPane getInfoAnchor;
+    @FXML Label firstNameLabel;
+
+    @FXML Label lastNameLabel;
+
+    @FXML Label confirmPasswordLabel;
+
+    @FXML AnchorPane getInfoAnchor;
 
     private String[] info;
     boolean isLogin;
@@ -61,7 +58,21 @@ public class GetUserInfoController extends Observable implements Controller {
                 info[1] = password.getText();
                 info[2] = firstName.getText();
                 info[3] = lastName.getText();
-                checkValues();
+                if (!isLogin && !isChange){
+                    if (confirmPassword.getText().equals(info[1])){//Check password for match
+                        checkValues();
+                    }
+                    else{
+                        info = new String[4];//Clear out the container holding values
+                        AlertFactory.getInstance().displayCommonAlert("Passwords do not match.");
+                        password.clear();
+                        confirmPassword.clear();
+                    }
+                }
+                else{
+                    checkValues();
+                }
+
             }
         });
     }
@@ -123,6 +134,8 @@ public class GetUserInfoController extends Observable implements Controller {
         lastNameLabel.setVisible(false);
         firstName.setVisible(false);
         lastName.setVisible(false);
+        confirmPassword.setVisible(false);
+        confirmPasswordLabel.setVisible(false);
         isLogin = true;
         isChange = false;
     }

@@ -170,7 +170,7 @@ public class LobbyController implements Controller, Observer {
     }
 
     private void createGameRequest() throws IOException {
-        FXMLLoader createGameUI = new FXMLLoader(getClass().getResource("CreateGame/CreateGame.fxml"));
+        FXMLLoader createGameUI = new FXMLLoader(getClass().getResource("../CreateGame/CreateGame.fxml"));
         Parent ui = createGameUI.load();
 
         //jMetro.setParent(ui);
