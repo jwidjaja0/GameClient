@@ -23,9 +23,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
-import jfxtras.styles.jmetro.JMetro;
-import jfxtras.styles.jmetro.JMetroStyleClass;
-import jfxtras.styles.jmetro.Style;
 
 
 import java.io.IOException;
@@ -49,11 +46,9 @@ public class MenuLayoutController implements Controller {
 
     private Controller userInfoController;
     private Controller userStatsController;
-    private JMetro jMetro;
+
 
     public void initialize(){
-        jMetro = new JMetro(Style.DARK);
-        menuBar1.getStyleClass().add(JMetroStyleClass.BACKGROUND);
         logout.setDisable(true);
         deleteAccount.setDisable(true);
 
@@ -158,9 +153,8 @@ public class MenuLayoutController implements Controller {
                     userInfoController = getUserInfo.getController();
                     Stage stage = new Stage();
                     stage.setTitle("Enter Your Information");
-                    jMetro.setParent(getUserInfoWindow);
 
-                    stage.setScene(new Scene(jMetro.getParent()));
+                    stage.setScene(new Scene(getUserInfoWindow));
                     ((GetUserInfoController) userInfoController).setType("Change");
                     stage.show();
                 } catch (IOException e) {
@@ -180,8 +174,7 @@ public class MenuLayoutController implements Controller {
                     userInfoController = splashScreen.getController();
                     Stage stage = new Stage();
                     stage.setTitle("Welcome!");
-                    jMetro.setParent(splashWindow);
-                    stage.setScene(new Scene(jMetro.getParent()));
+                    stage.setScene(new Scene(splashWindow));
                     stage.show();
                 } catch (IOException e) {
                     e.printStackTrace();

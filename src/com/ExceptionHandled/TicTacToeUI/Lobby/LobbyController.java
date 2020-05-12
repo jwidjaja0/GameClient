@@ -22,8 +22,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import jfxtras.styles.jmetro.JMetro;
-import jfxtras.styles.jmetro.Style;
+
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -46,10 +45,10 @@ public class LobbyController implements Controller, Observer {
     private Stage openStage;
     private ArrayList<GameBoardController> openGames;
     private List<ActiveGameHeader>games;
-    private JMetro jMetro;
+
 
     public void initialize(){
-        jMetro = new JMetro(Style.DARK);
+
         //Set background for JMetro skin
         //lobbyAnchor.getStyleClass().add(JMetroStyleClass.BACKGROUND);
 
@@ -181,7 +180,6 @@ public class LobbyController implements Controller, Observer {
         FXMLLoader createGameUI = new FXMLLoader(getClass().getResource("../CreateGame/CreateGame.fxml"));
         Parent ui = createGameUI.load();
 
-        //jMetro.setParent(ui);
         Stage openStage = new Stage();
         openStage.setTitle("Create New Game");
         openStage.setScene(new Scene(ui));
@@ -235,13 +233,12 @@ public class LobbyController implements Controller, Observer {
 
     private void openGameWindow(Parent gameWindow, String gameName) throws IOException {
         //Load the window
-        jMetro.setParent(gameWindow);
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 Stage stage = new Stage();
                 stage.setTitle(gameName);
-                stage.setScene(new Scene(jMetro.getParent()));
+                stage.setScene(new Scene(gameWindow));
                 stage.show();
             }
         });

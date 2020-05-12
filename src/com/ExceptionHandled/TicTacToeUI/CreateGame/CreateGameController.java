@@ -10,7 +10,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import jfxtras.styles.jmetro.JMetroStyleClass;
 
 
 public class CreateGameController {
@@ -27,7 +26,6 @@ public class CreateGameController {
     AnchorPane createGameAnchor;
 
     public void initialize(){
-        createGameAnchor.getStyleClass().add(JMetroStyleClass.BACKGROUND);
         opponent.getItems().add("Human");
         opponent.getItems().add("AI");
         opponent.getSelectionModel().selectFirst();

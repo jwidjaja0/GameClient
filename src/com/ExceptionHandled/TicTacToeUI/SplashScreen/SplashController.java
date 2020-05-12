@@ -13,9 +13,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import jfxtras.styles.jmetro.JMetro;
-import jfxtras.styles.jmetro.JMetroStyleClass;
-import jfxtras.styles.jmetro.Style;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -30,11 +27,8 @@ public class SplashController implements Controller {
     AnchorPane splashAnchor;
 
     private GetUserInfoController getUserInfoController;
-    private JMetro jMetro;
 
     public void initialize(){
-        jMetro = new JMetro(Style.DARK);
-        splashAnchor.getStyleClass().add(JMetroStyleClass.BACKGROUND);
         login.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -73,8 +67,7 @@ public class SplashController implements Controller {
         getUserInfoController.setType(type);
         Stage stage = new Stage();
         stage.setTitle("Enter Your Information");
-        jMetro.setParent(getUserInfoWindow);
-        stage.setScene(new Scene(jMetro.getParent()));
+        stage.setScene(new Scene(getUserInfoWindow));
         stage.show();
     }
 
