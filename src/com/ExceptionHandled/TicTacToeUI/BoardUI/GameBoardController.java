@@ -341,12 +341,12 @@ public class GameBoardController extends Observable implements Controller {
 
     private void displayMove(MoveValid move){
         if(move.getPlayer().equals("x")){
-            setXImage(getButton(move.getxCoord(), move.getyCoord()));
-            System.out.println("Placing X at " + move.getxCoord() + " " + move.getyCoord() );
+            setXImage(getButton(move.getYCoord(), move.getXCoord()));
+            System.out.println("Placing X at " + move.getXCoord() + " " + move.getYCoord() );
         }
         else {
-            setOImage(getButton(move.getxCoord(), move.getyCoord()));
-            System.out.println("Placing O at " + move.getxCoord() + " " + move.getyCoord() );
+            setOImage(getButton(move.getXCoord(), move.getYCoord()));
+            System.out.println("Placing O at " + move.getXCoord() + " " + move.getYCoord() );
         }
     }
 
@@ -505,8 +505,8 @@ public class GameBoardController extends Observable implements Controller {
     }
 
     private void setBoard(MoveValid move){
-        board[move.getxCoord()][move.getyCoord()] = move.getPlayer();
-        System.out.println("Board set at " + move.getxCoord() + " " + move.getyCoord());
+        board[move.getXCoord()][move.getYCoord()] = move.getPlayer();
+        System.out.println("Board set at " + move.getXCoord() + " " + move.getYCoord());
     }
 
 }
