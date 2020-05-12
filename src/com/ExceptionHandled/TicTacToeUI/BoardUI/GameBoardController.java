@@ -31,7 +31,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import jfxtras.styles.jmetro.JMetroStyleClass;
 
 
 import java.io.Serializable;
@@ -94,7 +93,6 @@ public class GameBoardController extends Observable implements Controller {
         //btnExit = new Button();
         //btnRestart = new Button();
         //playArea = new GridPane();
-        playArea.getStyleClass().add(JMetroStyleClass.BACKGROUND);
 
         panel1.setOnAction(new EventHandler<ActionEvent>() {
             @Override

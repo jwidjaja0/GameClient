@@ -9,8 +9,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import jfxtras.styles.jmetro.JMetro;
-import jfxtras.styles.jmetro.Style;
 
 import java.io.IOException;
 import java.util.Observable;
@@ -39,19 +37,16 @@ public class Main extends Application implements Observer {
         Parent lobby = lobbyUI.load();
         lbc = lobbyUI.getController();
 
-        JMetro jLobby = new JMetro(Style.DARK);
 
         // Instantiate the FXML Loader to load the top menu
         FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("com/ExceptionHandled/TicTacToeUI/MenuLayout/MenuLayout.fxml"));
         Parent menu = menuLoader.load();
         mlc = menuLoader.getController();
 
-        JMetro jMenu = new JMetro(Style.LIGHT);
-
         // Create the main vBox that holds both the menu and the game board
         VBox mainScreen = new VBox(menu, lobby);
 
-        // Create the main application window
+        // Create the main applicaion window
         primaryStage.setTitle("TicTacToe Board");
         primaryStage.setScene(new Scene(mainScreen));
 
