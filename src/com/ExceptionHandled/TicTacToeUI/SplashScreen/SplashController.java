@@ -1,9 +1,8 @@
 package com.ExceptionHandled.TicTacToeUI.SplashScreen;
 
-import com.ExceptionHandled.GameMessages.Interfaces.Login;
 import com.ExceptionHandled.GameMessages.Login.*;
 import com.ExceptionHandled.Interfaces.Controller;
-import com.ExceptionHandled.TicTacToeUI.SplashScreen.GetUserInfo.GetUserInfoController;
+import com.ExceptionHandled.TicTacToeUI.GetUserInfo.GetUserInfoController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -20,8 +19,6 @@ import jfxtras.styles.jmetro.Style;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Observable;
-import java.util.Observer;
 
 public class SplashController implements Controller {
     @FXML
@@ -70,7 +67,7 @@ public class SplashController implements Controller {
     }
 
     private void showInfoScreen(String type) throws IOException {
-        FXMLLoader getUserInfo = new FXMLLoader(getClass().getResource("GetUserInfo/GetUserInfo.fxml"));
+        FXMLLoader getUserInfo = new FXMLLoader(getClass().getResource("../GetUserInfo/GetUserInfo.fxml"));
         Parent getUserInfoWindow = getUserInfo.load();
         getUserInfoController = getUserInfo.getController();
         getUserInfoController.setType(type);

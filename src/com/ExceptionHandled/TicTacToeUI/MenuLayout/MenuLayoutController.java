@@ -5,14 +5,14 @@ package com.ExceptionHandled.TicTacToeUI.MenuLayout;
 import com.ExceptionHandled.Alerts.AlertFactory;
 import com.ExceptionHandled.Client.MessageSender;
 import com.ExceptionHandled.GameMessages.Login.*;
+import com.ExceptionHandled.GameMessages.Stats.GameHistoryDetail;
 import com.ExceptionHandled.GameMessages.Stats.PlayerStatsInfo;
 import com.ExceptionHandled.GameMessages.Stats.PlayerStatsRequest;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteFail;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteRequest;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteSuccess;
-import com.ExceptionHandled.Interfaces.Alert;
 import com.ExceptionHandled.Interfaces.Controller;
-import com.ExceptionHandled.TicTacToeUI.SplashScreen.GetUserInfo.GetUserInfoController;
+import com.ExceptionHandled.TicTacToeUI.GetUserInfo.GetUserInfoController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -116,6 +116,9 @@ public class MenuLayoutController implements Controller {
         else if (message instanceof PlayerStatsInfo){
             showStats((PlayerStatsInfo) message);
         }
+        else if (message instanceof GameHistoryDetail){
+            userStatsController.messageProcessor(message);
+        }
         else{
             userInfoController.messageProcessor(message);//Send it first because alerts handled in subsequent screens
             if (message instanceof LoginSuccess || message instanceof SignUpSuccess){
@@ -143,8 +146,6 @@ public class MenuLayoutController implements Controller {
                 }
             }
         });
-
-
     }
 
     private void changeUserInfo(){
@@ -152,7 +153,7 @@ public class MenuLayoutController implements Controller {
             @Override
             public void run() {
                 try{
-                    FXMLLoader getUserInfo = new FXMLLoader(getClass().getResource("../SplashScreen/GetUserInfo/GetUserInfo.fxml"));
+                    FXMLLoader getUserInfo = new FXMLLoader(getClass().getResource("../GetUserInfo/GetUserInfo.fxml"));
                     Parent getUserInfoWindow = getUserInfo.load();
                     userInfoController = getUserInfo.getController();
                     Stage stage = new Stage();
