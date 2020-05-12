@@ -94,10 +94,10 @@ public class StatsViewerController implements Controller {
                 try{
                     FXMLLoader gameDetails = new FXMLLoader(getClass().getResource("../GameDetailViewer/GameDetail.fxml"));
                     Parent gameDetailsWindow = gameDetails.load();
-                    ((GameDetailController)gameDetails.getController()).setInfo(detail);
                     Stage stage = new Stage();
                     stage.setTitle("Player Game History");
                     stage.setScene(new Scene(gameDetailsWindow));
+                    ((GameDetailController)gameDetails.getController()).setInfo(detail);
                     stage.show();
                 } catch (IOException e) {
                     e.printStackTrace();

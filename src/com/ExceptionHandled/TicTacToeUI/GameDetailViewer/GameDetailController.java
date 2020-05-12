@@ -65,7 +65,9 @@ public class GameDetailController {
         }
 
         populateMoveList(gameDetail.getMoveMadeList());
-        //populateViewers(gameDetail.getViewersInfo());
+        List<UserInfo> viewerList = gameDetail.getViewersInfo();
+        if (viewerList != null)
+            populateViewers(viewerList);
     }
 
     private void populateMoveList(List<MoveValid> moveList){
@@ -73,6 +75,7 @@ public class GameDetailController {
     }
 
     private void populateViewers(List<UserInfo> viewerList){
+        System.out.println(viewerList.size());
         viewersView.getItems().addAll(viewerList);
     }
 }
