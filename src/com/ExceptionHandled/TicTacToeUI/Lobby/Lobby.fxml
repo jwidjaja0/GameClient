@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane id="mypane" fx:id="lobbyAnchor" prefHeight="400.0" prefWidth="536.0" stylesheets="@../CSS/TTTall.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ExceptionHandled.TicTacToeUI.Lobby.LobbyController">
+<AnchorPane id="mypane" fx:id="lobbyAnchor" prefHeight="400.0" prefWidth="536.0" stylesheets="@../CSS/TTTall.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ExceptionHandled.TicTacToeUI.Lobby.LobbyController">
    <children>
-      <ListView fx:id="gamesList" layoutX="30.0" layoutY="32.0" prefHeight="343.0" prefWidth="351.0" />
+      <TableView fx:id="gamesList" layoutX="30.0" layoutY="32.0" prefHeight="343.0" prefWidth="351.0">
+         <columns>
+            <TableColumn fx:id="gameID" prefWidth="75.0" text="Game ID" />
+            <TableColumn fx:id="gameName" prefWidth="136.0" text="Game Name" />
+            <TableColumn prefWidth="139.0" text="Creator" />
+         </columns></TableView>
       <Label layoutX="30.0" layoutY="14.0" prefHeight="17.0" prefWidth="126.0" text="Active Games" />
       <Button fx:id="createGameButton" layoutX="402.0" layoutY="32.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="114.0" text="Create Game" />
       <Button fx:id="joinGameButton" layoutX="402.0" layoutY="72.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="114.0" text="Join Game" />

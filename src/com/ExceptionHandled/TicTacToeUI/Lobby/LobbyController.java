@@ -17,6 +17,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
@@ -30,7 +33,10 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class LobbyController implements Controller, Observer {
-    @FXML ListView<ActiveGameHeader> gamesList;
+    @FXML TableView<ActiveGameHeader> gamesList;
+    @FXML TableColumn<ActiveGameHeader, String> gameID;
+    @FXML TableColumn<ActiveGameHeader, String> gameName;
+    @FXML TableColumn<ActiveGameHeader, String> creator;
     @FXML Button createGameButton;
     @FXML Button joinGameButton;
     @FXML Button spectateButton;
@@ -80,6 +86,10 @@ public class LobbyController implements Controller, Observer {
                 requestGamesListRefresh();
             }
         });
+
+        gameID.setCellValueFactory(new PropertyValueFactory<>("gameID"));
+        gameName.setCellValueFactory(new PropertyValueFactory<>("gameName"));
+        creator.setCellValueFactory(new PropertyValueFactory<>("player1"));
     }
 
     @Override
@@ -162,9 +172,7 @@ public class LobbyController implements Controller, Observer {
                 //Remove all items from current list
                 gamesList.getItems().clear();
                 //Add new items
-                for(ActiveGameHeader h : games){
-                    gamesList.getItems().add(h);
-                }
+                gamesList.getItems().addAll(games);
             }
         });
     }
