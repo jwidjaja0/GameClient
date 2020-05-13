@@ -51,6 +51,8 @@ public class MenuLayoutController implements Controller {
     public void initialize(){
         logout.setDisable(true);
         deleteAccount.setDisable(true);
+        personalRecordButton.setDisable(true);
+        changeProfileInfo.setDisable(true);
 
         loginRegisterButton.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
             @Override
@@ -104,6 +106,9 @@ public class MenuLayoutController implements Controller {
             AlertFactory.getInstance().displayCommonAlert(message.toString());
             logout.setDisable(true);
             deleteAccount.setDisable(true);
+            personalRecordButton.setDisable(true);
+            changeProfileInfo.setDisable(true);
+            loginRegisterButton.setDisable(false);
         }
         else if (message instanceof LogoutFail){
             AlertFactory.getInstance().displayCommonAlert(message.toString());
@@ -114,11 +119,14 @@ public class MenuLayoutController implements Controller {
         else if (message instanceof GameHistoryDetail){
             userStatsController.messageProcessor(message);
         }
-        else{
+        else {
             userInfoController.messageProcessor(message);//Send it first because alerts handled in subsequent screens
             if (message instanceof LoginSuccess || message instanceof SignUpSuccess){
                 logout.setDisable(false);
                 deleteAccount.setDisable(false);
+                loginRegisterButton.setDisable(true);
+                personalRecordButton.setDisable(false);
+                changeProfileInfo.setDisable(false);
             }
         }
     }
