@@ -3,12 +3,17 @@ package com.ExceptionHandled.TicTacToeUI.GameDetailViewer;
 import com.ExceptionHandled.GameMessages.Game.MoveValid;
 import com.ExceptionHandled.GameMessages.Stats.*;
 import com.ExceptionHandled.GameMessages.UserInfo;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
+import javafx.util.Callback;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -23,8 +28,8 @@ public class GameDetailController {
 
     @FXML  TableView<MoveValid> moveHistoryView;
     @FXML  TableColumn<MoveValid, String> playerCol;
-    @FXML  TableColumn<MoveValid, Integer> xCol;
-    @FXML  TableColumn<MoveValid, Integer> yCol;
+    @FXML  TableColumn<MoveValid, String> xCol;
+    @FXML  TableColumn<MoveValid, String> yCol;
     @FXML  TableColumn<MoveValid, Date> timeCol;
 
     @FXML private TableView<UserInfo> viewersView;
@@ -33,13 +38,36 @@ public class GameDetailController {
     @FXML private TableColumn<UserInfo,String> fNameCol;
     @FXML private TableColumn<UserInfo,String> lNameCol;
 
+
+
+//    public void setGameHistoryDetail(GameHistoryDetail gameHistoryDetail) {
+//        this.gameHistoryDetail = gameHistoryDetail;
+//        setInfo();
+//    }
+
     public GameDetailController() {
     }
 
     public void initialize(){
         playerCol.setCellValueFactory(new PropertyValueFactory<>("player"));
-        xCol.setCellValueFactory(new PropertyValueFactory<>("xCoord"));
-        yCol.setCellValueFactory(new PropertyValueFactory<>("yCoord"));
+        //xCol.setCellValueFactory(new PropertyValueFactory<>("xcoord"));
+
+        xCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<MoveValid, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<MoveValid, String> moveValidStringCellDataFeatures) {
+                Integer c = moveValidStringCellDataFeatures.getValue().getXCoord();
+                return new SimpleStringProperty(c.toString());
+            }
+        });
+        yCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<MoveValid, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<MoveValid, String> moveValidStringCellDataFeatures) {
+                Integer c = moveValidStringCellDataFeatures.getValue().getYCoord();
+                return new SimpleStringProperty(c.toString());
+            }
+        });
+
+//        yCol.setCellValueFactory(new PropertyValueFactory<>("ycoord"));
         timeCol.setCellValueFactory(new PropertyValueFactory<>("date"));
 
         vidCol.setCellValueFactory(new PropertyValueFactory<>("userID"));
@@ -56,12 +84,18 @@ public class GameDetailController {
         player1Text.setText(summary.getPlayer1());
         player2Text.setText(summary.getPlayer2());
         matchResultText.setText(summary.getMatchResult());
-        startTimeText.setText(summary.getStartDate().toString());
+
+        String pattern = "MM/dd/yyy HH:mm:ss";
+        DateFormat df = new SimpleDateFormat(pattern);
+        String startDateString = df.format(summary.getStartDate());
+        String endDateString = df.format(summary.getEndDate());
+
+        startTimeText.setText(startDateString); //TODO: figure out add hours if possible
         if(summary.getEndDate().getTime() < summary.getStartDate().getTime()){
             endTimeText.setText("-");
         }
         else{
-            endTimeText.setText(summary.getEndDate().toString());
+            endTimeText.setText(endDateString);
         }
 
         populateMoveList(gameDetail.getMoveMadeList());
@@ -75,7 +109,6 @@ public class GameDetailController {
     }
 
     private void populateViewers(List<UserInfo> viewerList){
-        System.out.println(viewerList.size());
         viewersView.getItems().addAll(viewerList);
     }
 }
