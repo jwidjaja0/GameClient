@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.net.Socket;
 import java.util.Observable;
-import java.util.Observer;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
