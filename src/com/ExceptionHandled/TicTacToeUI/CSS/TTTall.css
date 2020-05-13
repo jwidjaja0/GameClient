@@ -6,10 +6,17 @@
     -fx-text-fill: white;
 }
 
-AnchorPane, HBox, VBox{
+AnchorPane{
     -fx-background-color: basecolor;
 }
 
+Text{
+    -fx-fill: white;
+}
+
+#menuHbox{
+    -fx-background-color: basecolor;
+}
 
 .menu-bar{
     -fx-background-color: basecolor;
@@ -35,7 +42,6 @@ AnchorPane, HBox, VBox{
 .menu-item{
     -fx-border-color: basecolor;
     -fx-background-color: basecolor;
-
 }
 
 Button{
