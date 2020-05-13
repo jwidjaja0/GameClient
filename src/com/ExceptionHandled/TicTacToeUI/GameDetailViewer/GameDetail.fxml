@@ -21,7 +21,7 @@
          <children>
             <HBox prefHeight="20.0" prefWidth="509.0">
                <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="GameID: " wrappingWidth="90.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="GameID: " wrappingWidth="90.0" />
                   <Text fx:id="gameIDText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                </children>
             </HBox>
@@ -71,6 +71,5 @@
             <TableColumn fx:id="lNameCol" prefWidth="101.0" text="Last Name" />
          </columns>
       </TableView>
-      <Text layoutX="297.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Test" />
    </children>
 </AnchorPane>
