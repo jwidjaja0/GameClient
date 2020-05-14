@@ -117,7 +117,8 @@ public class MenuLayoutController implements Controller {
             showStats((PlayerStatsInfo) message);
         }
         else if (message instanceof GameHistoryDetail){
-            userStatsController.messageProcessor(message);
+            if (!(userStatsController == null))
+                userStatsController.messageProcessor(message);
         }
         else {
             userInfoController.messageProcessor(message);//Send it first because alerts handled in subsequent screens
