@@ -144,6 +144,8 @@ public class GetUserInfoController extends Observable implements Controller {
         lastNameLabel.setVisible(false);
         firstName.setVisible(false);
         lastName.setVisible(false);
+        confirmPassword.setVisible(false);
+        confirmPasswordLabel.setVisible(false);
         isLogin = false;
         isChange = true;
     }
