@@ -199,6 +199,7 @@ public class LobbyController implements Controller, Observer {
         openGames.add(gameBoardController);
         //Open the game window
         openGameWindow(gameWindow, newGame.getGameName());
+        MessageSender.getInstance().sendMessage("MainMenu", new ListActiveGamesRequest());
     }
 
     private void joinGame(JoinGameSuccess joinGame) throws IOException {

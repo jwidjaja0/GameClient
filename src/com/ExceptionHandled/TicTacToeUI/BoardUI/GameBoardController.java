@@ -171,6 +171,8 @@ public class GameBoardController extends Observable implements Controller {
         if (message instanceof GameOverOutcome){
             System.out.println("Game " + gameID + " received GameOverOutcome message.");
             gameOver(((GameOverOutcome) message).getPlayer());
+            //Send server a request to get new games list
+            MessageSender.getInstance().sendMessage("MainMenu", new ListActiveGamesRequest());
         }
         else if (message instanceof MoveValid){
             System.out.println("Game " + gameID + " received MoveValid message.");
@@ -272,12 +274,7 @@ public class GameBoardController extends Observable implements Controller {
         for (MoveValid mv : spectateGame.getMovesMade()){
             displayMove(mv);
         }
-        if (spectateGame.getPlayer2Name().equals("Ai")) {
-            vsAI = true;
-        }
-        else {
-            vsAI = false;
-        }
+        vsAI = false;
         fillBoard();
         //Disable panels until other player joins
         disableAllPanels();
