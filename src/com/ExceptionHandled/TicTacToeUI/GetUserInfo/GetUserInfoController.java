@@ -140,10 +140,10 @@ public class GetUserInfoController extends Observable implements Controller {
 
     private void setToChange(){
         action.setText("Change Profile Information");
-        firstNameLabel.setVisible(false);
-        lastNameLabel.setVisible(false);
-        firstName.setVisible(false);
-        lastName.setVisible(false);
+        firstNameLabel.setVisible(true);
+        lastNameLabel.setVisible(true);
+        firstName.setVisible(true);
+        lastName.setVisible(true);
         confirmPassword.setVisible(false);
         confirmPasswordLabel.setVisible(false);
         isLogin = false;
