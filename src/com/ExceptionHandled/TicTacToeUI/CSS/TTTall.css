@@ -57,7 +57,7 @@ ListView{
 }
 
 .list-cell:selected{
-    -fx-background-color: blue;
+    -fx-background-color: buttonbase;
 }
 
 .combo-box-base, .text-field, .text-area{
