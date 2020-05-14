@@ -189,7 +189,7 @@ public class GameBoardController extends Observable implements Controller {
             if (whoseTurn.getWhoseTurn().equals(player))
                 enableAllPanels();
             else {
-                if (vsAI) {//If it is a game vs the AI, tell the AI to make a move
+                if (vsAI && !player.equals("Spectator")) {//If it is a game vs the AI, tell the AI to make a move
                     AI.getInstance().makeMove(board, gameID);
                 }
                 disableAllPanels();
@@ -272,7 +272,12 @@ public class GameBoardController extends Observable implements Controller {
         for (MoveValid mv : spectateGame.getMovesMade()){
             displayMove(mv);
         }
-        vsAI = false;
+        if (spectateGame.getPlayer2Name().equals("Ai")) {
+            vsAI = true;
+        }
+        else {
+            vsAI = false;
+        }
         fillBoard();
         //Disable panels until other player joins
         disableAllPanels();
