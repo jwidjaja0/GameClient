@@ -444,11 +444,11 @@ public class GameBoardController extends Observable implements Controller {
                     Stage pStage = new Stage();
                     pStage.setScene(new Scene(root));
 
-                    Timeline timeline = new Timeline();
-                    KeyFrame key = new KeyFrame(Duration.seconds(2), new KeyValue(pStage.opacityProperty(), 0));
-                    timeline.getKeyFrames().add(key);
-
-                    timeline.play();
+                    //Following block of code is to have tie window slowly fade away
+//                    Timeline timeline = new Timeline();
+//                    KeyFrame key = new KeyFrame(Duration.seconds(2), new KeyValue(pStage.opacityProperty(), 0));
+//                    timeline.getKeyFrames().add(key);
+//                    timeline.play();
 
                     pStage.show();
                 }
