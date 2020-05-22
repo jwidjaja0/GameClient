@@ -32,12 +32,17 @@ public class Client extends Observable implements Runnable {
 
         send = new Send(serverConnection, outgoing);
         receive = new Receive(serverConnection, incoming);
+        playerID = "-1";
 
         MessageSender.getInstance().setQueue(outgoing);
         MessageSender.getInstance().sendMessage("Connection", new ConnectionRequest());
 
         Thread self = new Thread(this);
         self.start();
+    }
+
+    public String getPlayerID() {
+        return playerID;
     }
 
     @Override
@@ -77,6 +82,7 @@ public class Client extends Observable implements Runnable {
             } else if (message instanceof LogoutSuccess) {
                 System.out.println("Received Logout Success message. Removing PlayerID from MessageSender.");
                 MessageSender.getInstance().logOut();//Sets playerID in MessageSender to null
+                playerID = "-1";
             }
         }
         else if (messageType.equals("UserUpdate")){

@@ -339,7 +339,7 @@ public class GameBoardController extends Observable implements Controller {
     }
 
     private void setXImage(Button tc){
-        Image image = new Image(getClass().getResourceAsStream("../Graphics/XShape.png"));
+        Image image = new Image(getClass().getResourceAsStream("/com/ExceptionHandled/TicTacToeUI/Graphics/XShape.png"));
         ImageView imageView = new ImageView(image);
 
         imageView.setFitHeight(iconSize);
@@ -354,7 +354,7 @@ public class GameBoardController extends Observable implements Controller {
     }
 
     private void setOImage(Button tc){
-        Image image = new Image(getClass().getResourceAsStream("../Graphics/WhiteCircle.png"));
+        Image image = new Image(getClass().getResourceAsStream("/com/ExceptionHandled/TicTacToeUI/Graphics/WhiteCircle.png"));
         ImageView imageView = new ImageView(image);
 
         imageView.setFitHeight(iconSize);
@@ -414,12 +414,12 @@ public class GameBoardController extends Observable implements Controller {
                 try{
                     String winnerGraphic = "";
                     if (winner.equals("x")){
-                        winnerGraphic = "../Graphics/XShape.png";
+                        winnerGraphic = "/com/ExceptionHandled/TicTacToeUI/Graphics/XShape.png";
                     }
                     else{
-                        winnerGraphic = "../Graphics/WhiteCircle.png";
+                        winnerGraphic = "/com/ExceptionHandled/TicTacToeUI/Graphics/WhiteCircle.png";
                     }
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("../WinnerNotification/WinnerNotification.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/ExceptionHandled/TicTacToeUI/WinnerNotification/WinnerNotification.fxml"));
                     WinnerNotificationController wnc = new WinnerNotificationController(new Image(getClass().getResourceAsStream(winnerGraphic)));
                     loader.setController(wnc);
                     Parent winNotification = loader.load();
@@ -440,7 +440,7 @@ public class GameBoardController extends Observable implements Controller {
             @Override
             public void run() {
                 try {
-                    Parent root = FXMLLoader.load(getClass().getResource("../DrawNotification/DrawNotification.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("/com/ExceptionHandled/TicTacToeUI/DrawNotification/DrawNotification.fxml"));
                     Stage pStage = new Stage();
                     pStage.setScene(new Scene(root));
 

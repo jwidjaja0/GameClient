@@ -92,7 +92,7 @@ public class StatsViewerController implements Controller {
             @Override
             public void run() {
                 try{
-                    FXMLLoader gameDetails = new FXMLLoader(getClass().getResource("../GameDetailViewer/GameDetail.fxml"));
+                    FXMLLoader gameDetails = new FXMLLoader(getClass().getResource("com/ExceptionHandled/TicTacToeUI/GameDetailViewer/GameDetail.fxml"));
                     Parent gameDetailsWindow = gameDetails.load();
                     Stage stage = new Stage();
                     stage.setTitle("Player Game History");

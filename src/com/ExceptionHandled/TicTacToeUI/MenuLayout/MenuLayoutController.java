@@ -137,7 +137,8 @@ public class MenuLayoutController implements Controller {
             @Override
             public void run() {
                 try{
-                    FXMLLoader statsScreen = new FXMLLoader(getClass().getResource("../ViewStats/StatsViewer.fxml"));
+                    //FXMLLoader statsScreen = new FXMLLoader(getClass().getResource("../ViewStats/StatsViewer.fxml"));
+                    FXMLLoader statsScreen = new FXMLLoader(getClass().getResource("/com/ExceptionHandled/TicTacToeUI/ViewStats/StatsViewer.fxml"));
                     Parent statsScreenWindow = statsScreen.load();
                     userStatsController = statsScreen.getController();
                     userStatsController.messageProcessor(stats);
@@ -157,7 +158,8 @@ public class MenuLayoutController implements Controller {
             @Override
             public void run() {
                 try{
-                    FXMLLoader getUserInfo = new FXMLLoader(getClass().getResource("../GetUserInfo/GetUserInfo.fxml"));
+                    //FXMLLoader getUserInfo = new FXMLLoader(getClass().getResource("../GetUserInfo/GetUserInfo.fxml"));
+                    FXMLLoader getUserInfo = new FXMLLoader(getClass().getResource("/com/ExceptionHandled/TicTacToeUI/GetUserInfo/GetUserInfo.fxml"));
                     Parent getUserInfoWindow = getUserInfo.load();
                     userInfoController = getUserInfo.getController();
                     Stage stage = new Stage();
@@ -178,7 +180,8 @@ public class MenuLayoutController implements Controller {
             @Override
             public void run() {
                 try{
-                    FXMLLoader splashScreen = new FXMLLoader(getClass().getResource("../SplashScreen/SplashScreen.fxml"));
+                    //FXMLLoader splashScreen = new FXMLLoader(getClass().getResource("../SplashScreen/SplashScreen.fxml"));
+                    FXMLLoader splashScreen = new FXMLLoader(getClass().getResource("/com/ExceptionHandled/TicTacToeUI/SplashScreen/SplashScreen.fxml"));
                     Parent splashWindow = splashScreen.load();
                     userInfoController = splashScreen.getController();
                     Stage stage = new Stage();

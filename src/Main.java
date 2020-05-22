@@ -1,14 +1,18 @@
 import com.ExceptionHandled.Client.Client;
+import com.ExceptionHandled.Client.MessageSender;
 import com.ExceptionHandled.GameMessages.Interfaces.*;
+import com.ExceptionHandled.GameMessages.Login.LogoutRequest;
 import com.ExceptionHandled.GameMessages.Wrappers.*;
 import com.ExceptionHandled.TicTacToeUI.Lobby.LobbyController;
 import com.ExceptionHandled.TicTacToeUI.MenuLayout.MenuLayoutController;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.util.Observable;
@@ -49,6 +53,16 @@ public class Main extends Application implements Observer {
         // Create the main applicaion window
         primaryStage.setTitle("TicTacToe Board");
         primaryStage.setScene(new Scene(mainScreen));
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent windowEvent) {
+                //TODO: SEND LOGOUT REQUEST IF LOGGED IN
+                if(!client.getPlayerID().equals(-1)){
+                    MessageSender.getInstance().sendMessage("Login", client.getPlayerID(), new LogoutRequest());
+                }
+                System.exit(2);
+            }
+        });
 
         primaryStage.show();
     }

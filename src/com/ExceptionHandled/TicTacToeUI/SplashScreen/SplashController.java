@@ -61,7 +61,7 @@ public class SplashController implements Controller {
     }
 
     private void showInfoScreen(String type) throws IOException {
-        FXMLLoader getUserInfo = new FXMLLoader(getClass().getResource("../GetUserInfo/GetUserInfo.fxml"));
+        FXMLLoader getUserInfo = new FXMLLoader(getClass().getResource("/com/ExceptionHandled/TicTacToeUI/GetUserInfo/GetUserInfo.fxml"));
         Parent getUserInfoWindow = getUserInfo.load();
         getUserInfoController = getUserInfo.getController();
         getUserInfoController.setType(type);
