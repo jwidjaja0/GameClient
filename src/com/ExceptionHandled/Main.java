@@ -1,3 +1,5 @@
+package com.ExceptionHandled;
+
 import com.ExceptionHandled.Client.Client;
 import com.ExceptionHandled.Client.MessageSender;
 import com.ExceptionHandled.GameMessages.Interfaces.*;
@@ -37,13 +39,13 @@ public class Main extends Application implements Observer {
         }
 
         // Instantiate the FXML Loader to load the game board UI
-        FXMLLoader lobbyUI = new FXMLLoader(getClass().getResource("com/ExceptionHandled/TicTacToeUI/Lobby/Lobby.fxml"));
+        FXMLLoader lobbyUI = new FXMLLoader(getClass().getResource("/com/ExceptionHandled/TicTacToeUI/Lobby/Lobby.fxml"));
         Parent lobby = lobbyUI.load();
         lbc = lobbyUI.getController();
 
 
         // Instantiate the FXML Loader to load the top menu
-        FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("com/ExceptionHandled/TicTacToeUI/MenuLayout/MenuLayout.fxml"));
+        FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("/com/ExceptionHandled/TicTacToeUI/MenuLayout/MenuLayout.fxml"));
         Parent menu = menuLoader.load();
         mlc = menuLoader.getController();
 
@@ -72,13 +74,13 @@ public class Main extends Application implements Observer {
 
         Packet packet = (Packet) arg;
         String messageType = packet.getMessageType();
-        System.out.println("Main received " + messageType + " message.");
+        System.out.println("com.ExceptionHandled.Main received " + messageType + " message.");
         if(messageType.equals("Login") || messageType.equals("UserUpdate") || messageType.equals("Stats")){
-            System.out.println("Main passing message to MLC");
+            System.out.println("com.ExceptionHandled.Main passing message to MLC");
             mlc.messageProcessor(packet.getMessage());
         }
         else if (messageType.equals("MainMenu") || messageType.equals("Game")){
-            System.out.println("Main passing message to LBC");
+            System.out.println("com.ExceptionHandled.Main passing message to LBC");
             lbc.messageProcessor(packet.getMessage());
         }
     }
