@@ -15,8 +15,8 @@ public class DrawNotificationController {
     ImageView player2ImageView;
 
     public DrawNotificationController() {
-        player1Image = new Image(getClass().getResourceAsStream("../Graphics/XShape.png"));
-        player2Image = new Image(getClass().getResourceAsStream("../Graphics/WhiteCircle.png"));
+        player1Image = new Image(getClass().getResourceAsStream("/com/ExceptionHandled/TicTacToeUI/Graphics/XShape.png"));
+        player2Image = new Image(getClass().getResourceAsStream("/com/ExceptionHandled/TicTacToeUI/Graphics/WhiteCircle.png"));
     }
 
     public void initialize(){

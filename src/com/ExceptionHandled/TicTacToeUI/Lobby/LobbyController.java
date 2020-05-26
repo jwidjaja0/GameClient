@@ -177,7 +177,8 @@ public class LobbyController implements Controller, Observer {
     }
 
     private void createGameRequest() throws IOException {
-        FXMLLoader createGameUI = new FXMLLoader(getClass().getResource("../CreateGame/CreateGame.fxml"));
+        //FXMLLoader createGameUI = new FXMLLoader(getClass().getResource("../CreateGame/CreateGame.fxml"));
+        FXMLLoader createGameUI = new FXMLLoader(getClass().getResource("/com/ExceptionHandled/TicTacToeUI/CreateGame/CreateGame.fxml"));
         Parent ui = createGameUI.load();
 
         Stage openStage = new Stage();
@@ -188,7 +189,7 @@ public class LobbyController implements Controller, Observer {
 
     private void createGame(NewGameSuccess newGame) throws IOException {
         //Create FXMLLoader
-        FXMLLoader game = new FXMLLoader(getClass().getResource("../BoardUI/gameBoardScene.fxml"));
+        FXMLLoader game = new FXMLLoader(getClass().getResource("/com/ExceptionHandled/TicTacToeUI/BoardUI/gameBoardScene.fxml"));
         Parent gameWindow = game.load();
         GameBoardController gameBoardController = game.getController();
         //Set game details
@@ -204,7 +205,7 @@ public class LobbyController implements Controller, Observer {
 
     private void joinGame(JoinGameSuccess joinGame) throws IOException {
         //Create FXMLLoader
-        FXMLLoader game = new FXMLLoader(getClass().getResource("../BoardUI/gameBoardScene.fxml"));
+        FXMLLoader game = new FXMLLoader(getClass().getResource("/com/ExceptionHandled/TicTacToeUI/BoardUI/gameBoardScene.fxml"));
         Parent gameWindow = game.load();
         GameBoardController gameBoardController = game.getController();
         //Set game details
@@ -219,7 +220,7 @@ public class LobbyController implements Controller, Observer {
 
     private void spectateGame(SpectateSuccess spectateGame) throws IOException {
         //Create FXMLLoader
-        FXMLLoader game = new FXMLLoader(getClass().getResource("../BoardUI/gameBoardScene.fxml"));
+        FXMLLoader game = new FXMLLoader(getClass().getResource("/com/ExceptionHandled/TicTacToeUI/BoardUI/gameBoardScene.fxml"));
         Parent gameWindow = game.load();
         GameBoardController gameBoardController = game.getController();
         //Set game details

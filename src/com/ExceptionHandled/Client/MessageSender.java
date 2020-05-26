@@ -12,7 +12,7 @@ public class MessageSender {
     private BlockingQueue<Packet> queue;
 
     private MessageSender(){
-        playerID = null;
+        playerID = "-1";
     }
 
     public static MessageSender getInstance(){
@@ -41,6 +41,6 @@ public class MessageSender {
     }
 
     void logOut(){
-        playerID = null;
+        playerID = "-1";
     }
 }
