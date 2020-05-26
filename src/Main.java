@@ -49,6 +49,7 @@ public class Main extends Application implements Observer {
         // Create the main applicaion window
         primaryStage.setTitle("TicTacToe Board");
         primaryStage.setScene(new Scene(mainScreen));
+        //TODO:add oncloserequest, send logout message and exit whole program
 
         primaryStage.show();
     }
