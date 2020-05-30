@@ -1,3 +1,5 @@
+package com.ExceptionHandled;
+
 import com.ExceptionHandled.Client.Client;
 import com.ExceptionHandled.GameMessages.Interfaces.*;
 import com.ExceptionHandled.GameMessages.Wrappers.*;
