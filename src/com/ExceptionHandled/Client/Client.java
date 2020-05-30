@@ -25,7 +25,7 @@ public class Client extends Observable implements Runnable {
 
 
     public Client() throws IOException {
-        serverConnection = new Socket("localhost", 8000);// Create initial connection, need server to be up
+        serverConnection = new Socket("localhost", 8001);// Create initial connection, need server to be up
 
         outgoing = new ArrayBlockingQueue<>(100);
         incoming = new ArrayBlockingQueue<>(100);

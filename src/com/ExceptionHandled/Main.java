@@ -1,3 +1,5 @@
+package com.ExceptionHandled;
+
 import com.ExceptionHandled.Client.Client;
 import com.ExceptionHandled.GameMessages.Interfaces.*;
 import com.ExceptionHandled.GameMessages.Wrappers.*;
@@ -33,13 +35,13 @@ public class Main extends Application implements Observer {
         }
 
         // Instantiate the FXML Loader to load the game board UI
-        FXMLLoader lobbyUI = new FXMLLoader(getClass().getResource("com/ExceptionHandled/TicTacToeUI/Lobby/Lobby.fxml"));
+        FXMLLoader lobbyUI = new FXMLLoader(getClass().getResource("TicTacToeUI/Lobby/Lobby.fxml"));
         Parent lobby = lobbyUI.load();
         lbc = lobbyUI.getController();
 
 
         // Instantiate the FXML Loader to load the top menu
-        FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("com/ExceptionHandled/TicTacToeUI/MenuLayout/MenuLayout.fxml"));
+        FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("TicTacToeUI/MenuLayout/MenuLayout.fxml"));
         Parent menu = menuLoader.load();
         mlc = menuLoader.getController();
 
